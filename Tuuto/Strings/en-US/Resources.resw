@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LoginPage_DomainError" xml:space="preserve">
+    <value>Please check the domain again</value>
+  </data>
+  <data name="LoginPage_LoginButton.Content" xml:space="preserve">
+    <value>LOG IN</value>
+  </data>
+  <data name="LoginPage_LoginDesc.Text" xml:space="preserve">
+    <value>Log into any Mastodon instance!</value>
+  </data>
+  <data name="LoginPage_LoginFailed" xml:space="preserve">
+    <value>Login failed</value>
+  </data>
+  <data name="MainPage_Federated.HeaderText" xml:space="preserve">
+    <value>Federated timeline</value>
+  </data>
+  <data name="MainPage_FixedPivot.SplitViewPaneLength" xml:space="preserve">
+    <value>200</value>
+  </data>
+  <data name="MainPage_Home.HeaderText" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="MainPage_Local.HeaderText" xml:space="preserve">
+    <value>Local timeline</value>
+  </data>
+  <data name="MainPage_Notifications.HeaderText" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="MainPage_Refresh.Label" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="MainPage_Search.Label" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="MainPage_Setting.Label" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MainPage_Toot.Label" xml:space="preserve">
+    <value>Toot</value>
+  </data>
+  <data name="ProgressDialogText" xml:space="preserve">
+    <value>Now loading...</value>
+  </data>
+  <data name="RefreshListView.PullToRefreshLabel" xml:space="preserve">
+    <value>Pull to refresh</value>
+  </data>
+  <data name="RefreshListView.ReleaseToRefreshLabel" xml:space="preserve">
+    <value>Release to refresh</value>
+  </data>
+  <data name="StatusViewMenu_Block.Text" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="StatusViewMenu_Delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="StatusViewMenu_Expand.Text" xml:space="preserve">
+    <value>Expand this status</value>
+  </data>
+  <data name="StatusViewMenu_Mention.Text" xml:space="preserve">
+    <value>Mention</value>
+  </data>
+  <data name="StatusViewMenu_Mute.Text" xml:space="preserve">
+    <value>Mute</value>
+  </data>
+  <data name="StatusViewMenu_Report.Text" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="StatusView_ClickToView.Text" xml:space="preserve">
+    <value>Click to view</value>
+  </data>
+  <data name="StatusView_Expander.Header" xml:space="preserve">
+    <value>Show More</value>
+  </data>
+  <data name="StatusView_Reblog.Text" xml:space="preserve">
+    <value>reblogged</value>
+  </data>
+  <data name="StatusView_Sensitive.Text" xml:space="preserve">
+    <value>Sensitive content</value>
+  </data>
+  <data name="TootDialogCW_PlaceholderText.PlaceholderText" xml:space="preserve">
+    <value>Content warning</value>
+  </data>
+  <data name="TootDialog_Direct.Text" xml:space="preserve">
+    <value>Direct</value>
+  </data>
+  <data name="TootDialog_PlaceholderText.PlaceholderText" xml:space="preserve">
+    <value>What is on your mind?</value>
+  </data>
+  <data name="TootVisibility_Direct_Description" xml:space="preserve">
+    <value>Post to mentioned users only</value>
+  </data>
+  <data name="TootVisibility_Direct_Title" xml:space="preserve">
+    <value>Direct</value>
+  </data>
+  <data name="TootVisibility_Private_Description" xml:space="preserve">
+    <value>Post to followers only</value>
+  </data>
+  <data name="TootVisibility_Private_Title" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="TootVisibility_Public_Description" xml:space="preserve">
+    <value>Post to public timelines</value>
+  </data>
+  <data name="TootVisibility_Public_Title" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="TootVisibility_Unlisted_Description" xml:space="preserve">
+    <value>Do not show in public timelines</value>
+  </data>
+  <data name="TootVisibility_Unlisted_Title" xml:space="preserve">
+    <value>Unlisted</value>
+  </data>
+</root>
