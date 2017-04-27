@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Data;
 
 namespace Tuuto.Common.Converters
 {
-    public class BoolToVisibilityConverter : IValueConverter
+    class BoolToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
@@ -28,7 +28,14 @@ namespace Tuuto.Common.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            throw new NotImplementedException();
+            var isInverted = false;
+
+            if (parameter is string)
+            {
+                bool.TryParse(parameter.ToString(), out isInverted);
+            }
+            var visibility = (Visibility)value;
+            return isInverted ? visibility == Visibility.Collapsed : visibility == Visibility.Visible;
         }
     }
 }

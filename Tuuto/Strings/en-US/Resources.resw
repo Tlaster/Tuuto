@@ -165,7 +165,25 @@
   <data name="RefreshListView.ReleaseToRefreshLabel" xml:space="preserve">
     <value>Release to refresh</value>
   </data>
-  <data name="StatusViewMenu_Block.Text" xml:space="preserve">
+  <data name="SendDraft_Error" xml:space="preserve">
+    <value>Toot error</value>
+  </data>
+  <data name="SendDraft_OK" xml:space="preserve">
+    <value>Toot!</value>
+  </data>
+  <data name="StatusAction_favourite" xml:space="preserve">
+    <value>favourited your status</value>
+  </data>
+  <data name="StatusAction_follow" xml:space="preserve">
+    <value>followed you</value>
+  </data>
+  <data name="StatusAction_mention" xml:space="preserve">
+    <value>mentioned you</value>
+  </data>
+  <data name="StatusAction_reblog" xml:space="preserve">
+    <value>rebloged</value>
+  </data>
+  <data name="StatusViewMenu_Block" xml:space="preserve">
     <value>Block</value>
   </data>
   <data name="StatusViewMenu_Delete.Text" xml:space="preserve">
@@ -174,13 +192,13 @@
   <data name="StatusViewMenu_Expand.Text" xml:space="preserve">
     <value>Expand this status</value>
   </data>
-  <data name="StatusViewMenu_Mention.Text" xml:space="preserve">
+  <data name="StatusViewMenu_Mention" xml:space="preserve">
     <value>Mention</value>
   </data>
-  <data name="StatusViewMenu_Mute.Text" xml:space="preserve">
+  <data name="StatusViewMenu_Mute" xml:space="preserve">
     <value>Mute</value>
   </data>
-  <data name="StatusViewMenu_Report.Text" xml:space="preserve">
+  <data name="StatusViewMenu_Report" xml:space="preserve">
     <value>Report</value>
   </data>
   <data name="StatusView_ClickToView.Text" xml:space="preserve">
@@ -189,20 +207,35 @@
   <data name="StatusView_Expander.Header" xml:space="preserve">
     <value>Show More</value>
   </data>
-  <data name="StatusView_Reblog.Text" xml:space="preserve">
-    <value>reblogged</value>
-  </data>
   <data name="StatusView_Sensitive.Text" xml:space="preserve">
     <value>Sensitive content</value>
   </data>
   <data name="TootDialogCW_PlaceholderText.PlaceholderText" xml:space="preserve">
     <value>Content warning</value>
   </data>
-  <data name="TootDialog_Direct.Text" xml:space="preserve">
-    <value>Direct</value>
+  <data name="TootDialog_AddMultipleImage.Text" xml:space="preserve">
+    <value>add multiple image</value>
+  </data>
+  <data name="TootDialog_AddSingleImage.Text" xml:space="preserve">
+    <value>Add single image</value>
+  </data>
+  <data name="TootDialog_ContentWarningShort.Content" xml:space="preserve">
+    <value>CW</value>
+  </data>
+  <data name="TootDialog_Menu_DeleteMedia.Text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="TootDialog_NSFW.Content" xml:space="preserve">
+    <value>NSFW</value>
   </data>
   <data name="TootDialog_PlaceholderText.PlaceholderText" xml:space="preserve">
     <value>What is on your mind?</value>
+  </data>
+  <data name="TootDialog_TakePhoto.Text" xml:space="preserve">
+    <value>Take a photo</value>
+  </data>
+  <data name="TootDialog_Toot.Content" xml:space="preserve">
+    <value>TOOT!</value>
   </data>
   <data name="TootVisibility_Direct_Description" xml:space="preserve">
     <value>Post to mentioned users only</value>

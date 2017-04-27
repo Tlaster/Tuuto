@@ -13,7 +13,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Tuuto.Common;
 using Tuuto.Common.Helpers;
-
+using Tuuto.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tuuto.View
 {
@@ -87,6 +88,12 @@ namespace Tuuto.View
 
         private async void DismissExtendedSplash()
         {
+
+            using (var db = new DraftDbContext())
+            {
+                await db.Database.MigrateAsync();
+            }
+
             if (await CheckForLogin())
             {
                 _rootFrame.Navigate(typeof(MainPage));

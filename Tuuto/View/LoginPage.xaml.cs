@@ -48,14 +48,14 @@ namespace Tuuto.View
                     if (!match.Success)
                         throw new UriFormatException();
                     var domain = match.Value;
-                    var auth = await Apps.Register(domain, "Tuuto", "https://github.com/Tlaster/Tuuto", "https://github.com/Tlaster/Tuuto", Apps.SCOPE_FOLLOW, Apps.SCOPE_READ, Apps.SCOPE_WRITE);
-                    var url = $"https://{domain}/oauth/authorize?client_id={auth.ClientId}&response_type=code&redirect_uri={auth.RedirectUri}";
+                    var auth = await Apps.Register(domain, "Tuuto", "https://github.com/Tlaster/Tuuto", "https://github.com/Tlaster/Tuuto", Apps.SCOPE_READ, Apps.SCOPE_WRITE, Apps.SCOPE_FOLLOW);
+                    var url = $"https://{domain}/oauth/authorize?client_id={auth.ClientId}&response_type=code&redirect_uri={auth.RedirectUri}&scope={Apps.SCOPE_READ} {Apps.SCOPE_WRITE} {Apps.SCOPE_FOLLOW}";
                     var result = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, new Uri(url), new Uri(auth.RedirectUri));
                     if (result.ResponseStatus != WebAuthenticationStatus.Success) return;
                     var code = Regex.Match(result.ResponseData, "code=(.*)").Groups[1].Value;
                     if (string.IsNullOrEmpty(code))
                         throw new UnauthorizedAccessException();
-                    var token = await OAuth.GetAccessTokenByCode(domain, auth.ClientId, auth.ClientSecret, auth.RedirectUri, code);
+                    var token = await OAuth.GetAccessTokenByCode(domain, auth.ClientId, auth.ClientSecret, auth.RedirectUri, code, Apps.SCOPE_READ, Apps.SCOPE_WRITE, Apps.SCOPE_FOLLOW);
                     var account = await Accounts.VerifyCredentials(domain, token.AccessToken);
                     Settings.Account = new List<(string, string, int)>(Settings.Account)
                     {

@@ -10,6 +10,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <SolidColorBrush x:Key="AppTheme" Color="#FF4D1780" />
+            <converters:NumberToVisibilityConverter x:Key="NumberToVisibilityConverter"/>
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converters:HtmlToMarkdownConvert x:Key="HtmlToMarkdownConvert"/>
             <converters:NullableBooleanConverter x:Key="NullableBooleanConverter"/>

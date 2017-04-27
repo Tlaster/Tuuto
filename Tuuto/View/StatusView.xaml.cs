@@ -16,6 +16,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Toolkit.Uwp.UI.Animations;
+using Tuuto.Common.Helpers;
+
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Tuuto.View
@@ -55,10 +58,10 @@ namespace Tuuto.View
             var model = statusModel?.Reblog ?? statusModel;
             if (model == null)
                 return;
-            StatusViewMenu_Mention.Text = $"{StatusViewMenu_Mention.Text} @{model.Account.UserName}";
-            StatusViewMenu_Mute.Text = $"{StatusViewMenu_Mute.Text} @{model.Account.UserName}";
-            StatusViewMenu_Block.Text = $"{StatusViewMenu_Block.Text} @{model.Account.UserName}";
-            StatusViewMenu_Report.Text = $"{StatusViewMenu_Report.Text} @{model.Account.UserName}";
+            StatusViewMenu_Mention.Text = $"{ResourceHelper.GetString("StatusViewMenu_Mention")} @{model.Account.UserName}";
+            StatusViewMenu_Mute.Text = $"{ResourceHelper.GetString("StatusViewMenu_Mute")} @{model.Account.UserName}";
+            StatusViewMenu_Block.Text = $"{ResourceHelper.GetString("StatusViewMenu_Block")} @{model.Account.UserName}";
+            StatusViewMenu_Report.Text = $"{ResourceHelper.GetString("StatusViewMenu_Report")} @{model.Account.UserName}";
         }
 
 
@@ -83,7 +86,7 @@ namespace Tuuto.View
         private async void LinkClicked(object sender, Microsoft.Toolkit.Uwp.UI.Controls.LinkClickedEventArgs e)
         {
             var url = new Uri(e.Link);
-            if (url.Host == new Uri(ViewModel.Account.Url).Host)
+            if (url.Host == new Uri(ViewModel.Account.Url).Host || url.Host == new Uri(Settings.CurrentAccountModel.Url).Host)
             {
                 //TODO:Parse content
             }

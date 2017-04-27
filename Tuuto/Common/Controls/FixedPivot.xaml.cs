@@ -21,7 +21,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Tuuto.Common.Controls
 {
-    public class PivotHeaderSplitterVisibilityConverter : IValueConverter
+    class PivotHeaderSplitterVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
@@ -93,7 +93,7 @@ namespace Tuuto.Common.Controls
         public static readonly DependencyProperty ContentHeightProperty =
             DependencyProperty.Register(nameof(ContentHeight), typeof(double), typeof(FixedPivot), new PropertyMetadata(0));
         private SplitView _splitView;
-        private AdaptiveGridView _fixedHeader;
+        private ExAdaptiveGridView _fixedHeader;
 
         public FixedPivot()
         {
@@ -160,7 +160,7 @@ namespace Tuuto.Common.Controls
             ExVisualTreeHelper.GetObjectByName<Button>(this, "PreviousButton").Visibility = Visibility.Collapsed;
             ExVisualTreeHelper.GetObjectByName<Button>(this, "NextButton").Visibility = Visibility.Collapsed;
             ExVisualTreeHelper.GetObjectByName<ContentPresenter>(this, "RightHeaderPresenter").Visibility = Visibility.Collapsed;
-            _fixedHeader = ExVisualTreeHelper.GetObjectByName<AdaptiveGridView>(this, "FixedHeader");
+            _fixedHeader = ExVisualTreeHelper.GetObjectByName<ExAdaptiveGridView>(this, "FixedHeader");
             _fixedHeader.DataContext = this;
             _splitView = ExVisualTreeHelper.GetObjectByName<SplitView>(this, "splitView");
             _splitView.DataContext = this;

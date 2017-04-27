@@ -59,7 +59,14 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem HeaderIcon="Message" x:Uid="MainPage_Notifications">
+            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshNotification}" HeaderIcon="Message" x:Uid="MainPage_Notifications">
+                <controls:ExListView RefreshRequested="{x:Bind ViewModel.RefreshNotification}" ItemsSource="{x:Bind ViewModel.Notification}" IsLoading="{x:Bind ViewModel.Notification.IsLoading,Mode=OneWay}">
+                    <controls:ExListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:NotificationModel">
+                            <local:NotificationView ViewModel="{x:Bind}"/>
+                        </DataTemplate>
+                    </controls:ExListView.ItemTemplate>
+                </controls:ExListView>
             </controls:FixedPivotItem>
             <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshTimelineLocal}" HeaderIcon="People" x:Uid="MainPage_Local">
                 <controls:ExListView RefreshRequested="{x:Bind ViewModel.RefreshTimelineLocal}" ItemsSource="{x:Bind ViewModel.TimelineLocal}" IsLoading="{x:Bind ViewModel.TimelineLocal.IsLoading,Mode=OneWay}">

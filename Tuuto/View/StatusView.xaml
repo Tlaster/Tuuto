@@ -9,113 +9,118 @@
     xmlns:model="using:Mastodon.Model"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converter="using:Tuuto.Common.Converters"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:selectors="using:Tuuto.Common.Selectors"
     xmlns:controls="using:Tuuto.Common.Controls">
     <UserControl.Resources>
+        <selectors:DataTemplateByVersionSelector x:Key="DataTemplateByVersionSelector" Version="AnniversaryUpdate" Before="{StaticResource SensitiveBlockerBackgroundBlackTemplate}" After="{StaticResource SensitiveBlockerBackgroundWithBlurTemplate}"/>
         <local:StatusReblogConverter x:Key="StatusReblogConverter"/>
-        <converter:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
         <MenuFlyout x:Name="MenuOthers" Placement="Bottom">
             <MenuFlyoutItem x:Uid="StatusViewMenu_Expand" Visibility="{x:Bind MenuExpandVisibility}"/>
             <MenuFlyoutSeparator Visibility="{x:Bind MenuExpandVisibility}"/>
-            <MenuFlyoutItem x:Name="StatusViewMenu_Mention" x:Uid="StatusViewMenu_Mention"/>
+            <MenuFlyoutItem x:Name="StatusViewMenu_Mention"/>
             <MenuFlyoutSeparator/>
-            <MenuFlyoutItem x:Name="StatusViewMenu_Mute" x:Uid="StatusViewMenu_Mute" Visibility="{x:Bind MenuExpandVisibility}"/>
-            <MenuFlyoutItem x:Name="StatusViewMenu_Block" x:Uid="StatusViewMenu_Block" Visibility="{x:Bind MenuExpandVisibility}"/>
-            <MenuFlyoutItem x:Name="StatusViewMenu_Report" x:Uid="StatusViewMenu_Report"/>
+            <MenuFlyoutItem x:Name="StatusViewMenu_Mute" Visibility="{x:Bind MenuExpandVisibility}"/>
+            <MenuFlyoutItem x:Name="StatusViewMenu_Block" Visibility="{x:Bind MenuExpandVisibility}"/>
+            <MenuFlyoutItem x:Name="StatusViewMenu_Report"/>
         </MenuFlyout>
         <MenuFlyout x:Name="MenuMe" Placement="Bottom">
             <MenuFlyoutItem x:Uid="StatusViewMenu_Expand" Visibility="{x:Bind MenuExpandVisibility}"/>
             <MenuFlyoutSeparator Visibility="{x:Bind MenuExpandVisibility}"/>
             <MenuFlyoutItem x:Uid="StatusViewMenu_Delete"/>
         </MenuFlyout>
+        <DataTemplate x:Key="SensitiveBlockerBackgroundWithBlurTemplate">
+            <Border Background="#7F000000">
+                <Interactivity:Interaction.Behaviors>
+                    <behaviors:Blur Value="50" AutomaticallyStart="True"/>
+                </Interactivity:Interaction.Behaviors>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="SensitiveBlockerBackgroundBlackTemplate">
+            <Border Background="Black"/>
+        </DataTemplate>
+        <DataTemplate x:Key="StatusContentTemplate" x:DataType="model:StatusModel">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <toolkit:ImageEx DataContext="{x:Bind Account}" Margin="4" VerticalAlignment="Top" Source="{x:Bind Account.Avatar}"/>
+                <StackPanel Grid.Column="2">
+                    <Grid>
+                        <StackPanel DataContext="{x:Bind Account}" Orientation="Horizontal">
+                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind Account.DisplayName}" />
+                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="@"/>
+                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind Account.Acct}"/>
+                        </StackPanel>
+                        <TextBlock  Style="{ThemeResource BodyTextBlockStyle}" HorizontalAlignment="Right" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind CreatedAt}"/>
+                    </Grid>
+                    <TextBlock IsTextSelectionEnabled="True" Visibility="{x:Bind SpoilerText,Converter={StaticResource NullToVisibilityConverter}}" Text="{x:Bind SpoilerText}"/>
+                    <toolkit:Expander Style="{StaticResource TextExpanderStyle}" x:Uid="StatusView_Expander" Visibility="{x:Bind SpoilerText,Converter={StaticResource NullToVisibilityConverter}}">
+                        <toolkit:MarkdownTextBlock HorizontalAlignment="Left" LinkClicked="LinkClicked" Text="{x:Bind Content, Converter={StaticResource HtmlToMarkdownConvert}}"/>
+                    </toolkit:Expander>
+                    <toolkit:MarkdownTextBlock Visibility="{x:Bind SpoilerText,Converter={StaticResource NullToVisibilityConverter},ConverterParameter=true}" LinkClicked="LinkClicked" Text="{x:Bind Content, Converter={StaticResource HtmlToMarkdownConvert}}"/>
+                    <Grid Padding="0,8,0,0" MaxWidth="720" Visibility="{x:Bind MediaAttachments,Converter={StaticResource NullToVisibilityConverter}}">
+                        <toolkit:AdaptiveGridView IsItemClickEnabled="True" ItemClick="AdaptiveGridView_ItemClick" DesiredWidth="150" SelectionMode="None" StretchContentForSingleRow="True" ItemsSource="{x:Bind MediaAttachments}">
+                            <toolkit:AdaptiveGridView.ItemTemplate>
+                                <DataTemplate x:DataType="model:AttachmentModel">
+                                    <toolkit:ImageEx MaxHeight="300" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Source="{x:Bind PreviewUrl}"/>
+                                </DataTemplate>
+                            </toolkit:AdaptiveGridView.ItemTemplate>
+                            <toolkit:AdaptiveGridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="GridViewItem">
+                                                <GridViewItemPresenter SelectedForeground="{StaticResource AppTheme}" Foreground="{StaticResource PivotHeaderForegroundUnselectedBrush}" />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </toolkit:AdaptiveGridView.ItemContainerStyle>
+                        </toolkit:AdaptiveGridView>
+                        <Button x:Name="HideContent" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource ActionButtonStyle}">
+                            <Interactivity:Interaction.Behaviors>
+                                <Interactions:EventTriggerBehavior EventName="Click" SourceObject="{Binding ElementName=HideContent}">
+                                    <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=SensitiveBlocker}" PropertyName="Visibility" Value="Visible"/>
+                                </Interactions:EventTriggerBehavior>
+                            </Interactivity:Interaction.Behaviors>
+                            <SymbolIcon Symbol="View"/>
+                        </Button>
+                        <Grid Visibility="{x:Bind Sensitive,Converter={StaticResource BoolToVisibilityConverter}}" x:Name="SensitiveBlocker">
+                            <Interactivity:Interaction.Behaviors>
+                                <Interactions:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding ElementName=SensitiveBlocker}">
+                                    <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=SensitiveBlocker}" PropertyName="Visibility" Value="Collapsed"/>
+                                </Interactions:EventTriggerBehavior>
+                            </Interactivity:Interaction.Behaviors>
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ContentTemplateSelector="{StaticResource DataTemplateByVersionSelector}" />
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" RequestedTheme="Dark" Orientation="Vertical">
+                                <TextBlock HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" x:Uid="StatusView_Sensitive"/>
+                                <TextBlock HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" x:Uid="StatusView_ClickToView"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    <StackPanel DataContext="{x:Bind}" Padding="0,4,0,0" Orientation="Horizontal">
+                        <controls:SplitViewButton Padding="4,0" IconSize="30" Icon="Undo" Style="{StaticResource ActionButtonStyle}"/>
+                        <controls:IconToggleButton IsChecked="{x:Bind Reblogged,Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}" Padding="4,0" IconSize="30" Icon="ReShare" Label="{x:Bind ReblogsCount}" Style="{StaticResource TextToggleButtonStyle}"/>
+                        <controls:IconToggleButton IsChecked="{x:Bind Favourited,Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}" Padding="4,0" IconSize="30" Icon="Favorite" Label="{x:Bind FavouritesCount}" Style="{StaticResource TextToggleButtonStyle}"/>
+                        <controls:SplitViewButton Click="More_Click" Padding="4,0" IconSize="30" Icon="More" Style="{StaticResource ActionButtonStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
     </UserControl.Resources>
-    <Grid Padding="8" BorderThickness="0,0,1,1" BorderBrush="LightGray">
+    <Grid Padding="4" BorderThickness="0,0,0,1" BorderBrush="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Visibility="{x:Bind ViewModel.Reblog,Mode=OneWay,Converter={StaticResource NullToVisibilityConverter}}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="48"/>
-                <ColumnDefinition Width="4"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <SymbolIcon Symbol="ReShare" HorizontalAlignment="Right">
-                <SymbolIcon.Foreground>
-                    <SolidColorBrush Color="{StaticResource SystemChromeBlackMediumLowColor}"/>
-                </SymbolIcon.Foreground>
-            </SymbolIcon>
-            <StackPanel Padding="0,0,0,8" HorizontalAlignment="Left" DataContext="{x:Bind ViewModel.Account,Mode=OneWay}" Orientation="Horizontal" Grid.Column="2">
-                <Button Padding="0" HorizontalAlignment="Left" Content="{x:Bind ViewModel.Account.DisplayName,Mode=OneWay}" Style="{StaticResource ActionButtonStyle}"/>
-                <TextBlock VerticalAlignment="Center" x:Uid="StatusView_Reblog">
-                    <TextBlock.Foreground>
-                        <SolidColorBrush Color="{StaticResource SystemChromeBlackMediumLowColor}"/>
-                    </TextBlock.Foreground>
-                </TextBlock>
-            </StackPanel>
-        </Grid>
-        <ContentControl Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{x:Bind ViewModel,Mode=OneWay,Converter={StaticResource StatusReblogConverter}}">
-            <ContentControl.ContentTemplate>
-                <DataTemplate x:DataType="model:StatusModel">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="4"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <toolkit:ImageEx DataContext="{x:Bind Account}" Margin="4" VerticalAlignment="Top" Source="{x:Bind Account.Avatar}"/>
-                        <StackPanel Grid.Column="2">
-                            <Grid>
-                                <StackPanel DataContext="{x:Bind Account}" Orientation="Horizontal">
-                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind Account.DisplayName}" />
-                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="@"/>
-                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind Account.Acct}"/>
-                                </StackPanel>
-                                <TextBlock  Style="{ThemeResource BodyTextBlockStyle}" HorizontalAlignment="Right" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind CreatedAt}"/>
-                            </Grid>
-                            <TextBlock IsTextSelectionEnabled="True" Visibility="{x:Bind SpoilerText,Converter={StaticResource NullToVisibilityConverter}}" Text="{x:Bind SpoilerText}"/>
-                            <toolkit:Expander Style="{StaticResource TextExpanderStyle}" x:Uid="StatusView_Expander" Visibility="{x:Bind SpoilerText,Converter={StaticResource NullToVisibilityConverter}}">
-                                <toolkit:MarkdownTextBlock HorizontalAlignment="Left" LinkClicked="LinkClicked" Text="{x:Bind Content, Converter={StaticResource HtmlToMarkdownConvert}}"/>
-                            </toolkit:Expander>
-                            <toolkit:MarkdownTextBlock Visibility="{x:Bind SpoilerText,Converter={StaticResource NullToVisibilityConverter},ConverterParameter=true}" LinkClicked="LinkClicked" Text="{x:Bind Content, Converter={StaticResource HtmlToMarkdownConvert}}"/>
-                            <Grid MaxWidth="720" Visibility="{x:Bind MediaAttachments,Converter={StaticResource NullToVisibilityConverter}}">
-                                <toolkit:AdaptiveGridView IsItemClickEnabled="True" ItemClick="AdaptiveGridView_ItemClick" DesiredWidth="150" SelectionMode="None" StretchContentForSingleRow="True" ItemsSource="{x:Bind MediaAttachments}">
-                                    <toolkit:AdaptiveGridView.ItemTemplate>
-                                        <DataTemplate x:DataType="model:AttachmentModel">
-                                            <toolkit:ImageEx MaxHeight="300" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Source="{x:Bind PreviewUrl}"/>
-                                        </DataTemplate>
-                                    </toolkit:AdaptiveGridView.ItemTemplate>
-                                </toolkit:AdaptiveGridView>
-                                <Button x:Name="HideContent" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource ActionButtonStyle}">
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Interactions:EventTriggerBehavior EventName="Click" SourceObject="{Binding ElementName=HideContent}">
-                                            <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=SensitiveBlocker}" PropertyName="Visibility" Value="Visible"/>
-                                        </Interactions:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-                                    <SymbolIcon Symbol="View"/>
-                                </Button>
-                                <Border Visibility="{x:Bind Sensitive,Converter={StaticResource BoolToVisibilityConverter}}" Background="Black" x:Name="SensitiveBlocker">
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Interactions:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding ElementName=SensitiveBlocker}">
-                                            <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=SensitiveBlocker}" PropertyName="Visibility" Value="Collapsed"/>
-                                        </Interactions:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" RequestedTheme="Dark" Orientation="Vertical">
-                                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" x:Uid="StatusView_Sensitive"/>
-                                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" x:Uid="StatusView_ClickToView"/>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                            <StackPanel DataContext="{x:Bind}" Padding="0,4,0,0" Orientation="Horizontal">
-                                <controls:SplitViewButton Padding="4,0" IconSize="30" Icon="Undo" Style="{StaticResource ActionButtonStyle}"/>
-                                <controls:IconToggleButton IsChecked="{x:Bind Reblogged,Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}" Padding="4,0" IconSize="30" Icon="ReShare" Label="{x:Bind ReblogsCount}" Style="{StaticResource TextToggleButtonStyle}"/>
-                                <controls:IconToggleButton IsChecked="{x:Bind Favourited,Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}" Padding="4,0" IconSize="30" Icon="Favorite" Label="{x:Bind FavouritesCount}" Style="{StaticResource TextToggleButtonStyle}"/>
-                                <controls:SplitViewButton Click="More_Click" Padding="4,0" IconSize="30" Icon="More" Style="{StaticResource ActionButtonStyle}"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ContentControl.ContentTemplate>
-        </ContentControl>
+        <controls:StatusAction Padding="0,0,0,4" Visibility="{x:Bind ViewModel.Reblog,Mode=OneWay,Converter={StaticResource NullToVisibilityConverter}}" ActionType="reblog" ActionAccount="{x:Bind ViewModel.Account,Mode=OneWay}"/>
+        <ContentControl Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{x:Bind ViewModel,Mode=OneWay,Converter={StaticResource StatusReblogConverter}}" ContentTemplate="{StaticResource StatusContentTemplate}"/>
     </Grid>
 </UserControl>

@@ -11,6 +11,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Tuuto.Common.Helpers;
 using Tuuto.View;
+using Tuuto.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tuuto
 {

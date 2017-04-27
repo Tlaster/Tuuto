@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Data;
 
 namespace Tuuto.Common.Converters
 {
-    public class NumberToVisibilityConverter : IValueConverter
+    class NumberToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

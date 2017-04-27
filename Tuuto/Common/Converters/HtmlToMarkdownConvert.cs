@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Data;
 
 namespace Tuuto.Common.Converters
 {
-    public class HtmlToMarkdownConvert : IValueConverter
+    class HtmlToMarkdownConvert : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

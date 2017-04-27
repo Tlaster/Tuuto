@@ -18,60 +18,60 @@ namespace Tuuto.Common.Controls
     /// screen resolution in order to fully leverage the available screen space. The property ItemsHeight define
     /// the items fixed height and the property DesiredWidth sets the minimum width for the elements to add a
     /// new column.</remarks>
-    public partial class AdaptiveGridView : GridView
+    public class ExAdaptiveGridView : GridView
     {
 
         /// <summary>
         /// Identifies the <see cref="ItemClickCommand"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ItemClickCommandProperty =
-            DependencyProperty.Register(nameof(ItemClickCommand), typeof(ICommand), typeof(AdaptiveGridView), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(ItemClickCommand), typeof(ICommand), typeof(ExAdaptiveGridView), new PropertyMetadata(null));
 
         /// <summary>
         /// Identifies the <see cref="ItemHeight"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ItemHeightProperty =
-            DependencyProperty.Register(nameof(ItemHeight), typeof(double), typeof(AdaptiveGridView), new PropertyMetadata(double.NaN));
+            DependencyProperty.Register(nameof(ItemHeight), typeof(double), typeof(ExAdaptiveGridView), new PropertyMetadata(double.NaN));
 
         /// <summary>
         /// Identifies the <see cref="OneRowModeEnabled"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty OneRowModeEnabledProperty =
-            DependencyProperty.Register(nameof(OneRowModeEnabled), typeof(bool), typeof(AdaptiveGridView), new PropertyMetadata(false, (o, e) => { OnOneRowModeEnabledChanged(o, e.NewValue); }));
+            DependencyProperty.Register(nameof(OneRowModeEnabled), typeof(bool), typeof(ExAdaptiveGridView), new PropertyMetadata(false, (o, e) => { OnOneRowModeEnabledChanged(o, e.NewValue); }));
 
         /// <summary>
         /// Identifies the <see cref="ItemWidth"/> dependency property.
         /// </summary>
         private static readonly DependencyProperty ItemWidthProperty =
-            DependencyProperty.Register(nameof(ItemWidth), typeof(double), typeof(AdaptiveGridView), new PropertyMetadata(double.NaN));
+            DependencyProperty.Register(nameof(ItemWidth), typeof(double), typeof(ExAdaptiveGridView), new PropertyMetadata(double.NaN));
 
         /// <summary>
         /// Identifies the <see cref="DesiredWidth"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty DesiredWidthProperty =
-            DependencyProperty.Register(nameof(DesiredWidth), typeof(double), typeof(AdaptiveGridView), new PropertyMetadata(double.NaN, DesiredWidthChanged));
+            DependencyProperty.Register(nameof(DesiredWidth), typeof(double), typeof(ExAdaptiveGridView), new PropertyMetadata(double.NaN, DesiredWidthChanged));
 
         /// <summary>
         /// Identifies the <see cref="StretchContentForSingleRow"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty StretchContentForSingleRowProperty =
-        DependencyProperty.Register(nameof(StretchContentForSingleRow), typeof(bool), typeof(AdaptiveGridView), new PropertyMetadata(true, OnStretchContentForSingleRowPropertyChanged));
+        DependencyProperty.Register(nameof(StretchContentForSingleRow), typeof(bool), typeof(ExAdaptiveGridView), new PropertyMetadata(true, OnStretchContentForSingleRowPropertyChanged));
 
         private static void OnOneRowModeEnabledChanged(DependencyObject d, object newValue)
         {
-            var self = d as AdaptiveGridView;
+            var self = d as ExAdaptiveGridView;
             self.DetermineOneRowMode();
         }
 
         private static void DesiredWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var self = d as AdaptiveGridView;
+            var self = d as ExAdaptiveGridView;
             self.RecalculateLayout(self.ActualWidth);
         }
 
         private static void OnStretchContentForSingleRowPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var self = d as AdaptiveGridView;
+            var self = d as ExAdaptiveGridView;
             self.RecalculateLayout(self.ActualWidth);
         }
 
@@ -168,9 +168,9 @@ namespace Tuuto.Common.Controls
         private bool _needToRestoreScrollStates;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AdaptiveGridView"/> class.
+        /// Initializes a new instance of the <see cref="ExAdaptiveGridView"/> class.
         /// </summary>
-        public AdaptiveGridView()
+        public ExAdaptiveGridView()
         {
             IsTabStop = false;
             SizeChanged += OnSizeChanged;
@@ -224,7 +224,7 @@ namespace Tuuto.Common.Controls
         /// <returns>The calculated item width.</returns>
         protected virtual double CalculateItemWidth(double containerWidth)
         {
-            double desiredWidth = double.IsNaN(DesiredWidth) ? containerWidth : DesiredWidth;
+            var desiredWidth = double.IsNaN(DesiredWidth) ? containerWidth : DesiredWidth;
 
             var columns = CalculateColumns(containerWidth, desiredWidth);
 

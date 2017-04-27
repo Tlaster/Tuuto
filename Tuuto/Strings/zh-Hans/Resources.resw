@@ -165,7 +165,25 @@
   <data name="RefreshListView.ReleaseToRefreshLabel" xml:space="preserve">
     <value>释放刷新</value>
   </data>
-  <data name="StatusViewMenu_Block.Text" xml:space="preserve">
+  <data name="SendDraft_Error" xml:space="preserve">
+    <value>发布失败</value>
+  </data>
+  <data name="SendDraft_OK" xml:space="preserve">
+    <value>发布成功</value>
+  </data>
+  <data name="StatusAction_favourite" xml:space="preserve">
+    <value>喜欢了您的推</value>
+  </data>
+  <data name="StatusAction_follow" xml:space="preserve">
+    <value>关注了您</value>
+  </data>
+  <data name="StatusAction_mention" xml:space="preserve">
+    <value>提及了您</value>
+  </data>
+  <data name="StatusAction_reblog" xml:space="preserve">
+    <value>转发了</value>
+  </data>
+  <data name="StatusViewMenu_Block" xml:space="preserve">
     <value>拉黑</value>
   </data>
   <data name="StatusViewMenu_Delete.Text" xml:space="preserve">
@@ -174,13 +192,13 @@
   <data name="StatusViewMenu_Expand.Text" xml:space="preserve">
     <value>查看详情</value>
   </data>
-  <data name="StatusViewMenu_Mention.Text" xml:space="preserve">
+  <data name="StatusViewMenu_Mention" xml:space="preserve">
     <value>提及</value>
   </data>
-  <data name="StatusViewMenu_Mute.Text" xml:space="preserve">
+  <data name="StatusViewMenu_Mute" xml:space="preserve">
     <value>屏蔽</value>
   </data>
-  <data name="StatusViewMenu_Report.Text" xml:space="preserve">
+  <data name="StatusViewMenu_Report" xml:space="preserve">
     <value>举报</value>
   </data>
   <data name="StatusView_ClickToView.Text" xml:space="preserve">
@@ -189,20 +207,35 @@
   <data name="StatusView_Expander.Header" xml:space="preserve">
     <value>显示更多</value>
   </data>
-  <data name="StatusView_Reblog.Text" xml:space="preserve">
-    <value>转发了</value>
-  </data>
   <data name="StatusView_Sensitive.Text" xml:space="preserve">
     <value>和谐内容</value>
   </data>
   <data name="TootDialogCW_PlaceholderText.PlaceholderText" xml:space="preserve">
-    <value>和谐内容</value>
+    <value>和谐内容警告</value>
   </data>
-  <data name="TootDialog_Direct.Text" xml:space="preserve">
-    <value>被提及的用户</value>
+  <data name="TootDialog_AddMultipleImage.Text" xml:space="preserve">
+    <value>添加多图</value>
+  </data>
+  <data name="TootDialog_AddSingleImage.Text" xml:space="preserve">
+    <value>添加图片</value>
+  </data>
+  <data name="TootDialog_ContentWarningShort.Content" xml:space="preserve">
+    <value>和谐</value>
+  </data>
+  <data name="TootDialog_Menu_DeleteMedia.Text" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="TootDialog_NSFW.Content" xml:space="preserve">
+    <value>和谐图片</value>
   </data>
   <data name="TootDialog_PlaceholderText.PlaceholderText" xml:space="preserve">
     <value>分享您钢鞭的故事</value>
+  </data>
+  <data name="TootDialog_TakePhoto.Text" xml:space="preserve">
+    <value>拍照</value>
+  </data>
+  <data name="TootDialog_Toot.Content" xml:space="preserve">
+    <value>发布！</value>
   </data>
   <data name="TootVisibility_Direct_Description" xml:space="preserve">
     <value>只有提及的人才能看到</value>

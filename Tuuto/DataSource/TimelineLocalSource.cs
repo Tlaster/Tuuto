@@ -11,17 +11,11 @@ using Tuuto.Common;
 
 namespace Tuuto.DataSource
 {
-    public class TimelineLocalSource : IIncrementalSource<StatusModel>
+    public class TimelineLocalSource : BaseArraySource<StatusModel>
     {
-        private int _maxid = 0;
-
-        public async Task<IEnumerable<StatusModel>> GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken))
+        protected override async Task<ArrayModel<StatusModel>> GetArrayAsync(int max_id)
         {
-            if (pageIndex == 0)
-                _maxid = 0;
-            var result = await Timelines.Public(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, max_id: _maxid, local: true);
-            _maxid = result.MaxId;
-            return result.Result;
+            return await Timelines.Public(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, max_id: max_id, local: true);
         }
     }
 }

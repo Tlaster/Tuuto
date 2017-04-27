@@ -1,0 +1,32 @@
+﻿<UserControl
+    x:Class="Tuuto.View.AccountLiteView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Tuuto.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Padding="4" BorderThickness="0,0,0,1" BorderBrush="LightGray" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="48"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <toolkit:ImageEx Margin="4" Source="{x:Bind ViewModel.Avatar,Mode=OneWay}"/>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock VerticalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind ViewModel.DisplayName,Mode=OneWay}" />
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="@"/>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind ViewModel.Acct,Mode=OneWay}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

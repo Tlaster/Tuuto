@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Tuuto.Model
 {
-    public class TootVisibilityList
+    class TootVisibilityList
     {
         public static List<TootVisibilityModel> VisibilityList { get; } = new List<TootVisibilityModel>
         {
@@ -43,7 +43,7 @@ namespace Tuuto.Model
             }
         };
     }
-    public class TootVisibilityModel
+    class TootVisibilityModel
     {
         public Symbol Icon { get; internal set; }
         public string Title { get; internal set; }

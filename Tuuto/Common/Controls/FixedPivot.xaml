@@ -150,8 +150,8 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <ContentControl x:Name="TitleContentControl" ContentTemplate="{TemplateBinding TitleTemplate}" Content="{TemplateBinding Title}" IsTabStop="False" Margin="{StaticResource PivotPortraitThemePadding}" Style="{StaticResource TitleContentControlStyle}" Visibility="Collapsed"/>
-                            <local:AdaptiveGridView Tapped="HeaderList_Tapped" DoubleTapped="HeaderList_DoubleTapped" Background="{Binding PaneBackground,ElementName=splitView}" SelectionMode="Single" ItemsSource="{Binding Headers}" SelectedIndex="{Binding SelectedIndex,Mode=TwoWay}" x:Name="FixedHeader" Height="48" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" DesiredWidth="32" ItemHeight="48" OneRowModeEnabled="True">
-                                <local:AdaptiveGridView.ItemTemplate>
+                            <local:ExAdaptiveGridView Tapped="HeaderList_Tapped" DoubleTapped="HeaderList_DoubleTapped" Background="{Binding PaneBackground,ElementName=splitView}" SelectionMode="Single" ItemsSource="{Binding Headers}" SelectedIndex="{Binding SelectedIndex,Mode=TwoWay}" x:Name="FixedHeader" Height="48" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" DesiredWidth="32" ItemHeight="48" OneRowModeEnabled="True">
+                                <local:ExAdaptiveGridView.ItemTemplate>
                                     <DataTemplate>
                                         <RelativePanel>
                                             <Rectangle RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Visibility="{Binding Foreground,ElementName=Icon,Converter={StaticResource PivotHeaderSplitterVisibilityConverter},ConverterParameter={StaticResource AppTheme}}" Fill="{Binding Foreground,ElementName=Icon}" RelativePanel.AlignBottomWithPanel="True" Height="4" />
@@ -162,8 +162,8 @@
                                             </Grid>
                                         </RelativePanel>
                                     </DataTemplate>
-                                </local:AdaptiveGridView.ItemTemplate>
-                                <local:AdaptiveGridView.ItemContainerStyle>
+                                </local:ExAdaptiveGridView.ItemTemplate>
+                                <local:ExAdaptiveGridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
                                         <Setter Property="Margin" Value="0"/>
                                         <Setter Property="Template">
@@ -174,8 +174,8 @@
                                             </Setter.Value>
                                         </Setter>
                                     </Style>
-                                </local:AdaptiveGridView.ItemContainerStyle>
-                            </local:AdaptiveGridView>
+                                </local:ExAdaptiveGridView.ItemContainerStyle>
+                            </local:ExAdaptiveGridView>
                             <SplitView OpenPaneLength="{Binding SplitViewPaneLength}" DisplayMode="Inline" x:Name="splitView" Grid.Row="1">
                                 <SplitView.Pane>
                                     <Grid>
@@ -340,7 +340,6 @@
     </Pivot.Style>
     <Pivot.Resources>
         <local:PivotHeaderSplitterVisibilityConverter x:Key="PivotHeaderSplitterVisibilityConverter"/>
-        <converters:NumberToVisibilityConverter x:Key="NumberToVisibilityConverter"/>
     </Pivot.Resources>
     <Pivot.ItemContainerStyle>
         <Style TargetType="PivotItem">
