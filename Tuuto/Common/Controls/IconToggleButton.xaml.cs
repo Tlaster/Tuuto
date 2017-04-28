@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FontAwesome.UWP;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,15 +42,15 @@ namespace Tuuto.Common.Controls
         public static readonly DependencyProperty LabelProperty =
             DependencyProperty.Register(nameof(Label), typeof(string), typeof(SplitViewButton), new PropertyMetadata(null));
 
-        public Symbol Icon
+        public FontAwesomeIcon Icon
         {
-            get { return (Symbol)GetValue(IconProperty); }
+            get { return (FontAwesomeIcon)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Icon.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register(nameof(Icon), typeof(Symbol), typeof(SplitViewButton), new PropertyMetadata(Symbol.Emoji));
+            DependencyProperty.Register(nameof(Icon), typeof(FontAwesomeIcon), typeof(SplitViewButton), new PropertyMetadata(FontAwesomeIcon.SmileOutline));
 
         public IconToggleButton()
         {

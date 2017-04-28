@@ -154,7 +154,7 @@
     <value>设置</value>
   </data>
   <data name="MainPage_Toot.Label" xml:space="preserve">
-    <value>发微博</value>
+    <value>发嘟嘟</value>
   </data>
   <data name="ProgressDialogText" xml:space="preserve">
     <value>坐和放宽，这不需要太久</value>
@@ -172,7 +172,7 @@
     <value>发布成功</value>
   </data>
   <data name="StatusAction_favourite" xml:space="preserve">
-    <value>喜欢了您的推</value>
+    <value>喜欢了您的嘟</value>
   </data>
   <data name="StatusAction_follow" xml:space="preserve">
     <value>关注了您</value>
@@ -235,7 +235,7 @@
     <value>拍照</value>
   </data>
   <data name="TootDialog_Toot.Content" xml:space="preserve">
-    <value>发布！</value>
+    <value>嘟嘟！</value>
   </data>
   <data name="TootVisibility_Direct_Description" xml:space="preserve">
     <value>只有提及的人才能看到</value>

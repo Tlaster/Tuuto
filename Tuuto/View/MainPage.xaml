@@ -11,6 +11,7 @@
     xmlns:behaviors="using:Tuuto.Common.Behaviors"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:fa="using:FontAwesome.UWP"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -37,9 +38,9 @@
         <controls:FixedPivot x:Name="fixedPivot" x:Uid="MainPage_FixedPivot">
             <controls:FixedPivot.SplitViewPaneButtomContent>
                 <StackPanel Orientation="Vertical">
-                    <controls:SplitViewButton Icon="Find" x:Uid="MainPage_Search" />
+                    <controls:SplitViewButton Click="{x:Bind SearchClick}" Icon="Search" x:Uid="MainPage_Search" />
                     <controls:SplitViewButton Click="{x:Bind RefreshClick}" Icon="Refresh" x:Uid="MainPage_Refresh"/>
-                    <controls:SplitViewButton Click="{x:Bind ShowTootDialog}" Icon="Edit" x:Uid="MainPage_Toot" x:Name="TootSplitViewButton">
+                    <controls:SplitViewButton Click="{x:Bind ShowTootDialog}" Icon="Pencil" x:Uid="MainPage_Toot" x:Name="TootSplitViewButton">
                         <!-- TODO: Behaviors doesn't work -->
                         <!--<Interactivity:Interaction.Behaviors>
                             <Interactions:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding ElementName=TootSplitViewButton}">
@@ -47,10 +48,10 @@
                             </Interactions:EventTriggerBehavior>
                         </Interactivity:Interaction.Behaviors>-->
                     </controls:SplitViewButton>
-                    <controls:SplitViewButton Icon="Setting" x:Uid="MainPage_Setting"/>
+                    <controls:SplitViewButton Icon="Cog" x:Uid="MainPage_Setting"/>
                 </StackPanel>
             </controls:FixedPivot.SplitViewPaneButtomContent>
-            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshTimelineHome}" HeaderIcon="Home" x:Uid="MainPage_Home">
+            <controls:FixedPivotItem x:Name="pivotitem" RefreshRequested="{x:Bind ViewModel.RefreshTimelineHome}" HeaderIcon="Home" x:Uid="MainPage_Home">
                 <controls:ExListView RefreshRequested="{x:Bind ViewModel.RefreshTimelineHome}" ItemsSource="{x:Bind ViewModel.TimelineHome}" IsLoading="{x:Bind ViewModel.TimelineHome.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:StatusModel">
@@ -59,7 +60,7 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshNotification}" HeaderIcon="Message" x:Uid="MainPage_Notifications">
+            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshNotification}" HeaderIcon="Bell" x:Uid="MainPage_Notifications">
                 <controls:ExListView RefreshRequested="{x:Bind ViewModel.RefreshNotification}" ItemsSource="{x:Bind ViewModel.Notification}" IsLoading="{x:Bind ViewModel.Notification.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:NotificationModel">
@@ -68,7 +69,7 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshTimelineLocal}" HeaderIcon="People" x:Uid="MainPage_Local">
+            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshTimelineLocal}" HeaderIcon="Users" x:Uid="MainPage_Local">
                 <controls:ExListView RefreshRequested="{x:Bind ViewModel.RefreshTimelineLocal}" ItemsSource="{x:Bind ViewModel.TimelineLocal}" IsLoading="{x:Bind ViewModel.TimelineLocal.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:StatusModel">
@@ -77,7 +78,7 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshTimelineFederated}" HeaderIcon="World" x:Uid="MainPage_Federated">
+            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshTimelineFederated}" HeaderIcon="Globe" x:Uid="MainPage_Federated">
                 <controls:ExListView RefreshRequested="{x:Bind ViewModel.RefreshTimelineFederated}" ItemsSource="{x:Bind ViewModel.TimelineFederated}" IsLoading="{x:Bind ViewModel.TimelineFederated.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:StatusModel">
@@ -90,14 +91,25 @@
     </Grid>
     <Page.BottomAppBar>
         <CommandBar  x:Name="BottomCommandBar">
-            <AppBarButton Icon="Find" x:Uid="MainPage_Search"/>
-            <AppBarButton Click="{x:Bind RefreshClick}" Icon="Refresh" x:Uid="MainPage_Refresh"/>
-            <AppBarButton Icon="Edit" x:Uid="MainPage_Toot" x:Name="TootAppBarButton">
+            <AppBarButton x:Uid="MainPage_Search">
+                <AppBarButton.Icon>
+                    <fa:FontAwesome Icon="Search"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Click="{x:Bind RefreshClick}" x:Uid="MainPage_Refresh">
+                <AppBarButton.Icon>
+                    <fa:FontAwesome Icon="Refresh"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton x:Uid="MainPage_Toot" x:Name="TootAppBarButton">
                 <Interactivity:Interaction.Behaviors>
                     <Interactions:EventTriggerBehavior EventName="Click" SourceObject="{Binding ElementName=TootAppBarButton}">
                         <behaviors:ShowTootDialog/>
                     </Interactions:EventTriggerBehavior>
                 </Interactivity:Interaction.Behaviors>
+                <AppBarButton.Icon>
+                    <fa:FontAwesome Icon="Pencil"/>
+                </AppBarButton.Icon>
             </AppBarButton>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Setting" x:Uid="MainPage_Setting"/>

@@ -1,4 +1,5 @@
-﻿using Mastodon.Model;
+﻿using FontAwesome.UWP;
+using Mastodon.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,15 +26,15 @@ namespace Tuuto.Common.Controls
         public event EventHandler<AccountModel> AccountClick;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Symbol Icon
+        public FontAwesomeIcon Icon
         {
-            get { return (Symbol)GetValue(MyPropertyProperty); }
+            get { return (FontAwesomeIcon)GetValue(MyPropertyProperty); }
             set { SetValue(MyPropertyProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.Register(nameof(Icon), typeof(Symbol), typeof(StatusAction), new PropertyMetadata(Symbol.Emoji));
+            DependencyProperty.Register(nameof(Icon), typeof(FontAwesomeIcon), typeof(StatusAction), new PropertyMetadata(FontAwesomeIcon.SmileOutline));
 
 
 
@@ -57,16 +58,16 @@ namespace Tuuto.Common.Controls
             switch (v)
             {
                 case NotificationModel.NOTIFICATIONTYPE_FAVOURITE:
-                    Icon = Symbol.Favorite;
+                    Icon = FontAwesomeIcon.Star;
                     break;
                 case NotificationModel.NOTIFICATIONTYPE_FOLLOW:
-                    Icon = Symbol.AddFriend;
+                    Icon = FontAwesomeIcon.UserPlus;
                     break;
                 case NotificationModel.NOTIFICATIONTYPE_MENTION:
-                    Icon = Symbol.Account;
+                    Icon = FontAwesomeIcon.At;
                     break;
                 case NotificationModel.NOTIFICATIONTYPE_REBLOG:
-                    Icon = Symbol.ReShare;
+                    Icon = FontAwesomeIcon.Retweet;
                     break;
                 default:
                     break;

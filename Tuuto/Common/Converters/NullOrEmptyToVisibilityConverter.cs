@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Data;
 
 namespace Tuuto.Common.Converters
 {
-    class NullToVisibilityConverter : IValueConverter
+    class NullOrEmptyToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
@@ -19,7 +19,7 @@ namespace Tuuto.Common.Converters
                 bool.TryParse(parameter.ToString(), out isInverted);
             }
 
-            if (value == null || value is string && string.IsNullOrEmpty(value.ToString()) || value is IList && (value as IList).Count == 0)
+            if (value == null || int.TryParse(value.ToString(), out int res) && res > 0 || value is string && string.IsNullOrEmpty(value.ToString()) || value is IList && (value as IList).Count == 0)
             {
                 return isInverted ? Visibility.Visible : Visibility.Collapsed;
             }

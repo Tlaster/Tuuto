@@ -12,6 +12,7 @@
     xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     IsPrimaryButtonEnabled="False"
     IsSecondaryButtonEnabled="False"
+    xmlns:fa="using:FontAwesome.UWP"
     mc:Ignorable="d">
     <ContentControl.Resources>
         <model:TootVisibilityList x:Key="TootVisibilityList"/>
@@ -165,7 +166,7 @@
             <Grid>
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource CommonButtonStyle}">
-                        <SymbolIcon Symbol="Camera"/>
+                        <fa:FontAwesome Icon="Camera"/>
                         <Button.Flyout>
                             <MenuFlyout Placement="Bottom">
                                 <MenuFlyoutItem x:Uid="TootDialog_TakePhoto" Click="TakePhoto"/>
@@ -175,7 +176,7 @@
                         </Button.Flyout>
                     </Button>
                     <Button Style="{StaticResource CommonButtonStyle}">
-                        <SymbolIcon Symbol="{Binding ElementName=VisibilityList,Path=SelectedItem.Icon}"/>
+                        <fa:FontAwesome Icon="{Binding ElementName=VisibilityList,Path=SelectedItem.Icon}"/>
                         <Button.Flyout>
                             <Flyout Placement="Bottom">
                                 <ListView SelectedIndex="{x:Bind SelectedVisibilityIndex,Mode=TwoWay}" x:Name="VisibilityList" ItemsSource="{Binding Source={StaticResource TootVisibilityList},Path=VisibilityList}" SelectionMode="Single">
@@ -190,7 +191,7 @@
                                                     <ColumnDefinition Width="auto"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <SymbolIcon Margin="0,0,8,0" Symbol="{x:Bind Icon}" Grid.RowSpan="2"/>
+                                                <fa:FontAwesome Margin="0,0,8,0" Icon="{x:Bind Icon}" Grid.RowSpan="2"/>
                                                 <TextBlock Padding="2" Text="{x:Bind Title}" Grid.Row="0" Grid.Column="1"/>
                                                 <TextBlock Padding="2" Style="{StaticResource BodyTextBlockStyle}" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}" Text="{x:Bind Description}" Grid.Row="1" Grid.Column="1"/>
                                             </Grid>
@@ -200,7 +201,7 @@
                             </Flyout>
                         </Button.Flyout>
                     </Button>
-                    <ToggleButton Visibility="{x:Bind Medias.Count,Mode=OneWay,Converter={StaticResource NumberToVisibilityConverter}}" IsChecked="{x:Bind IsSensitive,Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}" Style="{StaticResource TextToggleButtonStyle}" x:Uid="TootDialog_NSFW"/>
+                    <ToggleButton Visibility="{x:Bind Medias.Count,Mode=OneWay,Converter={StaticResource NullOrEmptyToVisibilityConverter},ConverterParameter=true}" IsChecked="{x:Bind IsSensitive,Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}" Style="{StaticResource TextToggleButtonStyle}" x:Uid="TootDialog_NSFW"/>
                     <ToggleButton x:Name="ContentWarning" Style="{StaticResource TextToggleButtonStyle}" x:Uid="TootDialog_ContentWarningShort"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -215,13 +216,16 @@
                                 <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=TootButton}" PropertyName="IsEnabled" Value="false"/>
                                 <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=TextCountTextBlock}" PropertyName="Foreground" Value="Red"/>
                             </Interactions:DataTriggerBehavior>
+                            <Interactions:DataTriggerBehavior Binding="{x:Bind TextCount,Mode=OneWay}" ComparisonCondition="GreaterThanOrEqual" Value="500">
+                                <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=TootButton}" PropertyName="IsEnabled" Value="false"/>
+                            </Interactions:DataTriggerBehavior>
                         </Interactivity:Interaction.Behaviors>
                     </Button>
                 </StackPanel>
             </Grid>
         </StackPanel>
         <Button Click="{x:Bind Hide}" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource CommonButtonStyle}">
-            <SymbolIcon Symbol="Cancel"/>
+            <fa:FontAwesome Icon="TimesCircleOutline"/>
         </Button>
     </Grid>
 </ContentDialog>

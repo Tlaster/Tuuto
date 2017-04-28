@@ -5,6 +5,7 @@
     xmlns:local="using:Tuuto.Common.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:fa="using:FontAwesome.UWP"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -14,7 +15,7 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <SymbolIcon Width="{x:Bind IconSize,Mode=OneWay}" Height="{x:Bind IconSize,Mode=OneWay}" x:Name="Content" AutomationProperties.AccessibilityView="Raw" Symbol="{x:Bind Icon,Mode=OneWay}"/>
+        <fa:FontAwesome Width="{x:Bind IconSize,Mode=OneWay}" Height="{x:Bind IconSize,Mode=OneWay}" x:Name="Content" AutomationProperties.AccessibilityView="Raw" Icon="{x:Bind Icon,Mode=OneWay}"/>
         <TextBlock x:Name="TextLabel" Text="{x:Bind Label,Mode=OneWay}" VerticalAlignment="Center" Grid.Column="1" />
     </Grid>
 </ToggleButton>

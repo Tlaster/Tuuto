@@ -120,8 +120,7 @@
       <DependentUpon>TootDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Converters\NullableBooleanConverter.cs" />
-    <Compile Include="Common\Converters\NumberToVisibilityConverter.cs" />
-    <Compile Include="Common\Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Common\Converters\NullOrEmptyToVisibilityConverter.cs" />
     <Compile Include="Common\Controls\StatusAction.xaml.cs">
       <DependentUpon>StatusAction.xaml</DependentUpon>
     </Compile>
@@ -199,6 +198,9 @@
   <ItemGroup>
     <PackageReference Include="Fody">
       <Version>2.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="FontAwesome.UWP">
+      <Version>4.7.0.9</Version>
     </PackageReference>
     <PackageReference Include="Mastodon.Net">
       <Version>1.0.2</Version>

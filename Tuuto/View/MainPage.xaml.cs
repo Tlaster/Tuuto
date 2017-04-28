@@ -25,7 +25,10 @@ namespace Tuuto.View
         {
             this.InitializeComponent();
         }
+        public void SearchClick()
+        {
 
+        }
         public void RefreshClick()
         {
             fixedPivot.RequestRefresh();

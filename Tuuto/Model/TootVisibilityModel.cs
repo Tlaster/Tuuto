@@ -1,4 +1,5 @@
-﻿using Mastodon.Model;
+﻿using FontAwesome.UWP;
+using Mastodon.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,28 +16,28 @@ namespace Tuuto.Model
         {
             new TootVisibilityModel
             {
-                Icon = Symbol.World,
+                Icon = FontAwesomeIcon.Globe,
                 Title = ResourceHelper.GetString("TootVisibility_Public_Title"),
                 Description = ResourceHelper.GetString("TootVisibility_Public_Description"),
                 VisibilityCode = StatusModel.STATUSVISIBILITY_PUBLIC,
             },
             new TootVisibilityModel
             {
-                Icon = Symbol.List,
+                Icon = FontAwesomeIcon.Lock,
                 Title = ResourceHelper.GetString("TootVisibility_Unlisted_Title"),
                 Description = ResourceHelper.GetString("TootVisibility_Unlisted_Description"),
                 VisibilityCode = StatusModel.STATUSVISIBILITY_UNLISTED,
             },
             new TootVisibilityModel
             {
-                Icon = Symbol.People,
+                Icon = FontAwesomeIcon.UnlockAlt,
                 Title = ResourceHelper.GetString("TootVisibility_Private_Title"),
                 Description = ResourceHelper.GetString("TootVisibility_Private_Description"),
                 VisibilityCode = StatusModel.STATUSVISIBILITY_PRIVATE,
             },
             new TootVisibilityModel
             {
-                Icon = Symbol.Message,
+                Icon = FontAwesomeIcon.Envelope,
                 Title = ResourceHelper.GetString("TootVisibility_Direct_Title"),
                 Description = ResourceHelper.GetString("TootVisibility_Direct_Description"),
                 VisibilityCode = StatusModel.STATUSVISIBILITY_DIRECT,
@@ -45,7 +46,7 @@ namespace Tuuto.Model
     }
     class TootVisibilityModel
     {
-        public Symbol Icon { get; internal set; }
+        public FontAwesomeIcon Icon { get; internal set; }
         public string Title { get; internal set; }
         public string Description { get; internal set; }
         public string VisibilityCode { get; set; }

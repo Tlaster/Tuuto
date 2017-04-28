@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:Tuuto.Common.Converters"
+    xmlns:fa="using:FontAwesome.UWP"
     mc:Ignorable="d">
     <Grid VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
@@ -12,11 +13,11 @@
             <ColumnDefinition Width="4"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <SymbolIcon VerticalAlignment="Stretch" Symbol="{x:Bind Icon,Mode=OneWay}" HorizontalAlignment="Right">
-            <SymbolIcon.Foreground>
+        <fa:FontAwesome VerticalAlignment="Stretch" Icon="{x:Bind Icon,Mode=OneWay}" HorizontalAlignment="Right">
+            <fa:FontAwesome.Foreground>
                 <SolidColorBrush Color="{StaticResource SystemChromeBlackMediumLowColor}"/>
-            </SymbolIcon.Foreground>
-        </SymbolIcon>
+            </fa:FontAwesome.Foreground>
+        </fa:FontAwesome>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="2">
             <Button Click="Button_Click" Padding="0" HorizontalAlignment="Left" Content="{x:Bind ActionAccount.DisplayName,Mode=OneWay}" Style="{StaticResource ActionButtonStyle}"/>
             <TextBlock VerticalAlignment="Center" Text="{x:Bind ActionText,Mode=OneWay}">

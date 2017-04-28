@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FontAwesome.UWP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,18 +11,18 @@ namespace Tuuto.Common.Controls
 {
     public class FixedPivotItem : PivotItem
     {
-        public event EventHandler<int> BadgeChanged;
+        internal event EventHandler<int> BadgeChanged;
         public event EventHandler RefreshRequested;
 
-        public Symbol HeaderIcon
+        public FontAwesomeIcon HeaderIcon
         {
-            get { return (Symbol)GetValue(IconProperty); }
+            get { return (FontAwesomeIcon)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Icon.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register(nameof(HeaderIcon), typeof(Symbol), typeof(FixedPivotItem), new PropertyMetadata(Symbol.Emoji));
+            DependencyProperty.Register(nameof(HeaderIcon), typeof(FontAwesomeIcon), typeof(FixedPivotItem), new PropertyMetadata(FontAwesomeIcon.SmileOutline));
 
 
 

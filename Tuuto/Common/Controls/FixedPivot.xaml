@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converters="using:Tuuto.Common.Converters"
+    xmlns:fa="using:FontAwesome.UWP"
     IsLocked="True"
     mc:Ignorable="d">
     <Pivot.Style>
@@ -155,8 +156,8 @@
                                     <DataTemplate>
                                         <RelativePanel>
                                             <Rectangle RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Visibility="{Binding Foreground,ElementName=Icon,Converter={StaticResource PivotHeaderSplitterVisibilityConverter},ConverterParameter={StaticResource AppTheme}}" Fill="{Binding Foreground,ElementName=Icon}" RelativePanel.AlignBottomWithPanel="True" Height="4" />
-                                            <SymbolIcon RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Symbol="{Binding Icon}" HorizontalAlignment="Center" x:Name="Icon" VerticalAlignment="Center"/>
-                                            <Grid RelativePanel.RightOf="Icon" RelativePanel.Above="Icon" Visibility="{Binding Badge,Converter={StaticResource NumberToVisibilityConverter}}" Width="10" Height="10">
+                                            <fa:FontAwesome RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Icon="{Binding Icon}" HorizontalAlignment="Center" x:Name="Icon" VerticalAlignment="Center"/>
+                                            <Grid RelativePanel.RightOf="Icon" RelativePanel.Above="Icon" Visibility="{Binding Badge,Converter={StaticResource NullOrEmptyToVisibilityConverter},ConverterParameter=true}" Width="10" Height="10">
                                                 <Ellipse Fill="Red" />
                                                 <TextBlock FontSize="8" RequestedTheme="Dark" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Badge}" />
                                             </Grid>
@@ -199,9 +200,9 @@
                                                 <DataTemplate>
                                                     <RelativePanel>
                                                         <Rectangle RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" Width="4" Visibility="{Binding Foreground,ElementName=Icon,Converter={StaticResource PivotHeaderSplitterVisibilityConverter},ConverterParameter={StaticResource AppTheme}}" Fill="{Binding Foreground,ElementName=Icon}"/>
-                                                        <SymbolIcon Width="48" Height="48" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Symbol="{Binding Icon}" HorizontalAlignment="Center" x:Name="Icon" VerticalAlignment="Center"/>
+                                                        <fa:FontAwesome Width="48" Height="48" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Icon="{Binding Icon}" HorizontalAlignment="Center" x:Name="Icon" VerticalAlignment="Center"/>
                                                         <TextBlock RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.RightOf="Icon" Text="{Binding Text}" />
-                                                        <Grid RelativePanel.RightOf="Icon" RelativePanel.Above="Icon" Visibility="{Binding Badge,Converter={StaticResource NumberToVisibilityConverter}}" Width="10" Height="10">
+                                                        <Grid RelativePanel.AlignRightWith="Icon" RelativePanel.AlignTopWith="Icon" Margin="4" Visibility="{Binding Badge,Converter={StaticResource NullOrEmptyToVisibilityConverter},ConverterParameter=true}" Width="10" Height="10">
                                                             <Ellipse Fill="Red" />
                                                             <TextBlock FontSize="8" RequestedTheme="Dark" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Badge}" />
                                                         </Grid>

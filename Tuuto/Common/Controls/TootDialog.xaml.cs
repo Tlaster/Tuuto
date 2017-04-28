@@ -214,7 +214,8 @@ namespace Tuuto.Common.Controls
 
         public void Toot()
         {
-
+            if (TextCount >= 500 || TextCount <= 0)
+                return;
             DraftManager.Add(new DraftModel
             {
                 Domain = Settings.CurrentAccount.Domain,
