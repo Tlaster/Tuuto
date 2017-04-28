@@ -84,5 +84,12 @@ namespace Tuuto.Common
                 }
             return await Statuses.Posting(item.Domain, item.AccessToken, item.Status, item.InReplyToId, item.Sensitive, item.SpoilerText, item.Visibility, medias.Select(m => m.Id).ToArray());
         }
+        public static IEnumerable<DraftModel> GetCurrent()
+        {
+            using (var db = new DraftDbContext())
+            {
+                return db.Draft.Where(d => d.AccountId == Settings.CurrentAccount.Id).ToList();
+            }
+        }
     }
 }

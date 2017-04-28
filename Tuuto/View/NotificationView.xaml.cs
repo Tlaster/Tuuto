@@ -20,8 +20,6 @@ namespace Tuuto.View
 {
     public sealed partial class NotificationView : UserControl
     {
-
-
         public NotificationModel ViewModel
         {
             get { return (NotificationModel)GetValue(ViewModelProperty); }

@@ -88,7 +88,6 @@ namespace Tuuto.View
 
         private async void DismissExtendedSplash()
         {
-
             using (var db = new DraftDbContext())
             {
                 await db.Database.MigrateAsync();

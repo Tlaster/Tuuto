@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountView_FollowersCount.Text" xml:space="preserve">
+    <value>Followers</value>
+  </data>
+  <data name="AccountView_FollowingCount.Text" xml:space="preserve">
+    <value>Following</value>
+  </data>
+  <data name="AccountView_StatusesCount.Text" xml:space="preserve">
+    <value>Statuses</value>
+  </data>
   <data name="LoginPage_DomainError" xml:space="preserve">
     <value>Please check the domain again</value>
   </data>
@@ -128,6 +137,9 @@
   </data>
   <data name="LoginPage_LoginFailed" xml:space="preserve">
     <value>Login failed</value>
+  </data>
+  <data name="MainPage_Account.HeaderText" xml:space="preserve">
+    <value>Account</value>
   </data>
   <data name="MainPage_Federated.HeaderText" xml:space="preserve">
     <value>Federated timeline</value>
@@ -171,6 +183,18 @@
   <data name="SendDraft_OK" xml:space="preserve">
     <value>Toot!</value>
   </data>
+  <data name="SettingPage_Customize.HeaderText" xml:space="preserve">
+    <value>Customize</value>
+  </data>
+  <data name="SettingPage_Customize_EnableBladeView.Header" xml:space="preserve">
+    <value>Enable blade view (Restart required)</value>
+  </data>
+  <data name="SettingPage_Customize_EnableFederatedTimeline.Header" xml:space="preserve">
+    <value>Enable federated timeline</value>
+  </data>
+  <data name="SettingPage_Customize_EnableLocalTimeline.Header" xml:space="preserve">
+    <value>Enable local timeline</value>
+  </data>
   <data name="StatusAction_favourite" xml:space="preserve">
     <value>favourited your status</value>
   </data>
@@ -184,7 +208,7 @@
     <value>rebloged</value>
   </data>
   <data name="StatusViewMenu_Block" xml:space="preserve">
-    <value>Block</value>
+    <value>Block @{0}</value>
   </data>
   <data name="StatusViewMenu_Delete.Text" xml:space="preserve">
     <value>Delete</value>
@@ -193,13 +217,13 @@
     <value>Expand this status</value>
   </data>
   <data name="StatusViewMenu_Mention" xml:space="preserve">
-    <value>Mention</value>
+    <value>Mention @{0}</value>
   </data>
   <data name="StatusViewMenu_Mute" xml:space="preserve">
-    <value>Mute</value>
+    <value>Mute @{0}</value>
   </data>
   <data name="StatusViewMenu_Report" xml:space="preserve">
-    <value>Report</value>
+    <value>Report @{0}</value>
   </data>
   <data name="StatusView_ClickToView.Text" xml:space="preserve">
     <value>Click to view</value>

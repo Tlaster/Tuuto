@@ -24,6 +24,8 @@ namespace Tuuto.View
         public MainPage()
         {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
+            App.StatusAcionHandler = new StatusActionHandler(Frame);
         }
         public void SearchClick()
         {
@@ -36,6 +38,10 @@ namespace Tuuto.View
         public void ShowTootDialog()
         {
             new TootDialog().ShowAsync();
+        }
+        public void SettingClick()
+        {
+            Frame.Navigate(typeof(SettingPage));
         }
     }
 }

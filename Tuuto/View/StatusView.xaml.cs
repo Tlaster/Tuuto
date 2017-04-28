@@ -18,6 +18,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Toolkit.Uwp.UI.Animations;
 using Tuuto.Common.Helpers;
+using Mastodon.Api;
+using Microsoft.Toolkit.Uwp;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -46,23 +48,7 @@ namespace Tuuto.View
 
         // Using a DependencyProperty as the backing store for ViewModel.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ViewModelProperty =
-            DependencyProperty.Register(nameof(ViewModel), typeof(StatusModel), typeof(StatusView), new PropertyMetadata(null, OnViewModelChanged));
-
-        private static void OnViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            (d as StatusView).OnViewModelChanged(e.NewValue as StatusModel);
-        }
-
-        private void OnViewModelChanged(StatusModel statusModel)
-        {
-            var model = statusModel?.Reblog ?? statusModel;
-            if (model == null)
-                return;
-            StatusViewMenu_Mention.Text = $"{ResourceHelper.GetString("StatusViewMenu_Mention")} @{model.Account.UserName}";
-            StatusViewMenu_Mute.Text = $"{ResourceHelper.GetString("StatusViewMenu_Mute")} @{model.Account.UserName}";
-            StatusViewMenu_Block.Text = $"{ResourceHelper.GetString("StatusViewMenu_Block")} @{model.Account.UserName}";
-            StatusViewMenu_Report.Text = $"{ResourceHelper.GetString("StatusViewMenu_Report")} @{model.Account.UserName}";
-        }
+            DependencyProperty.Register(nameof(ViewModel), typeof(StatusModel), typeof(StatusView), new PropertyMetadata(null));
 
 
 
@@ -101,16 +87,65 @@ namespace Tuuto.View
 
         }
 
-        private void More_Click(object sender, RoutedEventArgs e)
+        private void Reply_Click(object sender, RoutedEventArgs e)
         {
-            if (Settings.CurrentAccount.Id == ((sender as FrameworkElement).DataContext as StatusModel).Account.Id)
-            {
-                MenuMe.ShowAt(sender as FrameworkElement);
-            }
-            else
-            {
-                MenuOthers.ShowAt(sender as FrameworkElement);
-            }
+            App.StatusAcionHandler.Reply(ViewModel?.Reblog ?? ViewModel);
+        }
+
+        private void Retweet_Click(object sender, RoutedEventArgs e)
+        {
+            Statuses.Reblog(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, (ViewModel?.Reblog ?? ViewModel).Id);
+        }
+
+        private void UnRetweet_Click(object sender, RoutedEventArgs e)
+        {
+            Statuses.UnReblog(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, (ViewModel?.Reblog ?? ViewModel).Id);
+        }
+
+        private void Favourite_Click(object sender, RoutedEventArgs e)
+        {
+            Statuses.Favourite(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, (ViewModel?.Reblog ?? ViewModel).Id);
+        }
+
+        private void UnFavourite_Click(object sender, RoutedEventArgs e)
+        {
+            Statuses.UnFavourite(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, (ViewModel?.Reblog ?? ViewModel).Id);
+        }
+
+        void Report()
+        {
+            App.StatusAcionHandler.Report((ViewModel?.Reblog ?? ViewModel).Account, ViewModel?.Reblog ?? ViewModel);
+        }
+
+        void Block()
+        {
+            Accounts.Block(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, (ViewModel?.Reblog ?? ViewModel).Id);
+        }
+
+        void Mute()
+        {
+            Accounts.Mute(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, (ViewModel?.Reblog ?? ViewModel).Id);
+        }
+
+        void Expand()
+        {
+            App.StatusAcionHandler.Expand(ViewModel?.Reblog ?? ViewModel);
+        }
+
+        void Delete()
+        {
+            Statuses.Delete(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, (ViewModel?.Reblog ?? ViewModel).Id);
+            Visibility = Visibility.Collapsed;
+        }
+
+        void Mention()
+        {
+            App.StatusAcionHandler.Mention((ViewModel?.Reblog ?? ViewModel).Account);
+        }
+
+        private void Account_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.StatusAcionHandler.AccountDetail((ViewModel?.Reblog ?? ViewModel).Account);
         }
     }
 }

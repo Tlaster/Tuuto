@@ -20,10 +20,8 @@ using System.Reflection;
 
 namespace Tuuto.Common.Controls
 {
-    public sealed partial class ExListView : PullToRefreshListView
+    public partial class ExListView : PullToRefreshListView
     {
-
-
         public bool IsLoading
         {
             get { return (bool)GetValue(IsLoadingProperty); }
@@ -33,7 +31,6 @@ namespace Tuuto.Common.Controls
         // Using a DependencyProperty as the backing store for IsLoading.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsLoadingProperty =
             DependencyProperty.Register(nameof(IsLoading), typeof(bool), typeof(ExListView), new PropertyMetadata(false));
-
 
 
         public ExListView()

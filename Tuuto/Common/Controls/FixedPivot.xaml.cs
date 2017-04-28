@@ -154,7 +154,7 @@ namespace Tuuto.Common.Controls
         private void FixedPivot_Loaded(object sender, RoutedEventArgs e)
         {
             Loaded -= FixedPivot_Loaded;
-            Headers = Items.Select(GetHeader).ToList();
+            Headers = Items.Where(CheckItem).Select(GetHeader).ToList();
             ExVisualTreeHelper.GetObjectByName<ContentControl>(this, "HeaderClipper").Visibility = Visibility.Collapsed;
             ExVisualTreeHelper.GetObjectByName<ContentPresenter>(this, "LeftHeaderPresenter").Visibility = Visibility.Collapsed;
             ExVisualTreeHelper.GetObjectByName<Button>(this, "PreviousButton").Visibility = Visibility.Collapsed;
@@ -180,6 +180,13 @@ namespace Tuuto.Common.Controls
             RecalculateHeight(ContentHeight);
             RecalculateWidth(ContentWidth);
         }
+
+        private bool CheckItem(object item)
+        {
+            var content = (item as FixedPivotItem);
+            return content.Visibility == Visibility.Visible;
+        }
+
         private PivotHeaderModel GetHeader(object item)
         {
             var content = (item as FixedPivotItem);

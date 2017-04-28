@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountView_FollowersCount.Text" xml:space="preserve">
+    <value>关注者</value>
+  </data>
+  <data name="AccountView_FollowingCount.Text" xml:space="preserve">
+    <value>正关注</value>
+  </data>
+  <data name="AccountView_StatusesCount.Text" xml:space="preserve">
+    <value>嘟文</value>
+  </data>
   <data name="LoginPage_DomainError" xml:space="preserve">
     <value>输入的实例地址有误</value>
   </data>
@@ -129,8 +138,11 @@
   <data name="LoginPage_LoginFailed" xml:space="preserve">
     <value>登陆失败</value>
   </data>
+  <data name="MainPage_Account.HeaderText" xml:space="preserve">
+    <value>我</value>
+  </data>
   <data name="MainPage_Federated.HeaderText" xml:space="preserve">
-    <value>全球</value>
+    <value>跨站公共</value>
   </data>
   <data name="MainPage_FixedPivot.SplitViewPaneLength" xml:space="preserve">
     <value>150</value>
@@ -139,7 +151,7 @@
     <value>主页</value>
   </data>
   <data name="MainPage_Local.HeaderText" xml:space="preserve">
-    <value>本地服务器</value>
+    <value>本站</value>
   </data>
   <data name="MainPage_Notifications.HeaderText" xml:space="preserve">
     <value>消息提醒</value>
@@ -171,6 +183,18 @@
   <data name="SendDraft_OK" xml:space="preserve">
     <value>发布成功</value>
   </data>
+  <data name="SettingPage_Customize.HeaderText" xml:space="preserve">
+    <value>个性化</value>
+  </data>
+  <data name="SettingPage_Customize_EnableBladeView.Header" xml:space="preserve">
+    <value>启用blade视图（需要重启APP）</value>
+  </data>
+  <data name="SettingPage_Customize_EnableFederatedTimeline.Header" xml:space="preserve">
+    <value>开启跨站公共时间轴</value>
+  </data>
+  <data name="SettingPage_Customize_EnableLocalTimeline.Header" xml:space="preserve">
+    <value>开启本站时间轴</value>
+  </data>
   <data name="StatusAction_favourite" xml:space="preserve">
     <value>喜欢了您的嘟</value>
   </data>
@@ -184,22 +208,22 @@
     <value>转发了</value>
   </data>
   <data name="StatusViewMenu_Block" xml:space="preserve">
-    <value>拉黑</value>
+    <value>屏蔽 @{0}</value>
   </data>
   <data name="StatusViewMenu_Delete.Text" xml:space="preserve">
     <value>删除</value>
   </data>
   <data name="StatusViewMenu_Expand.Text" xml:space="preserve">
-    <value>查看详情</value>
+    <value>展开嘟文</value>
   </data>
   <data name="StatusViewMenu_Mention" xml:space="preserve">
-    <value>提及</value>
+    <value>提及 @{0}</value>
   </data>
   <data name="StatusViewMenu_Mute" xml:space="preserve">
-    <value>屏蔽</value>
+    <value>将 @{0} 静音</value>
   </data>
   <data name="StatusViewMenu_Report" xml:space="preserve">
-    <value>举报</value>
+    <value>举报 @{0}</value>
   </data>
   <data name="StatusView_ClickToView.Text" xml:space="preserve">
     <value>点击查看</value>
@@ -241,24 +265,24 @@
     <value>只有提及的人才能看到</value>
   </data>
   <data name="TootVisibility_Direct_Title" xml:space="preserve">
-    <value>私信</value>
+    <value>私人消息</value>
   </data>
   <data name="TootVisibility_Private_Description" xml:space="preserve">
     <value>只有真正的粉丝才能够看到</value>
   </data>
   <data name="TootVisibility_Private_Title" xml:space="preserve">
-    <value>隐私</value>
+    <value>关注者</value>
   </data>
   <data name="TootVisibility_Public_Description" xml:space="preserve">
     <value>发布到公共时间线上</value>
   </data>
   <data name="TootVisibility_Public_Title" xml:space="preserve">
-    <value>公开</value>
+    <value>公共</value>
   </data>
   <data name="TootVisibility_Unlisted_Description" xml:space="preserve">
-    <value>不显示在公共时间线中</value>
+    <value>公开，但不在公共时间轴显示</value>
   </data>
   <data name="TootVisibility_Unlisted_Title" xml:space="preserve">
-    <value>不在列表中显示</value>
+    <value>公开</value>
   </data>
 </root>

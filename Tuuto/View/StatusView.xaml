@@ -18,19 +18,19 @@
     <UserControl.Resources>
         <selectors:DataTemplateByVersionSelector x:Key="DataTemplateByVersionSelector" Version="AnniversaryUpdate" Before="{StaticResource SensitiveBlockerBackgroundBlackTemplate}" After="{StaticResource SensitiveBlockerBackgroundWithBlurTemplate}"/>
         <local:StatusReblogConverter x:Key="StatusReblogConverter"/>
-        <MenuFlyout x:Name="MenuOthers" Placement="Bottom">
-            <MenuFlyoutItem x:Uid="StatusViewMenu_Expand" Visibility="{x:Bind MenuExpandVisibility}"/>
+        <MenuFlyout x:Key="MenuOthers" Placement="Bottom">
+            <MenuFlyoutItem Click="{x:Bind Expand}" x:Uid="StatusViewMenu_Expand" Visibility="{x:Bind MenuExpandVisibility}"/>
             <MenuFlyoutSeparator Visibility="{x:Bind MenuExpandVisibility}"/>
-            <MenuFlyoutItem x:Name="StatusViewMenu_Mention"/>
+            <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mention}"/>
             <MenuFlyoutSeparator/>
-            <MenuFlyoutItem x:Name="StatusViewMenu_Mute" Visibility="{x:Bind MenuExpandVisibility}"/>
-            <MenuFlyoutItem x:Name="StatusViewMenu_Block" Visibility="{x:Bind MenuExpandVisibility}"/>
-            <MenuFlyoutItem x:Name="StatusViewMenu_Report"/>
+            <MenuFlyoutItem Click="{x:Bind Mute}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mute}" Visibility="{x:Bind MenuExpandVisibility}"/>
+            <MenuFlyoutItem Click="{x:Bind Block}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Block}" Visibility="{x:Bind MenuExpandVisibility}"/>
+            <MenuFlyoutItem Click="{x:Bind Report}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Report}"/>
         </MenuFlyout>
-        <MenuFlyout x:Name="MenuMe" Placement="Bottom">
-            <MenuFlyoutItem x:Uid="StatusViewMenu_Expand" Visibility="{x:Bind MenuExpandVisibility}"/>
+        <MenuFlyout x:Key="MenuMe" Placement="Bottom">
+            <MenuFlyoutItem Click="{x:Bind Expand}" x:Uid="StatusViewMenu_Expand" Visibility="{x:Bind MenuExpandVisibility}"/>
             <MenuFlyoutSeparator Visibility="{x:Bind MenuExpandVisibility}"/>
-            <MenuFlyoutItem x:Uid="StatusViewMenu_Delete"/>
+            <MenuFlyoutItem Click="{x:Bind Delete}" x:Uid="StatusViewMenu_Delete"/>
         </MenuFlyout>
         <DataTemplate x:Key="SensitiveBlockerBackgroundWithBlurTemplate">
             <Border Background="#7F000000">
@@ -49,13 +49,12 @@
                     <ColumnDefinition Width="4"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <toolkit:ImageEx DataContext="{x:Bind Account}" Margin="4" VerticalAlignment="Top" Source="{x:Bind Account.Avatar}"/>
+                <toolkit:ImageEx Tapped="Account_Tapped" DataContext="{x:Bind Account}" Margin="4" VerticalAlignment="Top" Source="{x:Bind Account.Avatar}"/>
                 <StackPanel Grid.Column="2">
                     <Grid>
-                        <StackPanel DataContext="{x:Bind Account}" Orientation="Horizontal">
+                        <StackPanel Tapped="Account_Tapped" DataContext="{x:Bind Account}" Orientation="Horizontal">
                             <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind Account.DisplayName}" />
-                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="@"/>
-                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind Account.Acct}"/>
+                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind Account.Acct,Converter={StaticResource StringFormatConverter},ConverterParameter='@{0}'}"/>
                         </StackPanel>
                         <TextBlock  Style="{ThemeResource BodyTextBlockStyle}" HorizontalAlignment="Right" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind CreatedAt}"/>
                     </Grid>
@@ -106,11 +105,12 @@
                         </Grid>
                     </Grid>
                     <StackPanel DataContext="{x:Bind}" Padding="0,4,0,0" Orientation="Horizontal">
-                        <controls:SplitViewButton Visibility="{x:Bind InReplyToId,Mode=OneWay,Converter={StaticResource NullOrEmptyToVisibilityConverter}}" Padding="4,0" IconSize="30" Icon="Reply" Style="{StaticResource ActionButtonStyle}"/>
-                        <controls:SplitViewButton Visibility="{x:Bind InReplyToId,Mode=OneWay,Converter={StaticResource NullOrEmptyToVisibilityConverter},ConverterParameter=true}" Padding="4,0" IconSize="30" Icon="ReplyAll" Style="{StaticResource ActionButtonStyle}"/>
-                        <controls:IconToggleButton IsChecked="{x:Bind Reblogged,Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}" Padding="4,0" IconSize="30" Icon="Retweet" Label="{x:Bind ReblogsCount}" Style="{StaticResource TextToggleButtonStyle}"/>
-                        <controls:IconToggleButton IsChecked="{x:Bind Favourited,Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}" Padding="4,0" IconSize="30" Icon="Star" Label="{x:Bind FavouritesCount}" Style="{StaticResource TextToggleButtonStyle}"/>
-                        <controls:SplitViewButton Click="More_Click" Padding="4,0" IconSize="30" Icon="EllipsisH" Style="{StaticResource ActionButtonStyle}"/>
+                        <controls:SplitViewButton Click="Reply_Click" Visibility="{x:Bind InReplyToId,Mode=OneWay,Converter={StaticResource NullOrEmptyToVisibilityConverter}}" Padding="4,0" IconSize="30" Icon="Reply" Style="{StaticResource ActionButtonStyle}"/>
+                        <controls:SplitViewButton Click="Reply_Click" Visibility="{x:Bind InReplyToId,Mode=OneWay,Converter={StaticResource NullOrEmptyToVisibilityConverter},ConverterParameter=true}" Padding="4,0" IconSize="30" Icon="ReplyAll" Style="{StaticResource ActionButtonStyle}"/>
+                        <controls:IconToggleButton Checked="Retweet_Click" Unchecked="UnRetweet_Click" IsChecked="{x:Bind Reblogged,Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}" Padding="4,0" IconSize="30" Icon="Retweet" Label="{x:Bind ReblogsCount}" Style="{StaticResource TextToggleButtonStyle}"/>
+                        <controls:IconToggleButton Checked="Favourite_Click" Unchecked="UnFavourite_Click" IsChecked="{x:Bind Favourited,Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}" Padding="4,0" IconSize="30" Icon="Star" Label="{x:Bind FavouritesCount}" Style="{StaticResource TextToggleButtonStyle}"/>
+                        <controls:SplitViewButton Visibility="{x:Bind Account.Id,Converter={StaticResource IsMeToVisibilityConverter}}" Padding="4,0" IconSize="30" Icon="EllipsisH" Style="{StaticResource ActionButtonStyle}" Flyout="{StaticResource MenuMe}"/>
+                        <controls:SplitViewButton Visibility="{x:Bind Account.Id,Converter={StaticResource IsMeToVisibilityConverter},ConverterParameter=true}" Padding="4,0" IconSize="30" Icon="EllipsisH" Style="{StaticResource ActionButtonStyle}" Flyout="{StaticResource MenuOthers}"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>

@@ -5,22 +5,10 @@
     xmlns:local="using:Tuuto.Common.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:model="using:Tuuto.Model"
-    xmlns:common="using:Tuuto.Common"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:view="using:Tuuto.View"
     IsPrimaryButtonEnabled="False"
     IsSecondaryButtonEnabled="False"
-    xmlns:fa="using:FontAwesome.UWP"
     mc:Ignorable="d">
-    <ContentControl.Resources>
-        <model:TootVisibilityList x:Key="TootVisibilityList"/>
-        <common:Settings x:Key="Settings"/>
-        <MenuFlyout x:Key="MediaTapFlyout" x:Name="MediaTapFlyout">
-            <MenuFlyoutItem x:Uid="TootDialog_Menu_DeleteMedia" x:Name="Menu_DeleteMedia" Click="DeleteMedia" />
-        </MenuFlyout>
-    </ContentControl.Resources>
     <ContentControl.Style>
         <Style TargetType="ContentDialog">
             <Setter Property="Foreground" Value="{ThemeResource SystemControlPageTextBaseHighBrush}" />
@@ -136,96 +124,5 @@
             <PaneThemeTransition Edge="Top"/>
         </TransitionCollection>
     </ContentDialog.Transitions>
-    <Grid>
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <toolkit:ImageEx Width="40" Height="40" Source="{Binding Source={StaticResource Settings},Path=CurrentAccountModel.Avatar}"/>
-                <TextBlock Text="{Binding Source={StaticResource Settings},Path=CurrentAccountModel.DisplayName}" Margin="8,0"/>
-            </StackPanel>
-            <TextBox TextChanged="{x:Bind TextChanged}" Text="{x:Bind ContentWarningText,Mode=TwoWay}" Visibility="{Binding ElementName=ContentWarning,Path=IsChecked,Converter={StaticResource BoolToVisibilityConverter}}" Margin="0,8,0,0" x:Uid="TootDialogCW_PlaceholderText"/>
-            <RichEditBox x:Name="richEditBox" TextChanged="{x:Bind TextChanged}" DragOver="TextBox_DragOver" Drop="TextBox_Drop" Paste="TextBox_Paste" Margin="0,8" x:Uid="TootDialog_PlaceholderText" Height="150"/>
-            <toolkit:AdaptiveGridView CanReorderItems="True" IsItemClickEnabled="True" ItemClick="AdaptiveGridView_ItemClick" AllowDrop="True" ItemsSource="{x:Bind Medias,Mode=OneWay}" CanDragItems="True" DesiredWidth="50" SelectionMode="None" StretchContentForSingleRow="True">
-                <toolkit:AdaptiveGridView.ItemTemplate>
-                    <DataTemplate x:DataType="model:MediaData">
-                        <toolkit:ImageEx Margin="2,0" MaxHeight="100" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Source="{x:Bind Image}"/>
-                    </DataTemplate>
-                </toolkit:AdaptiveGridView.ItemTemplate>
-                <toolkit:AdaptiveGridView.ItemContainerStyle>
-                    <Style TargetType="GridViewItem">
-                        <Setter Property="Margin" Value="0"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="GridViewItem">
-                                    <GridViewItemPresenter SelectedForeground="{StaticResource AppTheme}" Foreground="{StaticResource PivotHeaderForegroundUnselectedBrush}" />
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </toolkit:AdaptiveGridView.ItemContainerStyle>
-            </toolkit:AdaptiveGridView>
-            <Grid>
-                <StackPanel Orientation="Horizontal">
-                    <Button Style="{StaticResource CommonButtonStyle}">
-                        <fa:FontAwesome Icon="Camera"/>
-                        <Button.Flyout>
-                            <MenuFlyout Placement="Bottom">
-                                <MenuFlyoutItem x:Uid="TootDialog_TakePhoto" Click="TakePhoto"/>
-                                <MenuFlyoutItem x:Uid="TootDialog_AddSingleImage" Click="AddSingleImage"/>
-                                <MenuFlyoutItem x:Uid="TootDialog_AddMultipleImage" Click="AddMultipleImage"/>
-                            </MenuFlyout>
-                        </Button.Flyout>
-                    </Button>
-                    <Button Style="{StaticResource CommonButtonStyle}">
-                        <fa:FontAwesome Icon="{Binding ElementName=VisibilityList,Path=SelectedItem.Icon}"/>
-                        <Button.Flyout>
-                            <Flyout Placement="Bottom">
-                                <ListView SelectedIndex="{x:Bind SelectedVisibilityIndex,Mode=TwoWay}" x:Name="VisibilityList" ItemsSource="{Binding Source={StaticResource TootVisibilityList},Path=VisibilityList}" SelectionMode="Single">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate x:DataType="model:TootVisibilityModel">
-                                            <Grid Padding="0,4">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*"/>
-                                                    <RowDefinition Height="*"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <fa:FontAwesome Margin="0,0,8,0" Icon="{x:Bind Icon}" Grid.RowSpan="2"/>
-                                                <TextBlock Padding="2" Text="{x:Bind Title}" Grid.Row="0" Grid.Column="1"/>
-                                                <TextBlock Padding="2" Style="{StaticResource BodyTextBlockStyle}" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}" Text="{x:Bind Description}" Grid.Row="1" Grid.Column="1"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                    <ToggleButton Visibility="{x:Bind Medias.Count,Mode=OneWay,Converter={StaticResource NullOrEmptyToVisibilityConverter},ConverterParameter=true}" IsChecked="{x:Bind IsSensitive,Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}" Style="{StaticResource TextToggleButtonStyle}" x:Uid="TootDialog_NSFW"/>
-                    <ToggleButton x:Name="ContentWarning" Style="{StaticResource TextToggleButtonStyle}" x:Uid="TootDialog_ContentWarningShort"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock x:Name="TextCountTextBlock" Padding="8" Text="{x:Bind TextCount,Mode=OneWay}" VerticalAlignment="Center"/>
-                    <Button Click="{x:Bind Toot}" x:Name="TootButton" IsEnabled="False" x:Uid="TootDialog_Toot">
-                        <Interactivity:Interaction.Behaviors>
-                            <Interactions:DataTriggerBehavior Binding="{x:Bind TextCount,Mode=OneWay}" ComparisonCondition="GreaterThanOrEqual" Value="0">
-                                <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=TootButton}" PropertyName="IsEnabled" Value="true"/>
-                                <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=TextCountTextBlock}" PropertyName="Foreground" Value="{StaticResource TextBoxForegroundThemeBrush}"/>
-                            </Interactions:DataTriggerBehavior>
-                            <Interactions:DataTriggerBehavior Binding="{x:Bind TextCount,Mode=OneWay}" ComparisonCondition="LessThan" Value="0">
-                                <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=TootButton}" PropertyName="IsEnabled" Value="false"/>
-                                <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=TextCountTextBlock}" PropertyName="Foreground" Value="Red"/>
-                            </Interactions:DataTriggerBehavior>
-                            <Interactions:DataTriggerBehavior Binding="{x:Bind TextCount,Mode=OneWay}" ComparisonCondition="GreaterThanOrEqual" Value="500">
-                                <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=TootButton}" PropertyName="IsEnabled" Value="false"/>
-                            </Interactions:DataTriggerBehavior>
-                        </Interactivity:Interaction.Behaviors>
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </StackPanel>
-        <Button Click="{x:Bind Hide}" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource CommonButtonStyle}">
-            <fa:FontAwesome Icon="TimesCircleOutline"/>
-        </Button>
-    </Grid>
+    <view:PostingTootView CloseRequested="PostingTootView_CloseRequested" Tooted="PostingTootView_CloseRequested"/>
 </ContentDialog>

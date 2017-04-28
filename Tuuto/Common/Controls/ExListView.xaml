@@ -24,7 +24,7 @@
             </Setter>
         </Style>
     </toolkit:PullToRefreshListView.ItemContainerStyle>
-    <toolkit:PullToRefreshListView.Footer>
+    <!--<toolkit:PullToRefreshListView.Footer>
         <ProgressBar Padding="16" IsIndeterminate="{x:Bind IsLoading,Mode=OneWay}"/>
-    </toolkit:PullToRefreshListView.Footer>
+    </toolkit:PullToRefreshListView.Footer>-->
 </toolkit:PullToRefreshListView>

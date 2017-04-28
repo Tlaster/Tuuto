@@ -20,6 +20,21 @@ namespace Tuuto.Common
             get => GetSetting(nameof(SelectedUserIndex), 0);
             set => SetSetting(nameof(SelectedUserIndex), value);
         }
+        public static bool EnableBladeView
+        {
+            get => GetSetting(nameof(EnableBladeView), false);
+            set => SetSetting(nameof(EnableBladeView), value);
+        }
+        public static bool EnableLocalTimeline
+        {
+            get => GetSetting(nameof(EnableLocalTimeline), true);
+            set => SetSetting(nameof(EnableLocalTimeline), value);
+        }
+        public static bool EnableFederatedTimeline
+        {
+            get => GetSetting(nameof(EnableFederatedTimeline), true);
+            set => SetSetting(nameof(EnableFederatedTimeline), value);
+        }
 
         public static (string Domain, string AccessToken, int Id)[] Account
         {

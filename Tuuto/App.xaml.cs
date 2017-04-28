@@ -13,11 +13,13 @@ using Tuuto.Common.Helpers;
 using Tuuto.View;
 using Tuuto.Model;
 using Microsoft.EntityFrameworkCore;
+using Tuuto.Common;
 
 namespace Tuuto
 {
     sealed partial class App : Application
     {
+        public static IStatusActionHandler StatusAcionHandler { get; internal set; }
         public App()
         {
             InitializeComponent();

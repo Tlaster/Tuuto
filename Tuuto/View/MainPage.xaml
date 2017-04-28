@@ -48,7 +48,7 @@
                             </Interactions:EventTriggerBehavior>
                         </Interactivity:Interaction.Behaviors>-->
                     </controls:SplitViewButton>
-                    <controls:SplitViewButton Icon="Cog" x:Uid="MainPage_Setting"/>
+                    <controls:SplitViewButton Click="{x:Bind SettingClick}" Icon="Cog" x:Uid="MainPage_Setting"/>
                 </StackPanel>
             </controls:FixedPivot.SplitViewPaneButtomContent>
             <controls:FixedPivotItem x:Name="pivotitem" RefreshRequested="{x:Bind ViewModel.RefreshTimelineHome}" HeaderIcon="Home" x:Uid="MainPage_Home">
@@ -69,7 +69,7 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshTimelineLocal}" HeaderIcon="Users" x:Uid="MainPage_Local">
+            <controls:FixedPivotItem Visibility="{Binding Source={StaticResource Settings},Path=EnableLocalTimeline,Converter={StaticResource BoolToVisibilityConverter}}" RefreshRequested="{x:Bind ViewModel.RefreshTimelineLocal}" HeaderIcon="Users" x:Uid="MainPage_Local">
                 <controls:ExListView RefreshRequested="{x:Bind ViewModel.RefreshTimelineLocal}" ItemsSource="{x:Bind ViewModel.TimelineLocal}" IsLoading="{x:Bind ViewModel.TimelineLocal.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:StatusModel">
@@ -78,7 +78,7 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshTimelineFederated}" HeaderIcon="Globe" x:Uid="MainPage_Federated">
+            <controls:FixedPivotItem Visibility="{Binding Source={StaticResource Settings},Path=EnableFederatedTimeline,Converter={StaticResource BoolToVisibilityConverter}}" RefreshRequested="{x:Bind ViewModel.RefreshTimelineFederated}" HeaderIcon="Globe" x:Uid="MainPage_Federated">
                 <controls:ExListView RefreshRequested="{x:Bind ViewModel.RefreshTimelineFederated}" ItemsSource="{x:Bind ViewModel.TimelineFederated}" IsLoading="{x:Bind ViewModel.TimelineFederated.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:StatusModel">
@@ -86,6 +86,15 @@
                         </DataTemplate>
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
+            </controls:FixedPivotItem>
+            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshAccount}" HeaderIcon="User" x:Uid="MainPage_Account">
+                <local:AccountView RefreshRequested="{x:Bind ViewModel.RefreshAccount}" IsLoading="{x:Bind ViewModel.AccountTimeline.IsLoading,Mode=OneWay}" ItemsSource="{x:Bind ViewModel.AccountTimeline}" Account="{x:Bind ViewModel.Account.Result,Mode=OneWay}">
+                    <local:AccountView.ItemTemplate>
+                        <DataTemplate x:DataType="model:StatusModel">
+                            <local:StatusView ViewModel="{x:Bind}"/>
+                        </DataTemplate>
+                    </local:AccountView.ItemTemplate>
+                </local:AccountView>
             </controls:FixedPivotItem>
         </controls:FixedPivot>
     </Grid>
@@ -112,7 +121,7 @@
                 </AppBarButton.Icon>
             </AppBarButton>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Icon="Setting" x:Uid="MainPage_Setting"/>
+                <AppBarButton Click="{x:Bind SettingClick}" Icon="Setting" x:Uid="MainPage_Setting"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
