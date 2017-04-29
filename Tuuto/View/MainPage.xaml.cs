@@ -25,7 +25,6 @@ namespace Tuuto.View
         {
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Required;
-            App.StatusAcionHandler = new StatusActionHandler(Frame);
         }
         public void SearchClick()
         {

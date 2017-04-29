@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Tuuto.Common.Controls"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:model="using:Mastodon.Model"
     xmlns:fa="using:FontAwesome.UWP"
     mc:Ignorable="d">
     <controls:ExListView.Resources>
@@ -16,76 +17,98 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
     </controls:ExListView.Resources>
+    <controls:ExListView.ItemTemplate>
+        <DataTemplate x:DataType="model:StatusModel">
+            <local:StatusView ViewModel="{x:Bind}"/>
+        </DataTemplate>
+    </controls:ExListView.ItemTemplate>
     <controls:ExListView.Header>
         <toolkit:ScrollHeader Mode="QuickReturn" TargetListViewBase="{x:Bind listView}">
-            <Grid RequestedTheme="Dark">
-                <toolkit:ImageEx Source="{x:Bind Account.Header,Mode=OneWay}"/>
-                <Border Background="#BF000000"/>
-                <StackPanel>
-                    <Ellipse Grid.RowSpan="2" Width="75" Height="75">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="{x:Bind Account.Avatar,Mode=OneWay}" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <TextBlock HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Account.DisplayName}"/>
-                    <TextBlock Foreground="{StaticResource HyperlinkButtonForeground}" Text="{x:Bind Account.Acct,Converter={StaticResource StringFormatConverter},ConverterParameter='@{0}'}"/>
-                    <toolkit:MarkdownTextBlock HorizontalAlignment="Center" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}" Text="{x:Bind Account.Note, Converter={StaticResource HtmlToMarkdownConvert}}"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Visibility="{x:Bind Account.Id,Converter={StaticResource IsMeToVisibilityConverter},ConverterParameter=true}" Style="{StaticResource ActionButtonStyle}">
-                            <fa:FontAwesome Icon="Bars"/>
-                            <Button.Flyout>
-                                <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mention}"/>
-                                    <MenuFlyoutSeparator/>
-                                    <MenuFlyoutItem Visibility="{x:Bind Relationship.Muting,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Click="{x:Bind Mute}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mute}" />
-                                    <MenuFlyoutItem Visibility="{x:Bind Relationship.Muting,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind UnMute}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mute}" />
-                                    <MenuFlyoutItem Visibility="{x:Bind Relationship.Blocking,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Click="{x:Bind Block}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Block}" />
-                                    <MenuFlyoutItem Visibility="{x:Bind Relationship.Blocking,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind UnBlock}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Block}" />
-                                    <MenuFlyoutItem Click="{x:Bind Report}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Report}"/>
-                                </MenuFlyout>
-                            </Button.Flyout>
-                        </Button>
-                        <Button Visibility="{x:Bind Account.Id,Converter={StaticResource IsMeToVisibilityConverter}}" Style="{StaticResource ActionButtonStyle}">
-                            <fa:FontAwesome Icon="Bars"/>
-                            <Button.Flyout>
-                                <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mention}"/>
-                                </MenuFlyout>
-                            </Button.Flyout>
-                        </Button>
-                        <StackPanel Grid.Column="1">
-                            <TextBlock x:Uid="AccountView_StatusesCount" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
-                            <TextBlock Text="{x:Bind Account.StatusesCount,Mode=OneWay}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="2">
-                            <TextBlock x:Uid="AccountView_FollowingCount" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
-                            <TextBlock Text="{x:Bind Account.FollowingCount,Mode=OneWay}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="3">
-                            <TextBlock x:Uid="AccountView_FollowersCount" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
-                            <TextBlock Text="{x:Bind Account.FollowersCount,Mode=OneWay}"/>
-                        </StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Border Background="{StaticResource AppTheme}"/>
+                <Grid RequestedTheme="Dark">
+                    <Grid.Background>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="{x:Bind Account.Header,Mode=OneWay}"/>
+                    </Grid.Background>
+                    <Border Background="#BF000000" Grid.RowSpan="2"/>
+                    <StackPanel Padding="16">
+                        <Ellipse Grid.RowSpan="2" Width="75" Height="75">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{x:Bind Account.Avatar,Mode=OneWay}" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Account.DisplayName,Mode=OneWay}"/>
+                        <TextBlock IsTextSelectionEnabled="True" Foreground="{StaticResource HyperlinkButtonForeground}" Text="{x:Bind Account.Acct,Mode=OneWay,Converter={StaticResource StringFormatConverter},ConverterParameter='@{0}'}"/>
+                        <toolkit:MarkdownTextBlock HorizontalAlignment="Center" Foreground="LightGray" Text="{x:Bind Account.Note,Mode=OneWay, Converter={StaticResource HtmlToMarkdownConvert}}"/>
+                    </StackPanel>
+                    <Grid Visibility="{x:Bind Relationship,Mode=OneWay,Converter={StaticResource NullOrEmptyToVisibilityConverter}}">
+                        <Grid Padding="16" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{x:Bind Account.Id,Converter={StaticResource IsMeToVisibilityConverter},ConverterParameter=true}" >
+                            <Button Click="{x:Bind Follow}" Visibility="{x:Bind Relationship.Following,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Style="{StaticResource CommonButtonStyle}">
+                                <fa:FontAwesome Icon="UserPlus"/>
+                            </Button>
+                            <Button Click="{x:Bind UnFollow}" Visibility="{x:Bind Relationship.Following,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Style="{StaticResource CommonButtonStyle}">
+                                <fa:FontAwesome Icon="UserTimes"/>
+                            </Button>
+                        </Grid>
                     </Grid>
-                </StackPanel>
-                <Grid Padding="8" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{x:Bind Relationship,Mode=OneWay,Converter={StaticResource NullOrEmptyToVisibilityConverter}}">
-                    <Button Visibility="{x:Bind Relationship.Following,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Style="{StaticResource CommonButtonStyle}">
-                        <fa:FontAwesome Icon="UserPlus"/>
+                </Grid>
+                <Grid BorderBrush="LightGray" BorderThickness="0,0,0,1" Grid.Row="1" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="Padding" Value="4"/>
+                        </Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="BorderBrush" Value="LightGray"/>
+                            <Setter Property="BorderThickness" Value="1,0,0,0"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Button Visibility="{x:Bind Account.Id,Mode=OneWay,Converter={StaticResource IsMeToVisibilityConverter},ConverterParameter=true}" Style="{StaticResource CommonButtonStyle}">
+                        <fa:FontAwesome Icon="Bars"/>
+                        <Button.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mention}"/>
+                                <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Muting,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Click="{x:Bind Mute}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mute}" />
+                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Muting,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind UnMute}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_UnMute}" />
+                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Blocking,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Click="{x:Bind Block}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Block}" />
+                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Blocking,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind UnBlock}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_UnBlock}" />
+                                <MenuFlyoutItem Click="{x:Bind Report}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Report}"/>
+                            </MenuFlyout>
+                        </Button.Flyout>
                     </Button>
-                    <Button Visibility="{x:Bind Relationship.Following,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Style="{StaticResource CommonButtonStyle}">
-                        <fa:FontAwesome Icon="UserTimes"/>
+                    <Button Visibility="{x:Bind Account.Id,Mode=OneWay,Converter={StaticResource IsMeToVisibilityConverter}}" Style="{StaticResource CommonButtonStyle}">
+                        <fa:FontAwesome Icon="Bars"/>
+                        <Button.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mention}"/>
+                            </MenuFlyout>
+                        </Button.Flyout>
                     </Button>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock x:Uid="AccountView_StatusesCount" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
+                        <TextBlock Text="{x:Bind Account.StatusesCount,Mode=OneWay}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock x:Uid="AccountView_FollowingCount" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
+                        <TextBlock Text="{x:Bind Account.FollowingCount,Mode=OneWay}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3">
+                        <TextBlock x:Uid="AccountView_FollowersCount" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
+                        <TextBlock Text="{x:Bind Account.FollowersCount,Mode=OneWay}"/>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </toolkit:ScrollHeader>
     </controls:ExListView.Header>
-    <!--TODO: progressbar not working-->
-    <!--<controls:ExListView.Footer>
-        <ProgressBar Padding="16" IsIndeterminate="{x:Bind IsLoading,Mode=OneWay}"/>
-    </controls:ExListView.Footer>-->
 </controls:ExListView>

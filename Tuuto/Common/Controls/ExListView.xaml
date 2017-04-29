@@ -6,10 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:fa="using:FontAwesome.UWP"
     mc:Ignorable="d"
     SelectionMode="None" 
-    IsItemClickEnabled="True" 
-    VerticalAlignment="Top" 
+    IsItemClickEnabled="True"
     x:Uid="RefreshListView"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -24,7 +24,63 @@
             </Setter>
         </Style>
     </toolkit:PullToRefreshListView.ItemContainerStyle>
-    <!--<toolkit:PullToRefreshListView.Footer>
-        <ProgressBar Padding="16" IsIndeterminate="{x:Bind IsLoading,Mode=OneWay}"/>
-    </toolkit:PullToRefreshListView.Footer>-->
+    <toolkit:PullToRefreshListView.Template>
+
+        <ControlTemplate TargetType="local:ExListView">
+            <Border x:Name="Root"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                <Grid>
+                    <Border x:Name="RefreshIndicator"
+                                    VerticalAlignment="Top">
+                        <Grid>
+                            <ContentPresenter x:Name="PullAndReleaseIndicatorContent"
+                                                      HorizontalAlignment="Center"
+                                                      FontSize="20" />
+                            <ContentPresenter Content="{TemplateBinding RefreshIndicatorContent}" />
+                        </Grid>
+                        <Border.RenderTransform>
+                            <CompositeTransform x:Name="RefreshIndicatorTransform" />
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border x:Name="EmptyView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Orientation="Vertical">
+                            <fa:FontAwesome Foreground="Gray" FontSize="50" Icon="MehOutline"/>
+                            <TextBlock Foreground="Gray" HorizontalAlignment="Center" x:Uid="ExListView_Empty"/>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="FailedView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Orientation="Vertical">
+                            <fa:FontAwesome Foreground="Gray" FontSize="50" Icon="FrownOutline"/>
+                            <TextBlock Foreground="Gray" HorizontalAlignment="Center" x:Uid="ExListView_Failed"/>
+                        </StackPanel>
+                    </Border>
+                    <ScrollViewer x:Name="ScrollViewer"
+                                          AutomationProperties.AccessibilityView="Raw"
+                                          BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+                                          HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                          HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                          IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                          IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                          IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
+                                          IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                          IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+                                          TabNavigation="{TemplateBinding TabNavigation}"
+                                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                          VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                          ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                        <ItemsPresenter x:Name="ItemsPresenter"
+                                                Padding="{TemplateBinding Padding}"
+                                                Footer="{TemplateBinding Footer}"
+                                                FooterTemplate="{TemplateBinding FooterTemplate}"
+                                                FooterTransitions="{TemplateBinding FooterTransitions}"
+                                                Header="{TemplateBinding Header}"
+                                                HeaderTemplate="{TemplateBinding HeaderTemplate}"
+                                                HeaderTransitions="{TemplateBinding HeaderTransitions}" />
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </toolkit:PullToRefreshListView.Template>
 </toolkit:PullToRefreshListView>

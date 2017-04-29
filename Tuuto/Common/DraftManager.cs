@@ -82,7 +82,7 @@ namespace Tuuto.Common
                     else
                         medias.Add(await Media.Uploading(item.Domain, item.AccessToken, media.Data));
                 }
-            return await Statuses.Posting(item.Domain, item.AccessToken, item.Status, item.InReplyToId, item.Sensitive, item.SpoilerText, item.Visibility, medias.Select(m => m.Id).ToArray());
+            return await Statuses.Posting(item.Domain, item.AccessToken, item.Status, item.ReplyStatus?.InReplyToId ?? 0, item.Sensitive, item.SpoilerText, item.Visibility, medias.Select(m => m.Id).ToArray());
         }
         public static IEnumerable<DraftModel> GetCurrent()
         {

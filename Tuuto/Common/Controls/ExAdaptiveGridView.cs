@@ -320,8 +320,8 @@ namespace Tuuto.Common.Controls
                     _needToRestoreScrollStates = true;
 
                     ScrollViewer.SetVerticalScrollMode(this, ScrollMode.Disabled);
-                    ScrollViewer.SetVerticalScrollBarVisibility(this, ScrollBarVisibility.Hidden);
-                    ScrollViewer.SetHorizontalScrollBarVisibility(this, ScrollBarVisibility.Hidden);
+                    ScrollViewer.SetVerticalScrollBarVisibility(this, ScrollBarVisibility.Disabled);
+                    ScrollViewer.SetHorizontalScrollBarVisibility(this, ScrollBarVisibility.Disabled);
                     ScrollViewer.SetHorizontalScrollMode(this, ScrollMode.Disabled);
                 }
                 else

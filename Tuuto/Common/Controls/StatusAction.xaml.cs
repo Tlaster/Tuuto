@@ -23,7 +23,6 @@ namespace Tuuto.Common.Controls
 {
     public sealed partial class StatusAction : UserControl, INotifyPropertyChanged
     {
-        public event EventHandler<AccountModel> AccountClick;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public FontAwesomeIcon Icon
@@ -110,7 +109,7 @@ namespace Tuuto.Common.Controls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AccountClick?.Invoke(this, ActionAccount);
+            App.StatusAcionHandler.AccountDetail(ActionAccount);
         }
     }
 }

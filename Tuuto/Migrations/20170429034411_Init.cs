@@ -9,6 +9,23 @@ namespace Tuuto.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Reply",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Acct = table.Column<string>(nullable: true),
+                    Avatar = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    InReplyToId = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reply", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Draft",
                 columns: table => new
                 {
@@ -18,7 +35,7 @@ namespace Tuuto.Migrations
                     AccountId = table.Column<int>(nullable: false),
                     Domain = table.Column<string>(nullable: true),
                     ErrorMessage = table.Column<string>(nullable: true),
-                    InReplyToId = table.Column<int>(nullable: false),
+                    ReplyStatusId = table.Column<int>(nullable: true),
                     Sensitive = table.Column<bool>(nullable: false),
                     SpoilerText = table.Column<string>(nullable: true),
                     Status = table.Column<string>(nullable: true),
@@ -27,6 +44,12 @@ namespace Tuuto.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Draft", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Draft_Reply_ReplyStatusId",
+                        column: x => x.ReplyStatusId,
+                        principalTable: "Reply",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,6 +73,11 @@ namespace Tuuto.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Draft_ReplyStatusId",
+                table: "Draft",
+                column: "ReplyStatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MediaData_DraftModelId",
                 table: "MediaData",
                 column: "DraftModelId");
@@ -62,6 +90,9 @@ namespace Tuuto.Migrations
 
             migrationBuilder.DropTable(
                 name: "Draft");
+
+            migrationBuilder.DropTable(
+                name: "Reply");
         }
     }
 }

@@ -16,6 +16,7 @@
     xmlns:controls="using:Tuuto.Common.Controls"
     xmlns:fa="using:FontAwesome.UWP">
     <UserControl.Resources>
+        <converter:DateTimeDiffForHumansConverter x:Key="DateTimeDiffForHumansConverter"/>
         <selectors:DataTemplateByVersionSelector x:Key="DataTemplateByVersionSelector" Version="AnniversaryUpdate" Before="{StaticResource SensitiveBlockerBackgroundBlackTemplate}" After="{StaticResource SensitiveBlockerBackgroundWithBlurTemplate}"/>
         <local:StatusReblogConverter x:Key="StatusReblogConverter"/>
         <MenuFlyout x:Key="MenuOthers" Placement="Bottom">
@@ -56,7 +57,7 @@
                             <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind Account.DisplayName}" />
                             <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind Account.Acct,Converter={StaticResource StringFormatConverter},ConverterParameter='@{0}'}"/>
                         </StackPanel>
-                        <TextBlock  Style="{ThemeResource BodyTextBlockStyle}" HorizontalAlignment="Right" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind CreatedAt}"/>
+                        <TextBlock  Style="{ThemeResource BodyTextBlockStyle}" HorizontalAlignment="Right" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind CreatedAt,Converter={StaticResource DateTimeDiffForHumansConverter}}"/>
                     </Grid>
                     <TextBlock IsTextSelectionEnabled="True" Visibility="{x:Bind SpoilerText,Converter={StaticResource NullOrEmptyToVisibilityConverter}}" Text="{x:Bind SpoilerText}"/>
                     <toolkit:Expander Style="{StaticResource TextExpanderStyle}" x:Uid="StatusView_Expander" Visibility="{x:Bind SpoilerText,Converter={StaticResource NullOrEmptyToVisibilityConverter}}">

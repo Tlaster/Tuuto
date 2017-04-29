@@ -126,6 +126,15 @@
   <data name="AccountView_StatusesCount.Text" xml:space="preserve">
     <value>Statuses</value>
   </data>
+  <data name="BladePage_Home.Label" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="ExListView_Empty.Text" xml:space="preserve">
+    <value>Nothing here</value>
+  </data>
+  <data name="ExListView_Failed.Text" xml:space="preserve">
+    <value>Failed</value>
+  </data>
   <data name="LoginPage_DomainError" xml:space="preserve">
     <value>Please check the domain again</value>
   </data>
@@ -224,6 +233,12 @@
   </data>
   <data name="StatusViewMenu_Report" xml:space="preserve">
     <value>Report @{0}</value>
+  </data>
+  <data name="StatusViewMenu_UnBlock" xml:space="preserve">
+    <value>UnBlock @{0}</value>
+  </data>
+  <data name="StatusViewMenu_UnMute" xml:space="preserve">
+    <value>UnMute @{0}</value>
   </data>
   <data name="StatusView_ClickToView.Text" xml:space="preserve">
     <value>Click to view</value>

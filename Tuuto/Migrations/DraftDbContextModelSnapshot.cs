@@ -28,7 +28,7 @@ namespace Tuuto.Migrations
 
                     b.Property<string>("ErrorMessage");
 
-                    b.Property<int>("InReplyToId");
+                    b.Property<int?>("ReplyStatusId");
 
                     b.Property<bool>("Sensitive");
 
@@ -39,6 +39,8 @@ namespace Tuuto.Migrations
                     b.Property<string>("Visibility");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ReplyStatusId");
 
                     b.ToTable("Draft");
                 });
@@ -57,6 +59,33 @@ namespace Tuuto.Migrations
                     b.HasIndex("DraftModelId");
 
                     b.ToTable("MediaData");
+                });
+
+            modelBuilder.Entity("Tuuto.Model.ReplyModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Acct");
+
+                    b.Property<string>("Avatar");
+
+                    b.Property<string>("Content");
+
+                    b.Property<int>("InReplyToId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reply");
+                });
+
+            modelBuilder.Entity("Tuuto.Model.DraftModel", b =>
+                {
+                    b.HasOne("Tuuto.Model.ReplyModel", "ReplyStatus")
+                        .WithMany()
+                        .HasForeignKey("ReplyStatusId");
                 });
 
             modelBuilder.Entity("Tuuto.Model.MediaData", b =>

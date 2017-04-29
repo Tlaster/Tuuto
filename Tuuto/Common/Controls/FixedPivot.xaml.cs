@@ -21,6 +21,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Tuuto.Common.Controls
 {
+    [TemplatePart(Name = "HeaderClipper", Type = typeof(ContentControl))]
+    [TemplatePart(Name = "LeftHeaderPresenter", Type = typeof(ContentPresenter))]
+    [TemplatePart(Name = "PreviousButton", Type = typeof(Button))]
+    [TemplatePart(Name = "NextButton", Type = typeof(Button))]
+    [TemplatePart(Name = "RightHeaderPresenter", Type = typeof(ContentPresenter))]
+    [TemplatePart(Name = "splitView", Type = typeof(SplitView))]
+    [TemplatePart(Name = "FixedHeader", Type = typeof(ExAdaptiveGridView))]
+    [TemplatePart(Name = "PivotItemPresenter", Type = typeof(ItemsPresenter))]
     class PivotHeaderSplitterVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -79,7 +87,7 @@ namespace Tuuto.Common.Controls
 
         // Using a DependencyProperty as the backing store for ContentWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ContentWidthProperty =
-            DependencyProperty.Register(nameof(ContentWidth), typeof(double), typeof(FixedPivot), new PropertyMetadata(0));
+            DependencyProperty.Register(nameof(ContentWidth), typeof(double), typeof(FixedPivot), new PropertyMetadata(double.NaN));
 
 
 
@@ -91,14 +99,13 @@ namespace Tuuto.Common.Controls
 
         // Using a DependencyProperty as the backing store for ContentHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ContentHeightProperty =
-            DependencyProperty.Register(nameof(ContentHeight), typeof(double), typeof(FixedPivot), new PropertyMetadata(0));
+            DependencyProperty.Register(nameof(ContentHeight), typeof(double), typeof(FixedPivot), new PropertyMetadata(double.NaN));
         private SplitView _splitView;
         private ExAdaptiveGridView _fixedHeader;
 
         public FixedPivot()
         {
             this.InitializeComponent();
-            Loaded += FixedPivot_Loaded;
             SelectionChanged += Header_SelectionChanged;
             //Pivot content will out of the window range if not calculate the size
             //TODO: fix pivot content out of the window range with a batter way
@@ -150,21 +157,20 @@ namespace Tuuto.Common.Controls
                 ContentHeight = height;
             }
         }
-
-        private void FixedPivot_Loaded(object sender, RoutedEventArgs e)
+        protected override void OnApplyTemplate()
         {
-            Loaded -= FixedPivot_Loaded;
+            base.OnApplyTemplate();
             Headers = Items.Where(CheckItem).Select(GetHeader).ToList();
-            ExVisualTreeHelper.GetObjectByName<ContentControl>(this, "HeaderClipper").Visibility = Visibility.Collapsed;
-            ExVisualTreeHelper.GetObjectByName<ContentPresenter>(this, "LeftHeaderPresenter").Visibility = Visibility.Collapsed;
-            ExVisualTreeHelper.GetObjectByName<Button>(this, "PreviousButton").Visibility = Visibility.Collapsed;
-            ExVisualTreeHelper.GetObjectByName<Button>(this, "NextButton").Visibility = Visibility.Collapsed;
-            ExVisualTreeHelper.GetObjectByName<ContentPresenter>(this, "RightHeaderPresenter").Visibility = Visibility.Collapsed;
-            _fixedHeader = ExVisualTreeHelper.GetObjectByName<ExAdaptiveGridView>(this, "FixedHeader");
+            (GetTemplateChild("HeaderClipper") as UIElement).Visibility = Visibility.Collapsed;
+            (GetTemplateChild("LeftHeaderPresenter") as UIElement).Visibility = Visibility.Collapsed;
+            (GetTemplateChild("PreviousButton") as UIElement).Visibility = Visibility.Collapsed;
+            (GetTemplateChild("NextButton") as UIElement).Visibility = Visibility.Collapsed;
+            (GetTemplateChild("RightHeaderPresenter") as UIElement).Visibility = Visibility.Collapsed;
+            _fixedHeader = GetTemplateChild("FixedHeader") as ExAdaptiveGridView;
             _fixedHeader.DataContext = this;
-            _splitView = ExVisualTreeHelper.GetObjectByName<SplitView>(this, "splitView");
+            _splitView = GetTemplateChild("splitView") as SplitView;
             _splitView.DataContext = this;
-            var presenter = ExVisualTreeHelper.GetObjectByName<ItemsPresenter>(this, "PivotItemPresenter");
+            var presenter = GetTemplateChild("PivotItemPresenter") as ItemsPresenter;
             presenter.SetBinding(WidthProperty, new Binding()
             {
                 Source = this,
@@ -177,8 +183,6 @@ namespace Tuuto.Common.Controls
                 Path = new PropertyPath(nameof(ContentHeight)),
                 Mode = BindingMode.TwoWay
             });
-            RecalculateHeight(ContentHeight);
-            RecalculateWidth(ContentWidth);
         }
 
         private bool CheckItem(object item)

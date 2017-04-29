@@ -26,6 +26,21 @@
                 <toolkit:ImageEx Width="40" Height="40" Source="{Binding Source={StaticResource Settings},Path=CurrentAccountModel.Avatar}"/>
                 <TextBlock Text="{Binding Source={StaticResource Settings},Path=CurrentAccountModel.DisplayName}" Margin="8,0"/>
             </StackPanel>
+            <Grid Background="{ThemeResource SystemControlHighlightChromeHighBrush}" Padding="4" Visibility="{x:Bind ReplyStatus,Mode=OneWay,Converter={StaticResource NullOrEmptyToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <toolkit:ImageEx Height="25" Width="25" Margin="4" Source="{x:Bind ReplyStatus.Account.Avatar,Mode=OneWay}"/>
+                    <TextBlock Padding="4" Text="{x:Bind ReplyStatus.Account.UserName,Mode=OneWay}"/>
+                    <TextBlock Padding="4" Text="{x:Bind ReplyStatus.Account.Acct,Mode=OneWay,Converter={StaticResource StringFormatConverter},ConverterParameter='@{0}'}"/>
+                </StackPanel>
+                <toolkit:MarkdownTextBlock Padding="4" Text="{x:Bind ReplyStatus.Content,Mode=OneWay,Converter={StaticResource HtmlToMarkdownConvert}}" Grid.Row="1"/>
+                <Button Click="{x:Bind ClearReplyStatus}" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource CommonButtonStyle}">
+                    <fa:FontAwesome Icon="Times"/>
+                </Button>
+            </Grid>
             <TextBox TextChanged="{x:Bind TextChanged}" Text="{x:Bind ContentWarningText,Mode=TwoWay}" Visibility="{Binding ElementName=ContentWarning,Path=IsChecked,Converter={StaticResource BoolToVisibilityConverter}}" Margin="0,8,0,0" x:Uid="TootDialogCW_PlaceholderText"/>
             <RichEditBox x:Name="richEditBox" TextChanged="{x:Bind TextChanged}" DragOver="TextBox_DragOver" Drop="TextBox_Drop" Paste="TextBox_Paste" Margin="0,8" x:Uid="TootDialog_PlaceholderText" Height="150"/>
             <toolkit:AdaptiveGridView CanReorderItems="True" IsItemClickEnabled="True" ItemClick="AdaptiveGridView_ItemClick" AllowDrop="True" ItemsSource="{x:Bind Medias,Mode=OneWay}" CanDragItems="True" DesiredWidth="50" SelectionMode="None" StretchContentForSingleRow="True">
@@ -108,7 +123,7 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <Button Click="{x:Bind Close}" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource CommonButtonStyle}">
+        <Button Click="{x:Bind Close}" Visibility="{x:Bind CanClose,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource CommonButtonStyle}">
             <fa:FontAwesome Icon="TimesCircleOutline"/>
         </Button>
 

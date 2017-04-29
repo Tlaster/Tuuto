@@ -1,0 +1,10 @@
+﻿<Page
+    x:Class="Tuuto.View.AccountPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Tuuto.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <local:AccountView RefreshRelationshipRequested="{x:Bind ViewModel.RefreshRelationship}" IsError="{x:Bind ViewModel.AccountTimeline.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.Refresh}" IsLoading="{x:Bind ViewModel.AccountTimeline.IsLoading,Mode=OneWay}" Relationship="{x:Bind ViewModel.Relationship.Result,Mode=OneWay}" ItemsSource="{x:Bind ViewModel.AccountTimeline,Mode=OneWay}" Account="{x:Bind ViewModel.Account.Result,Mode=OneWay}"/>
+</Page>

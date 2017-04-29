@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Controls;
+﻿using Mastodon.Model;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,7 +33,8 @@ namespace Tuuto.View
     public sealed partial class PostingTootView : UserControl, INotifyPropertyChanged
     {
         private const int MAX_IMAGE_COUNT = 4;
-        private int _inReplyToId = 0;
+
+        public StatusModel ReplyStatus { get; set; }
 
         public event EventHandler Tooted;
         public event EventHandler CloseRequested;
@@ -63,6 +65,21 @@ namespace Tuuto.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TextCount)));
         }
+
+
+
+        public bool CanClose
+        {
+            get { return (bool)GetValue(CanCloseProperty); }
+            set { SetValue(CanCloseProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CanClose.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CanCloseProperty =
+            DependencyProperty.Register(nameof(CanClose), typeof(bool), typeof(PostingTootView), new PropertyMetadata(true));
+
+
+
         public PostingTootView()
         {
             this.InitializeComponent();
@@ -216,19 +233,35 @@ namespace Tuuto.View
         {
             if (TextCount >= 500 || TextCount <= 0)
                 return;
-            DraftManager.Add(new DraftModel
+            DraftManager.Add(new DraftModel(ReplyStatus)
             {
                 Domain = Settings.CurrentAccount.Domain,
                 AccessToken = Settings.CurrentAccount.AccessToken,
                 AccountId = Settings.CurrentAccount.Id,
                 Status = Text.Replace("\r", "\n"),
-                InReplyToId = _inReplyToId,
                 Sensitive = IsSensitive,
                 SpoilerText = ContentWarningText,
                 Visibility = TootVisibilityList.VisibilityList[SelectedVisibilityIndex].VisibilityCode,
                 Medias = Medias.ToList()
             });
+            Clean();
             Tooted?.Invoke(this, null);
+        }
+
+        void ClearReplyStatus()
+        {
+            ReplyStatus = null;
+        }
+
+        private void Clean()
+        {
+            ReplyStatus = null;
+            Text = "";
+            IsSensitive = false;
+            ContentWarningText = "";
+            ContentWarning.IsChecked = false;
+            Medias.Clear();
+            SelectedVisibilityIndex = 0;
         }
 
         void Close()

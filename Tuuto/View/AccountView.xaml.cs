@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Tuuto.Common;
 using Tuuto.Common.Controls;
+using Tuuto.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -23,6 +24,19 @@ namespace Tuuto.View
 {
     public sealed partial class AccountView : ExListView
     {
+        public event EventHandler RefreshRelationshipRequested;
+
+        //public AccountViewModel ViewModel
+        //{
+        //    get { return (AccountViewModel)GetValue(ViewModelProperty); }
+        //    set { SetValue(ViewModelProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for ViewModel.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty ViewModelProperty =
+        //    DependencyProperty.Register(nameof(ViewModel), typeof(AccountViewModel), typeof(AccountView), new PropertyMetadata(null));
+
+
 
         public AccountModel Account
         {
@@ -66,21 +80,34 @@ namespace Tuuto.View
 
         async void Block()
         {
-            Relationship = await Accounts.Block(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
+            await Accounts.Block(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
+            RefreshRelationshipRequested?.Invoke(this, null);
         }
         async void UnBlock()
         {
-            Relationship = await Accounts.UnBlock(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
+            await Accounts.UnBlock(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
+            RefreshRelationshipRequested?.Invoke(this, null);
         }
 
         async void Mute()
         {
-            Relationship = await Accounts.Mute(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
+            await Accounts.Mute(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
+            RefreshRelationshipRequested?.Invoke(this, null);
         }
         async void UnMute()
         {
-            Relationship = await Accounts.UnMute(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
+            await Accounts.UnMute(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
+            RefreshRelationshipRequested?.Invoke(this, null);
         }
-
+        async void Follow()
+        {
+            await Accounts.Follow(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
+            RefreshRelationshipRequested?.Invoke(this, null);
+        }
+        async void UnFollow()
+        {
+            await Accounts.UnFollow(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
+            RefreshRelationshipRequested?.Invoke(this, null);
+        }
     }
 }

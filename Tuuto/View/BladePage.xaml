@@ -1,0 +1,86 @@
+﻿<Page
+    x:Class="Tuuto.View.BladePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Tuuto.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:fa="using:FontAwesome.UWP"
+    xmlns:controls="using:Tuuto.Common.Controls"
+    xmlns:model="using:Mastodon.Model"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style TargetType="toolkit:BladeItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="IsOpen" Value="True"/>
+            <Setter Property="Width" Value="400"/>
+            <Setter Property="TitleBarVisibility" Value="Collapsed"/>
+        </Style>
+    </Page.Resources>
+    <Grid Background="{StaticResource SystemControlPageBackgroundChromeLowBrush}">
+        <toolkit:BladeView BladeMode="Normal">
+            <toolkit:BladeItem>
+                <StackPanel Padding="8">
+                    <Grid Margin="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button HorizontalAlignment="Stretch" Style="{StaticResource CommonButtonStyle}">
+                            <fa:FontAwesome Icon="Users"/>
+                        </Button>
+                        <Button HorizontalAlignment="Stretch" Grid.Column="1" Style="{StaticResource CommonButtonStyle}">
+                            <fa:FontAwesome Icon="Globe"/>
+                        </Button>
+                        <Button HorizontalAlignment="Stretch" Grid.Column="2" Style="{StaticResource CommonButtonStyle}">
+                            <fa:FontAwesome Icon="Cog"/>
+                        </Button>
+                    </Grid>
+                    <AutoSuggestBox Margin="4">
+                        <AutoSuggestBox.QueryIcon>
+                            <fa:FontAwesome Icon="Search"/>
+                        </AutoSuggestBox.QueryIcon>
+                    </AutoSuggestBox>
+                    <local:PostingTootView CanClose="False" Margin="4"/>
+                </StackPanel>
+            </toolkit:BladeItem>
+            <toolkit:BladeItem>
+                <StackPanel>
+                    <controls:ExListView IsError="{x:Bind ViewModel.TimelineHome.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.RefreshTimelineHome}" ItemsSource="{x:Bind ViewModel.TimelineHome}" IsLoading="{x:Bind ViewModel.TimelineHome.IsLoading,Mode=OneWay}">
+                        <controls:ExListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:StatusModel">
+                                <local:StatusView ViewModel="{x:Bind}"/>
+                            </DataTemplate>
+                        </controls:ExListView.ItemTemplate>
+                        <controls:ExListView.Header>
+                            <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
+                                <controls:SplitViewButton x:Uid="BladePage_Home" Style="{StaticResource CommonButtonStyle}" Icon="Home"/>
+                            </Grid>
+                        </controls:ExListView.Header>
+                    </controls:ExListView>
+                </StackPanel>
+            </toolkit:BladeItem>
+            <toolkit:BladeItem>
+                <StackPanel>
+                    <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
+                        <controls:SplitViewButton x:Uid="BladePage_Notification" Style="{StaticResource CommonButtonStyle}" Icon="Bell"/>
+                    </Grid>
+                    <controls:ExListView IsError="{x:Bind ViewModel.Notification.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.RefreshNotification}" ItemsSource="{x:Bind ViewModel.Notification}" IsLoading="{x:Bind ViewModel.Notification.IsLoading,Mode=OneWay}">
+                        <controls:ExListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:NotificationModel">
+                                <local:NotificationView ViewModel="{x:Bind}"/>
+                            </DataTemplate>
+                        </controls:ExListView.ItemTemplate>
+                    </controls:ExListView>
+                </StackPanel>
+            </toolkit:BladeItem>
+            <!--<toolkit:BladeItem>
+                <StackPanel>
+                    
+                </StackPanel>
+            </toolkit:BladeItem>-->
+        </toolkit:BladeView>
+    </Grid>
+</Page>

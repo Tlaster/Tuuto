@@ -37,5 +37,12 @@ namespace Tuuto.View
         {
             this.InitializeComponent();
         }
+
+        protected override void OnTapped(TappedRoutedEventArgs e)
+        {
+            base.OnTapped(e);
+            e.Handled = true;
+            App.StatusAcionHandler.AccountDetail(ViewModel);
+        }
     }
 }

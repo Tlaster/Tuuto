@@ -11,6 +11,7 @@ namespace Tuuto.Model
     {
         public DbSet<DraftModel> Draft { get; set; }
         public DbSet<MediaData> MediaData { get; set; }
+        public DbSet<ReplyModel> Reply { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=draft.db");

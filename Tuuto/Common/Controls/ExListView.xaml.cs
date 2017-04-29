@@ -20,8 +20,11 @@ using System.Reflection;
 
 namespace Tuuto.Common.Controls
 {
+    [TemplatePart(Name = "FailedView", Type = typeof(Border))]
+    [TemplatePart(Name = "EmptyView", Type = typeof(Border))]
     public partial class ExListView : PullToRefreshListView
     {
+        //TODO: Show progressbar
         public bool IsLoading
         {
             get { return (bool)GetValue(IsLoadingProperty); }
@@ -32,11 +35,47 @@ namespace Tuuto.Common.Controls
         public static readonly DependencyProperty IsLoadingProperty =
             DependencyProperty.Register(nameof(IsLoading), typeof(bool), typeof(ExListView), new PropertyMetadata(false));
 
+        public bool IsError
+        {
+            get { return (bool)GetValue(LoadErrorProperty); }
+            set { SetValue(LoadErrorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LoadError.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LoadErrorProperty =
+            DependencyProperty.Register(nameof(IsError), typeof(bool), typeof(ExListView), new PropertyMetadata(false, OnIsErrorChanged));
+
+        private static void OnIsErrorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ExListView).OnIsErrorChanged((bool)e.NewValue);
+        }
+
+        private void OnIsErrorChanged(bool newValue)
+        {
+            _failedView.Visibility = newValue && !Items.Any() ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private Border _failedView;
+        private Border _emptyView;
+
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            _emptyView = GetTemplateChild("EmptyView") as Border;
+            _failedView = GetTemplateChild("FailedView") as Border;
+        }
+        
 
         public ExListView()
         {
             this.InitializeComponent();
+            Items.VectorChanged += Items_VectorChanged;
         }
-        
+
+        private void Items_VectorChanged(IObservableVector<object> sender, IVectorChangedEventArgs @event)
+        {
+            if (_emptyView != null)
+                _emptyView.Visibility = sender.Any() && !IsError || !IsLoading ? Visibility.Collapsed : Visibility.Visible;
+        }
     }
 }

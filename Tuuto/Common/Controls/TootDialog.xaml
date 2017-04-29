@@ -124,5 +124,5 @@
             <PaneThemeTransition Edge="Top"/>
         </TransitionCollection>
     </ContentDialog.Transitions>
-    <view:PostingTootView CloseRequested="PostingTootView_CloseRequested" Tooted="PostingTootView_CloseRequested"/>
+    <view:PostingTootView x:Name="postingTootView" CloseRequested="{x:Bind Hide}" Tooted="{x:Bind Hide}"/>
 </ContentDialog>

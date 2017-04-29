@@ -36,10 +36,15 @@ namespace Tuuto.Common.Controls
         {
             this.InitializeComponent();
         }
-
-        private void PostingTootView_CloseRequested(object sender, EventArgs e)
+        public TootDialog WithReply(StatusModel reply)
         {
-            Hide();
+            postingTootView.ReplyStatus = reply;
+            return this;
+        }
+        public TootDialog WithText(string text)
+        {
+            postingTootView.Text = text;
+            return this;
         }
     }
 }
