@@ -109,7 +109,7 @@ namespace Tuuto.Common.Controls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            App.StatusAcionHandler.AccountDetail(ActionAccount);
+            App.StatusAcionHandler.AccountDetail(ActionAccount.Id);
         }
     }
 }

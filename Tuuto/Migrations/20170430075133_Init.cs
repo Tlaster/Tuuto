@@ -33,6 +33,7 @@ namespace Tuuto.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     AccessToken = table.Column<string>(nullable: true),
                     AccountId = table.Column<int>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
                     Domain = table.Column<string>(nullable: true),
                     ErrorMessage = table.Column<string>(nullable: true),
                     ReplyStatusId = table.Column<int>(nullable: true),
@@ -49,7 +50,7 @@ namespace Tuuto.Migrations
                         column: x => x.ReplyStatusId,
                         principalTable: "Reply",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,7 +70,7 @@ namespace Tuuto.Migrations
                         column: x => x.DraftModelId,
                         principalTable: "Draft",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

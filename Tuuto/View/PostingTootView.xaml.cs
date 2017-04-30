@@ -1,4 +1,5 @@
 ﻿using Mastodon.Model;
+using Microsoft.Toolkit.Uwp;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
 using System.Collections.Generic;
@@ -77,8 +78,7 @@ namespace Tuuto.View
         // Using a DependencyProperty as the backing store for CanClose.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CanCloseProperty =
             DependencyProperty.Register(nameof(CanClose), typeof(bool), typeof(PostingTootView), new PropertyMetadata(true));
-
-
+        private int _draftId = -1;
 
         public PostingTootView()
         {
@@ -229,11 +229,40 @@ namespace Tuuto.View
 
         #endregion
 
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            DraftFlyout.Hide();
+            FromDraft(e.ClickedItem as DraftModel);
+        }
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DraftList.Value.Remove((sender as FrameworkElement).DataContext as DraftModel);
+            await DraftManager.DeleteDraft((sender as FrameworkElement).DataContext as DraftModel);
+        }
+        void FromDraft(DraftModel model)
+        {
+            Clean();
+            Text = model.Status.Replace("\n", "\r");
+            IsSensitive = model.Sensitive;
+            ContentWarningText = model.SpoilerText;
+            if (!string.IsNullOrEmpty(model.SpoilerText))
+            {
+                ContentWarning.IsChecked = true;
+            }
+            SelectedVisibilityIndex = TootVisibilityList.VisibilityList.FindIndex(v => v.VisibilityCode == model.Visibility);
+            if (model.Medias != null && model.Medias.Any())
+                model.Medias.ForEach(async item => await AddMediaData(await StorageFileHelper.ReadBytesFromLocalFileAsync(item.SavedFile)));
+            _draftId = model.Id;
+        }
+
+        
+        Lazy<ObservableCollection<DraftModel>> DraftList { get; } = new Lazy<ObservableCollection<DraftModel>>(() => new ObservableCollection<DraftModel>(DraftManager.GetCurrent()));
+
         public void Toot()
         {
             if (TextCount >= 500 || TextCount <= 0)
                 return;
-            DraftManager.Add(new DraftModel(ReplyStatus)
+            DraftManager.Add(new DraftModel(_draftId, ReplyStatus)
             {
                 Domain = Settings.CurrentAccount.Domain,
                 AccessToken = Settings.CurrentAccount.AccessToken,
@@ -262,11 +291,13 @@ namespace Tuuto.View
             ContentWarning.IsChecked = false;
             Medias.Clear();
             SelectedVisibilityIndex = 0;
+            _draftId = -1;
         }
 
         void Close()
         {
             CloseRequested?.Invoke(this, null);
         }
+
     }
 }

@@ -12,7 +12,8 @@
         <controls:FixedPivot>
             <controls:FixedPivotItem HeaderIcon="Wrench" x:Uid="SettingPage_Customize">
                 <StackPanel>
-                    <ToggleSwitch x:Name="EnableBladeViewSwitch" IsOn="{Binding Source={StaticResource Settings},Path=EnableBladeView,Mode=TwoWay}" x:Uid="SettingPage_Customize_EnableBladeView" Style="{StaticResource SingleLineToggleSwitch}"  />
+                    <ToggleSwitch x:Uid="SettingPage_Customize_IsDarkTheme" IsOn="{Binding Source={StaticResource Settings},Path=IsDarkTheme,Mode=TwoWay}" Style="{StaticResource SingleLineToggleSwitch}"/>
+                    <ToggleSwitch Visibility="Collapsed" x:Name="EnableBladeViewSwitch" IsOn="{Binding Source={StaticResource Settings},Path=EnableBladeView,Mode=TwoWay}" x:Uid="SettingPage_Customize_EnableBladeView" Style="{StaticResource SingleLineToggleSwitch}"  />
                     <StackPanel Visibility="{Binding ElementName=EnableBladeViewSwitch,Path=IsOn,Converter={StaticResource BoolToVisibilityConverter}}">
                         
                     </StackPanel>

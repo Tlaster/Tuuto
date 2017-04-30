@@ -35,6 +35,11 @@ namespace Tuuto.Common
             get => GetSetting(nameof(EnableFederatedTimeline), true);
             set => SetSetting(nameof(EnableFederatedTimeline), value);
         }
+        public static bool IsDarkTheme
+        {
+            get => GetSetting(nameof(IsDarkTheme), false);
+            set => SetSetting(nameof(IsDarkTheme), value);
+        }
 
         public static (string Domain, string AccessToken, int Id)[] Account
         {

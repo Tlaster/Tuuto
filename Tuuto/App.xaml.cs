@@ -24,6 +24,7 @@ namespace Tuuto
         {
             InitializeComponent();
             Suspending += OnSuspending;
+            RequestedTheme = Settings.IsDarkTheme ? ApplicationTheme.Dark : ApplicationTheme.Light;
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)

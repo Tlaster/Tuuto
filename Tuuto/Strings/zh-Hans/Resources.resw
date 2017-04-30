@@ -135,6 +135,9 @@
   <data name="ExListView_Failed.Text" xml:space="preserve">
     <value>载入失败</value>
   </data>
+  <data name="ImageMenu_Save.Text" xml:space="preserve">
+    <value>保存</value>
+  </data>
   <data name="LoginPage_DomainError" xml:space="preserve">
     <value>输入的实例地址有误</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="SettingPage_Customize_EnableLocalTimeline.Header" xml:space="preserve">
     <value>开启本站时间轴</value>
+  </data>
+  <data name="SettingPage_Customize_IsDarkTheme.Header" xml:space="preserve">
+    <value>使用黑色主题</value>
   </data>
   <data name="StatusAction_favourite" xml:space="preserve">
     <value>喜欢了您的嘟</value>

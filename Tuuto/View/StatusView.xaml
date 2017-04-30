@@ -16,7 +16,6 @@
     xmlns:controls="using:Tuuto.Common.Controls"
     xmlns:fa="using:FontAwesome.UWP">
     <UserControl.Resources>
-        <converter:DateTimeDiffForHumansConverter x:Key="DateTimeDiffForHumansConverter"/>
         <selectors:DataTemplateByVersionSelector x:Key="DataTemplateByVersionSelector" Version="AnniversaryUpdate" Before="{StaticResource SensitiveBlockerBackgroundBlackTemplate}" After="{StaticResource SensitiveBlockerBackgroundWithBlurTemplate}"/>
         <local:StatusReblogConverter x:Key="StatusReblogConverter"/>
         <MenuFlyout x:Key="MenuOthers" Placement="Bottom">
@@ -50,7 +49,7 @@
                     <ColumnDefinition Width="4"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <toolkit:ImageEx Tapped="Account_Tapped" DataContext="{x:Bind Account}" Margin="4" VerticalAlignment="Top" Source="{x:Bind Account.Avatar}"/>
+                <Image Tapped="Account_Tapped" DataContext="{x:Bind Account}" Margin="4" VerticalAlignment="Top" Source="{x:Bind Account.Avatar}"/>
                 <StackPanel Grid.Column="2">
                     <Grid>
                         <StackPanel Tapped="Account_Tapped" DataContext="{x:Bind Account}" Orientation="Horizontal">

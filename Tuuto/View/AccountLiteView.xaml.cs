@@ -42,7 +42,7 @@ namespace Tuuto.View
         {
             base.OnTapped(e);
             e.Handled = true;
-            App.StatusAcionHandler.AccountDetail(ViewModel);
+            App.StatusAcionHandler.AccountDetail(ViewModel.Id);
         }
     }
 }

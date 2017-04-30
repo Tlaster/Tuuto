@@ -135,6 +135,9 @@
   <data name="ExListView_Failed.Text" xml:space="preserve">
     <value>Failed</value>
   </data>
+  <data name="ImageMenu_Save.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="LoginPage_DomainError" xml:space="preserve">
     <value>Please check the domain again</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="SettingPage_Customize_EnableLocalTimeline.Header" xml:space="preserve">
     <value>Enable local timeline</value>
+  </data>
+  <data name="SettingPage_Customize_IsDarkTheme.Header" xml:space="preserve">
+    <value>Enable Dark Theme</value>
   </data>
   <data name="StatusAction_favourite" xml:space="preserve">
     <value>favourited your status</value>

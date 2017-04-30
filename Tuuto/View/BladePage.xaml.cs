@@ -53,12 +53,17 @@ namespace Tuuto.View
 
         }
 
-        public void AccountDetail(AccountModel model)
+        public void Mention(AccountModel model)
         {
 
         }
 
-        public void Mention(AccountModel model)
+        public void AccountDetail(int id)
+        {
+
+        }
+
+        public void HashTag(string tag)
         {
 
         }

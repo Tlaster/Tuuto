@@ -20,12 +20,17 @@ namespace Tuuto.Common
             this._frame = frame;
         }
 
-        public void AccountDetail(AccountModel model)
+        public void AccountDetail(int id)
         {
-            _frame.Navigate(typeof(AccountPage), new AccountViewModel(model.Id));
+            _frame.Navigate(typeof(AccountPage), new AccountViewModel(id));
         }
         
         public void Expand(StatusModel model)
+        {
+
+        }
+
+        public void HashTag(string tag)
         {
 
         }

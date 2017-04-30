@@ -16,5 +16,9 @@ namespace Tuuto.Model
         {
             optionsBuilder.UseSqlite("Data Source=draft.db");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

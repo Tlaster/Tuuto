@@ -15,7 +15,7 @@ namespace Tuuto.DataSource
     {
         protected override async Task<ArrayModel<StatusModel>> GetArrayAsync(int max_id)
         {
-            return await Timelines.Public(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, max_id: max_id);
+            return await Timelines.Public(Settings.CurrentAccount.Domain, max_id: max_id);
         }
     }
 }

@@ -9,6 +9,7 @@ using Mastodon.Model;
 using Mastodon.Api;
 using Tuuto.Common.Helpers;
 using Tuuto.Common.Controls;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tuuto.Common
 {
@@ -16,13 +17,20 @@ namespace Tuuto.Common
     {
         public static async void Add(DraftModel item)
         {
-            if (item.Medias != null && item.Medias.Any())
-                foreach (var media in item.Medias)
-                    await media.SaveToFile();
             using (var db = new DraftDbContext())
             {
-                db.Draft.Add(item);
-                await db.SaveChangesAsync();
+                if (!db.Draft.Any(d => d.Id == item.Id))
+                {
+                    if (item.Medias != null && item.Medias.Any())
+                        foreach (var media in item.Medias)
+                            await media.SaveToFile();
+                    db.Draft.Add(item);
+                    //if (item.Medias != null && item.Medias.Any())
+                    //    db.MediaData.AddRange(item.Medias);
+                    //if (item.ReplyStatus != null)
+                    //    db.Reply.Add(item.ReplyStatus);
+                    await db.SaveChangesAsync();
+                }
             }
             Task.Run(() => HandleDraft(item));
         }
@@ -38,7 +46,7 @@ namespace Tuuto.Common
             catch (Exception e)
             {
                 message = ResourceHelper.GetString("SendDraft_Error");
-                HandleFailedAsync(item, e);
+                HandleFailedAsync(item.Id, e);
             }
             finally
             {
@@ -56,15 +64,16 @@ namespace Tuuto.Common
                     await media.DeleteFile();
             using (var db = new DraftDbContext())
             {
-                db.Draft.Remove(item);
+                db.Draft.Remove(db.Draft.Find(item.Id));
                 await db.SaveChangesAsync();
             }
         }
 
-        private static async void HandleFailedAsync(DraftModel item, Exception e)
+        private static async void HandleFailedAsync(int id, Exception e)
         {
             using (var db = new DraftDbContext())
             {
+                var item = db.Draft.Find(id);
                 item.ErrorMessage = e.Message;
                 db.Draft.Update(item);
                 await db.SaveChangesAsync();
@@ -88,7 +97,15 @@ namespace Tuuto.Common
         {
             using (var db = new DraftDbContext())
             {
-                return db.Draft.Where(d => d.AccountId == Settings.CurrentAccount.Id).ToList();
+                return db.Draft.Include(d => d.ReplyStatus).Include(d => d.Medias).Where(d => d.AccountId == Settings.CurrentAccount.Id && Settings.CurrentAccount.Domain == d.Domain).ToList();
+            }
+        }
+        public static async Task DeleteDraft(DraftModel item)
+        {
+            using (var db = new DraftDbContext())
+            {
+                db.Draft.Remove(db.Draft.Find(item.Id));
+                await db.SaveChangesAsync();
             }
         }
     }

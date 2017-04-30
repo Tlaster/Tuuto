@@ -23,7 +23,11 @@ namespace Tuuto.Model
         public byte[] Data { get; }
         [NotMapped]
         public BitmapImage Image { get; }
-        
+
+        public MediaData()
+        {
+
+        }
 
         public MediaData(byte[] data, BitmapImage image)
         {

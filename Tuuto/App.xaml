@@ -6,20 +6,22 @@
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converters="using:Tuuto.Common.Converters"
     xmlns:toolkitConverters="using:Microsoft.Toolkit.Uwp.UI.Converters"
-    xmlns:common="using:Tuuto.Common"
-    RequestedTheme="Light">
+    xmlns:common="using:Tuuto.Common">
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Dark">
                     <SolidColorBrush x:Key="AppTheme" Color="#FFC282FF" />
+                    <SolidColorBrush x:Key="ActionButtonForeground" Color="LightGray"/>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Light">
                     <SolidColorBrush x:Key="AppTheme" Color="#FF4D1780" />
+                    <SolidColorBrush x:Key="ActionButtonForeground" Color="{StaticResource SystemChromeBlackMediumLowColor}"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
             <common:Settings x:Key="Settings"/>
+            <converters:DateTimeDiffForHumansConverter x:Key="DateTimeDiffForHumansConverter"/>
             <converters:NullOrEmptyToVisibilityConverter x:Key="NullOrEmptyToVisibilityConverter"/>
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converters:HtmlToMarkdownConvert x:Key="HtmlToMarkdownConvert"/>
@@ -39,7 +41,7 @@
                                         <VisualState x:Name="Normal">
                                             <Storyboard>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SystemChromeBlackMediumLowColor}"/>
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ActionButtonForeground}"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
                                             </Storyboard>
@@ -79,7 +81,6 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-
             </Style>
             <Style x:Key="CommonButtonStyle" TargetType="Button">
                 <Setter Property="Background" Value="Transparent"/>
@@ -156,6 +157,11 @@
                                     <VisualStateGroup x:Name="CommonStates">
                                         <VisualState x:Name="Normal">
                                             <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
+                                                                       Storyboard.TargetName="ContentPresenter">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{StaticResource ActionButtonForeground}" />
+                                                </ObjectAnimationUsingKeyFrames>
                                                 <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                             </Storyboard>
                                         </VisualState>

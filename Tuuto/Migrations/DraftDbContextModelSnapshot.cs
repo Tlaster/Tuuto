@@ -24,6 +24,8 @@ namespace Tuuto.Migrations
 
                     b.Property<int>("AccountId");
 
+                    b.Property<DateTime>("CreatedAt");
+
                     b.Property<string>("Domain");
 
                     b.Property<string>("ErrorMessage");

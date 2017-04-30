@@ -12,7 +12,8 @@ namespace Tuuto.Common
         void Report(AccountModel account, StatusModel status = null);
         void Reply(StatusModel model);
         void Expand(StatusModel model);
-        void AccountDetail(AccountModel model);
+        void AccountDetail(int id);
         void Mention(AccountModel model);
+        void HashTag(string tag);
     }
 }

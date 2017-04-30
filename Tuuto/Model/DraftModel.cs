@@ -11,6 +11,10 @@ namespace Tuuto.Model
 {
     class ReplyModel
     {
+        public ReplyModel()
+        {
+
+        }
         public ReplyModel(StatusModel replyStatus)
         {
             UserName = replyStatus.Account.UserName;
@@ -31,12 +35,21 @@ namespace Tuuto.Model
     }
     class DraftModel
     {
-        public DraftModel(StatusModel replyStatus)
+        public DraftModel() : this(-1, null)
+        {
+
+        }
+        public DraftModel(int id, StatusModel replyStatus)
         {
             if (replyStatus != null)
             {
                 ReplyStatus = new ReplyModel(replyStatus);
             }
+            if (id > 0)
+            {
+                Id = id;
+            }
+            CreatedAt = DateTime.UtcNow;
         }
 
         [Key]
@@ -52,5 +65,6 @@ namespace Tuuto.Model
         public string Domain { get; internal set; }
         public int AccountId { get; internal set; }
         public string ErrorMessage { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Tuuto.Model;
 namespace Tuuto.Migrations
 {
     [DbContext(typeof(DraftDbContext))]
-    [Migration("20170429034411_Init")]
+    [Migration("20170430075133_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,8 @@ namespace Tuuto.Migrations
                     b.Property<string>("AccessToken");
 
                     b.Property<int>("AccountId");
+
+                    b.Property<DateTime>("CreatedAt");
 
                     b.Property<string>("Domain");
 

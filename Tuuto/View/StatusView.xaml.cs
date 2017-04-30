@@ -20,6 +20,8 @@ using Microsoft.Toolkit.Uwp.UI.Animations;
 using Tuuto.Common.Helpers;
 using Mastodon.Api;
 using Microsoft.Toolkit.Uwp;
+using System.Text.RegularExpressions;
+using Tuuto.Common.Controls;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -71,10 +73,28 @@ namespace Tuuto.View
 
         private async void LinkClicked(object sender, Microsoft.Toolkit.Uwp.UI.Controls.LinkClickedEventArgs e)
         {
+#if DEBUG
+            Notification.Show(e.Link);
+#endif
             var url = new Uri(e.Link);
-            if (url.Host == new Uri(ViewModel.Account.Url).Host || url.Host == new Uri(Settings.CurrentAccountModel.Url).Host)
+            if (ViewModel.Mentions != null && ViewModel.Mentions.Any(item => item.Url == e.Link))
             {
-                //TODO:Parse content
+                App.StatusAcionHandler.AccountDetail(ViewModel.Mentions.FirstOrDefault(item => item.Url == e.Link).Id);
+            }
+            else if (url.Host == new Uri(ViewModel.Account.Url).Host || url.Host == new Uri(Settings.CurrentAccountModel.Url).Host)
+            {
+                var groups = Regex.Match(e.Link, "(http|https)://([^/]*)/([^/]*)/([^/]*)").Groups;
+                if (!groups[3].Success && groups[4].Success) await Launcher.LaunchUriAsync(url);
+                var value = System.Net.WebUtility.UrlDecode(groups[4].Value);
+                switch (groups[3].Value.ToLower())
+                {
+                    case "tags":
+                        App.StatusAcionHandler.HashTag(value);
+                        break;
+                    default:
+                        await Launcher.LaunchUriAsync(url);
+                        break;
+                }
             }
             else
             {
@@ -82,9 +102,9 @@ namespace Tuuto.View
             }
         }
 
-        private void AdaptiveGridView_ItemClick(object sender, ItemClickEventArgs e)
+        private async void AdaptiveGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            await new MediaViewDialog((ViewModel?.Reblog ?? ViewModel).MediaAttachments, (ViewModel?.Reblog ?? ViewModel).MediaAttachments.IndexOf(e.ClickedItem as AttachmentModel)).ShowAsync();
         }
 
         private void Reply_Click(object sender, RoutedEventArgs e)
@@ -145,7 +165,7 @@ namespace Tuuto.View
 
         private void Account_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.StatusAcionHandler.AccountDetail((ViewModel?.Reblog ?? ViewModel).Account);
+            App.StatusAcionHandler.AccountDetail((ViewModel?.Reblog ?? ViewModel).Account.Id);
         }
     }
 }
