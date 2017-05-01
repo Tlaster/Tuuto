@@ -21,14 +21,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Tuuto.Common.Controls
 {
-    [TemplatePart(Name = "HeaderClipper", Type = typeof(ContentControl))]
-    [TemplatePart(Name = "LeftHeaderPresenter", Type = typeof(ContentPresenter))]
-    [TemplatePart(Name = "PreviousButton", Type = typeof(Button))]
-    [TemplatePart(Name = "NextButton", Type = typeof(Button))]
-    [TemplatePart(Name = "RightHeaderPresenter", Type = typeof(ContentPresenter))]
-    [TemplatePart(Name = "splitView", Type = typeof(SplitView))]
-    [TemplatePart(Name = "FixedHeader", Type = typeof(ExAdaptiveGridView))]
-    [TemplatePart(Name = "PivotItemPresenter", Type = typeof(ItemsPresenter))]
     class PivotHeaderSplitterVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -50,6 +42,14 @@ namespace Tuuto.Common.Controls
             throw new NotImplementedException();
         }
     }
+    [TemplatePart(Name = "HeaderClipper", Type = typeof(ContentControl))]
+    [TemplatePart(Name = "LeftHeaderPresenter", Type = typeof(ContentPresenter))]
+    [TemplatePart(Name = "PreviousButton", Type = typeof(Button))]
+    [TemplatePart(Name = "NextButton", Type = typeof(Button))]
+    [TemplatePart(Name = "RightHeaderPresenter", Type = typeof(ContentPresenter))]
+    [TemplatePart(Name = "splitView", Type = typeof(SplitView))]
+    [TemplatePart(Name = "FixedHeader", Type = typeof(ExAdaptiveGridView))]
+    [TemplatePart(Name = "PivotItemPresenter", Type = typeof(ItemsPresenter))]
     public sealed partial class FixedPivot : Pivot
     {
         private bool _isSelectionChanged = false;
