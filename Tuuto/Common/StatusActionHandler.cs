@@ -47,7 +47,7 @@ namespace Tuuto.Common
 
         public void Report(AccountModel account, StatusModel status = null)
         {
-            throw new NotImplementedException();
+
         }
     }
 }
