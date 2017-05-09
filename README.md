@@ -1,8 +1,14 @@
 # Tuuto
 Yet another Mastodon client for Windows 10  
+PR is welcomed
 <a href="https://www.microsoft.com/store/apps/9nh0493n4tsb?ocid=badge"><img src="https://assets.windowsphone.com/f2f77ec7-9ba9-4850-9ebe-77e366d08adc/English_Get_it_Win_10_InvariantCulture_Default.png" height="104" alt="Get it on Windows 10" /></a>
 # Goal
 This client's goal is to provide a fully functional client for mastodon with good User Experience. And keep the client easy to use.  
+# Translation
+Help wanted
+- [x] English
+- [x] 简体中文
+- [x] 日本語
 # License
 ```
 MIT License
