@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Controls;
 using Tuuto.View;
 using Tuuto.ViewModel;
 using Tuuto.Common.Controls;
+using Tuuto.Pages;
 
 namespace Tuuto.Common
 {

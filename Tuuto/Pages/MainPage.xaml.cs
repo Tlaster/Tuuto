@@ -16,7 +16,7 @@ using Tuuto.Common;
 using Tuuto.ViewModel;
 using Tuuto.Common.Controls;
 
-namespace Tuuto.View
+namespace Tuuto.Pages
 {
     public sealed partial class MainPage : Page
     {

@@ -15,8 +15,10 @@ using Tuuto.Common;
 using Tuuto.Common.Helpers;
 using Tuuto.Model;
 using Microsoft.EntityFrameworkCore;
+using Tuuto.View;
+using Windows.UI.Xaml.Media;
 
-namespace Tuuto.View
+namespace Tuuto.Pages
 {
     public sealed partial class ExtendedSplash
     {
@@ -114,8 +116,22 @@ namespace Tuuto.View
                 _rootFrame.Navigate(typeof(LoginPage));
             }
 
-            Window.Current.Content = _rootFrame;
+            if (false)//Blur Effect
+            {
+                CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+                var rootGrid = new Grid();
+                var blurBorder = new Border();
+                rootGrid.Children.Add(blurBorder);
+                rootGrid.Children.Add(_rootFrame);
+                Window.Current.Content = rootGrid;
+                App.InitBlurEffect(blurBorder);
+            }
+            else
+            {
+                Window.Current.Content = _rootFrame;
+            }
             App.HandleBackButton(_rootFrame);
+
         }
 
         private async Task<bool> CheckForLogin()

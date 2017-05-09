@@ -14,8 +14,16 @@
                 <ResourceDictionary x:Key="Dark">
                     <SolidColorBrush x:Key="AppTheme" Color="#FFC282FF" />
                     <SolidColorBrush x:Key="ActionButtonForeground" Color="LightGray"/>
+                    <!--<Style TargetType="SplitView">
+                        <Setter Property="PaneBackground" Value="#7F171717"/>
+                    </Style>
+                    <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#7F000000"/>-->
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Light">
+                    <!--<Style TargetType="SplitView">
+                        <Setter Property="PaneBackground" Value="#7FF2F2F2"/>
+                    </Style>
+                    <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#7FFFFFFF"/>-->
                     <SolidColorBrush x:Key="AppTheme" Color="#FF4D1780" />
                     <SolidColorBrush x:Key="ActionButtonForeground" Color="{StaticResource SystemChromeBlackMediumLowColor}"/>
                 </ResourceDictionary>
