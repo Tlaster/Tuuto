@@ -1,0 +1,17 @@
+﻿<ContentPresenter
+    x:Class="Tuuto.Common.Controls.VersionSplitter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Tuuto.Common.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
+    xmlns:selectors="using:Tuuto.Common.Selectors"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <!--<ContentPresenter.ContentTemplateSelector>
+        <selectors:DataTemplateByVersionSelector Before="{x:Bind BeforeTemplate}" After="{x:Bind AfterTemplate}" Version="{x:Bind Version}"/>
+    </ContentPresenter.ContentTemplateSelector>-->
+</ContentPresenter>

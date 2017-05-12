@@ -69,7 +69,10 @@ namespace Tuuto
 
             deferral.Complete();
         }
-
+        public static void ReStart()
+        {
+            Window.Current.Content = new ExtendedSplash(null);
+        }
         internal static void InitBlurEffect(FrameworkElement element)
         {
             _compositor = ElementCompositionPreview

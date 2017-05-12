@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,8 +29,19 @@ namespace Tuuto.Common.Helpers
                     return DeviceFormFactorType.Other;
             }
         }
+        public static WindowsVersions GetCurrentVersion() 
+            => (WindowsVersions)SystemInformation.OperatingSystemVersion.Build;
+
     }
-    public enum DeviceFormFactorType
+    public enum WindowsVersions
+    {
+        RTM = 10240,
+        NovemberUpdate = 10586,
+        AnniversaryUpdate = 14393,
+        CreatorsUpdate = 15063,
+        Insider = 16193,
+    }
+    enum DeviceFormFactorType
     {
         Phone,
         Desktop,

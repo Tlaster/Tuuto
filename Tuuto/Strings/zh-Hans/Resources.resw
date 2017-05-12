@@ -123,6 +123,9 @@
   <data name="AccountView_FollowingCount.Text" xml:space="preserve">
     <value>正关注</value>
   </data>
+  <data name="AccountView_OpenInBrowser.Text" xml:space="preserve">
+    <value>在浏览器中打开</value>
+  </data>
   <data name="AccountView_StatusesCount.Text" xml:space="preserve">
     <value>嘟文</value>
   </data>
@@ -195,6 +198,12 @@
   <data name="SendDraft_OK" xml:space="preserve">
     <value>发布成功</value>
   </data>
+  <data name="SettingPage_Accounts.HeaderText" xml:space="preserve">
+    <value>用户管理</value>
+  </data>
+  <data name="SettingPage_AddUser.Content" xml:space="preserve">
+    <value>添加用户</value>
+  </data>
   <data name="SettingPage_Customize.HeaderText" xml:space="preserve">
     <value>个性化</value>
   </data>
@@ -209,6 +218,9 @@
   </data>
   <data name="SettingPage_Customize_IsDarkTheme.Header" xml:space="preserve">
     <value>使用黑色主题</value>
+  </data>
+  <data name="SettingPage_Logout.Content" xml:space="preserve">
+    <value>注销当前用户</value>
   </data>
   <data name="StatusAction_favourite" xml:space="preserve">
     <value>喜欢了您的嘟</value>

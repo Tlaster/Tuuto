@@ -16,7 +16,7 @@
     xmlns:controls="using:Tuuto.Common.Controls"
     xmlns:fa="using:FontAwesome.UWP">
     <UserControl.Resources>
-        <selectors:DataTemplateByVersionSelector x:Key="DataTemplateByVersionSelector" Version="AnniversaryUpdate" Before="{StaticResource SensitiveBlockerBackgroundBlackTemplate}" After="{StaticResource SensitiveBlockerBackgroundWithBlurTemplate}"/>
+        <!--<selectors:DataTemplateByVersionSelector x:Key="DataTemplateByVersionSelector" Version="AnniversaryUpdate" Before="{StaticResource SensitiveBlockerBackgroundBlackTemplate}" After="{StaticResource SensitiveBlockerBackgroundWithBlurTemplate}"/>-->
         <local:StatusReblogConverter x:Key="StatusReblogConverter"/>
         <MenuFlyout x:Key="MenuOthers" Placement="Bottom">
             <MenuFlyoutItem Click="{x:Bind Expand}" x:Uid="StatusViewMenu_Expand" Visibility="{x:Bind MenuExpandVisibility}"/>
@@ -97,7 +97,7 @@
                                     <Interactions:ChangePropertyAction TargetObject="{Binding ElementName=SensitiveBlocker}" PropertyName="Visibility" Value="Collapsed"/>
                                 </Interactions:EventTriggerBehavior>
                             </Interactivity:Interaction.Behaviors>
-                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ContentTemplateSelector="{StaticResource DataTemplateByVersionSelector}" />
+                            <controls:VersionSplitter Version="AnniversaryUpdate" BeforeTemplate="{StaticResource SensitiveBlockerBackgroundBlackTemplate}" AfterTemplate="{StaticResource SensitiveBlockerBackgroundWithBlurTemplate}"/>
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" RequestedTheme="Dark" Orientation="Vertical">
                                 <TextBlock HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" x:Uid="StatusView_Sensitive"/>
                                 <TextBlock HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" x:Uid="StatusView_ClickToView"/>

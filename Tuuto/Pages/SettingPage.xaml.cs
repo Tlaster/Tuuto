@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Tuuto.Common;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,34 @@ namespace Tuuto.Pages
     /// </summary>
     public sealed partial class SettingPage : Page
     {
+        public int SelectedUserIndex
+        {
+            get => Settings.SelectedUserIndex;
+            set { Settings.SelectedUserIndex = value; Window.Current.Content = new ExtendedSplash(null); }
+        }
         public SettingPage()
         {
             this.InitializeComponent();
+        }
+
+        private void GridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            App.ReStart();
+        }
+
+        void AddUser()
+        {
+            Frame.Navigate(typeof(LoginPage));
+        }
+        
+        void Logout()
+        {
+            var account = Settings.Account.ToList();
+            account.RemoveAt(Settings.SelectedUserIndex);
+            Settings.Account = account.ToArray();
+            Settings.SelectedUserIndex = 0;
+            App.ReStart();
         }
     }
 }

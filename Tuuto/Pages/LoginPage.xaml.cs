@@ -20,6 +20,7 @@ using Mastodon.Api;
 using Tuuto.Common;
 using Tuuto.Common.Controls;
 using Tuuto.Common.Helpers;
+using Windows.UI.Core;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -34,6 +35,13 @@ namespace Tuuto.Pages
         public LoginPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            Frame.BackStack.Clear();
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         public async void LoginClick()

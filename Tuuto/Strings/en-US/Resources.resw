@@ -123,6 +123,9 @@
   <data name="AccountView_FollowingCount.Text" xml:space="preserve">
     <value>Following</value>
   </data>
+  <data name="AccountView_OpenInBrowser.Text" xml:space="preserve">
+    <value>Open in browser</value>
+  </data>
   <data name="AccountView_StatusesCount.Text" xml:space="preserve">
     <value>Statuses</value>
   </data>
@@ -195,6 +198,12 @@
   <data name="SendDraft_OK" xml:space="preserve">
     <value>Toot!</value>
   </data>
+  <data name="SettingPage_Accounts.HeaderText" xml:space="preserve">
+    <value>Accounts</value>
+  </data>
+  <data name="SettingPage_AddUser.Content" xml:space="preserve">
+    <value>Add a user</value>
+  </data>
   <data name="SettingPage_Customize.HeaderText" xml:space="preserve">
     <value>Customize</value>
   </data>
@@ -209,6 +218,9 @@
   </data>
   <data name="SettingPage_Customize_IsDarkTheme.Header" xml:space="preserve">
     <value>Enable Dark Theme</value>
+  </data>
+  <data name="SettingPage_Logout.Content" xml:space="preserve">
+    <value>Log out</value>
   </data>
   <data name="StatusAction_favourite" xml:space="preserve">
     <value>favourited your status</value>

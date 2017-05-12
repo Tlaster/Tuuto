@@ -2,14 +2,36 @@
     x:Class="Tuuto.Pages.SettingPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Tuuto.View"
+    xmlns:local="using:Tuuto.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Tuuto.Common.Controls"
+    xmlns:extensions="using:Tuuto.Common.Extensions"
+    xmlns:view="using:Tuuto.View"
     xmlns:common="using:Tuuto.Common"
     mc:Ignorable="d">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:FixedPivot>
+            <controls:FixedPivotItem HeaderIcon="User" x:Uid="SettingPage_Accounts">
+                <ListView SelectionMode="Single" SelectedIndex="{x:Bind SelectedUserIndex,Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource Settings},Path=Account}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <view:UserAccountsView ViewModel="{Binding}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <StackPanel>
+                            <Button HorizontalAlignment="Stretch" x:Uid="SettingPage_AddUser" Margin="4" Click="{x:Bind AddUser}"/>
+                            <Button HorizontalAlignment="Stretch" x:Uid="SettingPage_Logout" Margin="4" Click="{x:Bind Logout}"/>
+                        </StackPanel>
+                    </ListView.Footer>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </controls:FixedPivotItem>
             <controls:FixedPivotItem HeaderIcon="Wrench" x:Uid="SettingPage_Customize">
                 <StackPanel>
                     <ToggleSwitch x:Uid="SettingPage_Customize_IsDarkTheme" IsOn="{Binding Source={StaticResource Settings},Path=IsDarkTheme,Mode=TwoWay}" Style="{StaticResource SingleLineToggleSwitch}"/>

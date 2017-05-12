@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Tuuto.Common;
 using Tuuto.Common.Controls;
 using Tuuto.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -108,6 +110,37 @@ namespace Tuuto.View
         {
             await Accounts.UnFollow(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
             RefreshRelationshipRequested?.Invoke(this, null);
+        }
+        async void OpenInBrowser()
+        {
+            await Launcher.LaunchUriAsync(new Uri(Account.Url));
+        }
+
+        private async void MarkdownTextBlock_LinkClicked(object sender, Microsoft.Toolkit.Uwp.UI.Controls.LinkClickedEventArgs e)
+        {
+#if DEBUG
+            Notification.Show(e.Link);
+#endif
+            var url = new Uri(e.Link);
+            if (url.Host == new Uri(Account.Url).Host || url.Host == new Uri(Settings.CurrentAccountModel.Url).Host)
+            {
+                var groups = Regex.Match(e.Link, "(http|https)://([^/]*)/([^/]*)/([^/]*)").Groups;
+                if (!groups[3].Success && groups[4].Success) await Launcher.LaunchUriAsync(url);
+                var value = System.Net.WebUtility.UrlDecode(groups[4].Value);
+                switch (groups[3].Value.ToLower())
+                {
+                    case "tags":
+                        App.StatusAcionHandler.HashTag(value);
+                        break;
+                    default:
+                        await Launcher.LaunchUriAsync(url);
+                        break;
+                }
+            }
+            else
+            {
+                await Launcher.LaunchUriAsync(url);
+            }
         }
     }
 }

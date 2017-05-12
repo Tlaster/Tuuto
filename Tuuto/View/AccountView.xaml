@@ -43,7 +43,7 @@
                         </Ellipse>
                         <TextBlock HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Account.DisplayName,Mode=OneWay}"/>
                         <TextBlock IsTextSelectionEnabled="True" Foreground="{StaticResource HyperlinkButtonForeground}" Text="{x:Bind Account.Acct,Mode=OneWay,Converter={StaticResource StringFormatConverter},ConverterParameter='@{0}'}"/>
-                        <toolkit:MarkdownTextBlock HorizontalAlignment="Center" Foreground="LightGray" Text="{x:Bind Account.Note,Mode=OneWay, Converter={StaticResource HtmlToMarkdownConvert}}"/>
+                        <toolkit:MarkdownTextBlock LinkClicked="MarkdownTextBlock_LinkClicked" HorizontalAlignment="Center" Foreground="LightGray" Text="{x:Bind Account.Note,Mode=OneWay, Converter={StaticResource HtmlToMarkdownConvert}}"/>
                     </StackPanel>
                     <Grid Visibility="{x:Bind Relationship,Mode=OneWay,Converter={StaticResource NullOrEmptyToVisibilityConverter}}">
                         <Grid Padding="16" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{x:Bind Account.Id,Converter={StaticResource IsMeToVisibilityConverter},ConverterParameter=true}" >
@@ -79,6 +79,8 @@
                             <MenuFlyout Placement="Bottom">
                                 <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mention}"/>
                                 <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Click="{x:Bind OpenInBrowser}" x:Uid="AccountView_OpenInBrowser"/>
+                                <MenuFlyoutSeparator/>
                                 <MenuFlyoutItem Visibility="{x:Bind Relationship.Muting,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Click="{x:Bind Mute}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mute}" />
                                 <MenuFlyoutItem Visibility="{x:Bind Relationship.Muting,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind UnMute}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_UnMute}" />
                                 <MenuFlyoutItem Visibility="{x:Bind Relationship.Blocking,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Click="{x:Bind Block}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Block}" />
@@ -92,6 +94,8 @@
                         <Button.Flyout>
                             <MenuFlyout Placement="Bottom">
                                 <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mention}"/>
+                                <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Click="{x:Bind OpenInBrowser}" x:Uid="AccountView_OpenInBrowser"/>
                             </MenuFlyout>
                         </Button.Flyout>
                     </Button>
