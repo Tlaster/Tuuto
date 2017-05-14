@@ -22,6 +22,7 @@ namespace Tuuto.Common.Controls
 {
     [TemplatePart(Name = "FailedView", Type = typeof(Border))]
     [TemplatePart(Name = "EmptyView", Type = typeof(Border))]
+    [TemplatePart(Name = "RefreshView", Type = typeof(Border))]
     public partial class ExListView : PullToRefreshListView
     {
         //TODO: Show progressbar
@@ -33,7 +34,19 @@ namespace Tuuto.Common.Controls
 
         // Using a DependencyProperty as the backing store for IsLoading.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsLoadingProperty =
-            DependencyProperty.Register(nameof(IsLoading), typeof(bool), typeof(ExListView), new PropertyMetadata(false));
+            DependencyProperty.Register(nameof(IsLoading), typeof(bool), typeof(ExListView), new PropertyMetadata(false, OnIsLoadingChanged));
+
+        private static void OnIsLoadingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ExListView).OnIsLoadingChanged((bool)e.NewValue);
+        }
+
+        private void OnIsLoadingChanged(bool newValue)
+        {
+            CheckForEmptyView();
+            if (_refreshView != null)
+                _refreshView.Visibility = newValue && !Items.Any() ? Visibility.Visible : Visibility.Collapsed;
+        }
 
         public bool IsError
         {
@@ -57,12 +70,14 @@ namespace Tuuto.Common.Controls
 
         private Border _failedView;
         private Border _emptyView;
+        private Border _refreshView;
 
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
             _emptyView = GetTemplateChild("EmptyView") as Border;
             _failedView = GetTemplateChild("FailedView") as Border;
+            _refreshView = GetTemplateChild("RefreshView") as Border;
         }
         
 
@@ -74,8 +89,17 @@ namespace Tuuto.Common.Controls
 
         private void Items_VectorChanged(IObservableVector<object> sender, IVectorChangedEventArgs @event)
         {
+            CheckForEmptyView();
+        }
+
+        private void CheckForEmptyView()
+        {
+            var a = Items.Any() && !IsError;
+            var v = !IsLoading;
             if (_emptyView != null)
-                _emptyView.Visibility = sender.Any() && !IsError || !IsLoading ? Visibility.Collapsed : Visibility.Visible;
+            {
+                _emptyView.Visibility = Items.Any() && !IsError || IsLoading ? Visibility.Collapsed : Visibility.Visible;
+            }
         }
     }
 }

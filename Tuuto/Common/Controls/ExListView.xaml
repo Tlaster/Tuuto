@@ -50,6 +50,9 @@
                             <TextBlock Foreground="Gray" HorizontalAlignment="Center" x:Uid="ExListView_Empty"/>
                         </StackPanel>
                     </Border>
+                    <Border x:Name="RefreshView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ProgressRing IsActive="{TemplateBinding IsLoading}" Height="50" Width="50"/>
+                    </Border>
                     <Border x:Name="FailedView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Vertical">
                             <fa:FontAwesome Foreground="Gray" FontSize="50" Icon="FrownOutline"/>

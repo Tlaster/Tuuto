@@ -51,8 +51,8 @@
                     <controls:SplitViewButton Click="{x:Bind SettingClick}" Icon="Cog" x:Uid="MainPage_Setting"/>
                 </StackPanel>
             </controls:FixedPivot.SplitViewPaneButtomContent>
-            <controls:FixedPivotItem x:Name="pivotitem" RefreshRequested="{x:Bind ViewModel.RefreshTimelineHome}" HeaderIcon="Home" x:Uid="MainPage_Home">
-                <controls:ExListView IsError="{x:Bind ViewModel.TimelineHome.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.RefreshTimelineHome}" ItemsSource="{x:Bind ViewModel.TimelineHome}" IsLoading="{x:Bind ViewModel.TimelineHome.IsLoading,Mode=OneWay}">
+            <controls:FixedPivotItem x:Name="pivotitem" RefreshRequested="{x:Bind ViewModel.TimelineHome.Refresh}" HeaderIcon="Home" x:Uid="MainPage_Home">
+                <controls:ExListView IsError="{x:Bind ViewModel.TimelineHome.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.TimelineHome.Refresh}" ItemsSource="{x:Bind ViewModel.TimelineHome}" IsLoading="{x:Bind ViewModel.TimelineHome.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:StatusModel">
                             <local:StatusView ViewModel="{x:Bind}"/>
@@ -60,8 +60,8 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.RefreshNotification}" HeaderIcon="Bell" x:Uid="MainPage_Notifications">
-                <controls:ExListView IsError="{x:Bind ViewModel.Notification.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.RefreshNotification}" ItemsSource="{x:Bind ViewModel.Notification}" IsLoading="{x:Bind ViewModel.Notification.IsLoading,Mode=OneWay}">
+            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.Notification.Refresh}" HeaderIcon="Bell" x:Uid="MainPage_Notifications">
+                <controls:ExListView IsError="{x:Bind ViewModel.Notification.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.Notification.Refresh}" ItemsSource="{x:Bind ViewModel.Notification}" IsLoading="{x:Bind ViewModel.Notification.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:NotificationModel">
                             <local:NotificationView ViewModel="{x:Bind}"/>
@@ -69,8 +69,8 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem Visibility="{Binding Source={StaticResource Settings},Path=EnableLocalTimeline,Converter={StaticResource BoolToVisibilityConverter}}" RefreshRequested="{x:Bind ViewModel.RefreshTimelineLocal}" HeaderIcon="Users" x:Uid="MainPage_Local">
-                <controls:ExListView IsError="{x:Bind ViewModel.TimelineLocal.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.RefreshTimelineLocal}" ItemsSource="{x:Bind ViewModel.TimelineLocal}" IsLoading="{x:Bind ViewModel.TimelineLocal.IsLoading,Mode=OneWay}">
+            <controls:FixedPivotItem Visibility="{Binding Source={StaticResource Settings},Path=EnableLocalTimeline,Converter={StaticResource BoolToVisibilityConverter}}" RefreshRequested="{x:Bind ViewModel.TimelineLocal.Refresh}" HeaderIcon="Users" x:Uid="MainPage_Local">
+                <controls:ExListView IsError="{x:Bind ViewModel.TimelineLocal.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.TimelineLocal.Refresh}" ItemsSource="{x:Bind ViewModel.TimelineLocal}" IsLoading="{x:Bind ViewModel.TimelineLocal.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:StatusModel">
                             <local:StatusView ViewModel="{x:Bind}"/>
@@ -78,8 +78,8 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem Visibility="{Binding Source={StaticResource Settings},Path=EnableFederatedTimeline,Converter={StaticResource BoolToVisibilityConverter}}" RefreshRequested="{x:Bind ViewModel.RefreshTimelineFederated}" HeaderIcon="Globe" x:Uid="MainPage_Federated">
-                <controls:ExListView IsError="{x:Bind ViewModel.TimelineFederated.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.RefreshTimelineFederated}" ItemsSource="{x:Bind ViewModel.TimelineFederated}" IsLoading="{x:Bind ViewModel.TimelineFederated.IsLoading,Mode=OneWay}">
+            <controls:FixedPivotItem Visibility="{Binding Source={StaticResource Settings},Path=EnableFederatedTimeline,Converter={StaticResource BoolToVisibilityConverter}}" RefreshRequested="{x:Bind ViewModel.TimelineFederated.Refresh}" HeaderIcon="Globe" x:Uid="MainPage_Federated">
+                <controls:ExListView IsError="{x:Bind ViewModel.TimelineFederated.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.TimelineFederated.Refresh}" ItemsSource="{x:Bind ViewModel.TimelineFederated}" IsLoading="{x:Bind ViewModel.TimelineFederated.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:StatusModel">
                             <local:StatusView ViewModel="{x:Bind}"/>

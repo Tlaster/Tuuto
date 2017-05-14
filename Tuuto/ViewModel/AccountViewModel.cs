@@ -8,21 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tuuto.Common;
-using Tuuto.DataSource;
 
 namespace Tuuto.ViewModel
 {
     public class AccountViewModel : INotifyPropertyChanged
     {
-        public ExIncrementalLoadingCollection<AccountStatusSource, StatusModel> AccountTimeline { get; } 
+        public ArrayIncrementalLoading<StatusModel> AccountTimeline { get; } 
         public NotifyTask<AccountModel> Account { get; private set; }
         public NotifyTask<RelationshipModel> Relationship { get; private set; }
         public int Id { get; }
+        public bool OnlyMedia { get; set; } = false;
+        public bool ExcludeReplies { get; set; } = false;
 
         public AccountViewModel(int id)
         {
             Id = id;
-            AccountTimeline = new ExIncrementalLoadingCollection<AccountStatusSource, StatusModel>(new AccountStatusSource(Id));
+            AccountTimeline = new ArrayIncrementalLoading<StatusModel>((max_id) => Accounts.Statuses(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, id, max_id: max_id, only_media: OnlyMedia, exclude_replies: ExcludeReplies));
             RefreshAccount();
             RefreshRelationship();
         }
@@ -31,7 +32,7 @@ namespace Tuuto.ViewModel
 
         public void Refresh()
         {
-            AccountTimeline.RefreshAsync();
+            AccountTimeline.Refresh();
             RefreshAccount();
             RefreshRelationship();
         }

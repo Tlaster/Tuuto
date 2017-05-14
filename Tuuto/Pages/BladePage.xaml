@@ -48,7 +48,7 @@
             </toolkit:BladeItem>
             <toolkit:BladeItem>
                 <StackPanel>
-                    <controls:ExListView IsError="{x:Bind ViewModel.TimelineHome.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.RefreshTimelineHome}" ItemsSource="{x:Bind ViewModel.TimelineHome}" IsLoading="{x:Bind ViewModel.TimelineHome.IsLoading,Mode=OneWay}">
+                    <controls:ExListView IsError="{x:Bind ViewModel.TimelineHome.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.TimelineHome.Refresh}" ItemsSource="{x:Bind ViewModel.TimelineHome}" IsLoading="{x:Bind ViewModel.TimelineHome.IsLoading,Mode=OneWay}">
                         <controls:ExListView.ItemTemplate>
                             <DataTemplate x:DataType="model:StatusModel">
                                 <local:StatusView ViewModel="{x:Bind}"/>
@@ -67,7 +67,7 @@
                     <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
                         <controls:SplitViewButton x:Uid="BladePage_Notification" Style="{StaticResource CommonButtonStyle}" Icon="Bell"/>
                     </Grid>
-                    <controls:ExListView IsError="{x:Bind ViewModel.Notification.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.RefreshNotification}" ItemsSource="{x:Bind ViewModel.Notification}" IsLoading="{x:Bind ViewModel.Notification.IsLoading,Mode=OneWay}">
+                    <controls:ExListView IsError="{x:Bind ViewModel.Notification.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.Notification.Refresh}" ItemsSource="{x:Bind ViewModel.Notification}" IsLoading="{x:Bind ViewModel.Notification.IsLoading,Mode=OneWay}">
                         <controls:ExListView.ItemTemplate>
                             <DataTemplate x:DataType="model:NotificationModel">
                                 <local:NotificationView ViewModel="{x:Bind}"/>
