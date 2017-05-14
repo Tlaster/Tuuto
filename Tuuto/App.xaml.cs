@@ -19,11 +19,16 @@ using Windows.UI.Composition;
 using System.Numerics;
 using Microsoft.Toolkit.Uwp.UI.Animations;
 using Tuuto.Pages;
+using Tuuto.Common.Notifications;
+using Windows.ApplicationModel.Background;
+using Microsoft.Toolkit.Uwp;
 
 namespace Tuuto
 {
     sealed partial class App : Application
     {
+        public const string BackgroundTask_Notification = nameof(BackgroundTask_Notification);
+
         private static Compositor _compositor;
         private static SpriteVisual _hostSprite;
 
@@ -32,7 +37,19 @@ namespace Tuuto
         {
             InitializeComponent();
             Suspending += OnSuspending;
+            EnteredBackground += App_EnteredBackground;
+            LeavingBackground += App_LeavingBackground;
             RequestedTheme = Settings.IsDarkTheme ? ApplicationTheme.Dark : ApplicationTheme.Light;
+        }
+
+        private void App_LeavingBackground(object sender, LeavingBackgroundEventArgs e)
+        {
+            BackgroundTaskHelper.Unregister(BackgroundTask_Notification);
+        }
+
+        private void App_EnteredBackground(object sender, EnteredBackgroundEventArgs e)
+        {
+            BackgroundTaskHelper.Register(BackgroundTask_Notification, new TimeTrigger(15, false));
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
@@ -40,7 +57,7 @@ namespace Tuuto
             var rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null && e.PreviousExecutionState != ApplicationExecutionState.Running)
             {
-                if (DeviceHelper.GetDeviceFormFactorType() == DeviceFormFactorType.Phone)
+                if (DeviceHelper.DeviceFormFactorType == DeviceFormFactorType.Phone)
                 {
                     StatusBar.GetForCurrentView().BackgroundColor = ((SolidColorBrush) Resources["AppTheme"]).Color;
                     StatusBar.GetForCurrentView().BackgroundOpacity = 1d;
@@ -58,9 +75,18 @@ namespace Tuuto
             Window.Current.Activate();
         }
 
-        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        protected override void OnBackgroundActivated(BackgroundActivatedEventArgs args)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            base.OnBackgroundActivated(args);
+            if (DeviceHelper.CurrentVersion < WindowsVersions.AnniversaryUpdate) return;
+            switch (args.TaskInstance.Task.Name)
+            {
+                case BackgroundTask_Notification:
+                    new NotificationBackgroundTask().Run(args.TaskInstance);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void OnSuspending(object sender, SuspendingEventArgs e)
@@ -102,7 +128,7 @@ namespace Tuuto
                     e.Handled = true;
                     rootFrame.GoBack();
                 }
-                else if (DeviceHelper.GetDeviceFormFactorType() == DeviceFormFactorType.Phone)
+                else if (DeviceHelper.DeviceFormFactorType == DeviceFormFactorType.Phone)
                 {
                     Current.Exit();
                 }

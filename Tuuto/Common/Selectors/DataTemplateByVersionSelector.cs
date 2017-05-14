@@ -18,7 +18,7 @@ namespace Tuuto.Common.Selectors
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            if (DeviceHelper.GetCurrentVersion() < Version)
+            if (DeviceHelper.CurrentVersion < Version)
             {
                 return Before;
             }

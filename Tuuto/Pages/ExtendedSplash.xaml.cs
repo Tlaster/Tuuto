@@ -17,6 +17,8 @@ using Tuuto.Model;
 using Microsoft.EntityFrameworkCore;
 using Tuuto.View;
 using Windows.UI.Xaml.Media;
+using FluentScheduler;
+using Tuuto.Common.Notifications;
 
 namespace Tuuto.Pages
 {
@@ -58,7 +60,7 @@ namespace Tuuto.Pages
         {
             extendedSplashImage.SetValue(Canvas.LeftProperty, _splashImageRect.Left);
             extendedSplashImage.SetValue(Canvas.TopProperty, _splashImageRect.Top);
-            if (DeviceHelper.GetDeviceFormFactorType() == DeviceFormFactorType.Phone)
+            if (DeviceHelper.DeviceFormFactorType == DeviceFormFactorType.Phone)
             {
                 extendedSplashImage.Height = _splashImageRect.Height / _scaleFactor;
                 extendedSplashImage.Width = _splashImageRect.Width / _scaleFactor;
@@ -98,6 +100,8 @@ namespace Tuuto.Pages
             if (await CheckForLogin())
             {
                 App.StatusAcionHandler = new StatusActionHandler(_rootFrame);
+                JobManager.Initialize(new NotificationRegistry());
+
                 _rootFrame.Navigate(typeof(MainPage));
 
                 //TODO: Currently BladeView does not perform well, do not trying to use it

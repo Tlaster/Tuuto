@@ -142,7 +142,10 @@
     <Compile Include="Common\Extensions\XamlExtensions.cs" />
     <Compile Include="Common\Helpers\ExVisualTreeHelper.cs" />
     <Compile Include="Common\IStatusActionHandler.cs" />
-    <Compile Include="Common\NotificationJob.cs" />
+    <Compile Include="Common\Notifications\NotificationBackgroundTask.cs" />
+    <Compile Include="Common\Notifications\NotificationHelper.cs" />
+    <Compile Include="Common\Notifications\NotificationJob.cs" />
+    <Compile Include="Common\Notifications\NotificationRegistry.cs" />
     <Compile Include="Common\Selectors\DataTemplateByVersionSelector.cs" />
     <Compile Include="Common\Selectors\NotificationViewSelector.cs" />
     <Compile Include="Common\StatusActionHandler.cs" />

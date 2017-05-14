@@ -41,6 +41,12 @@ namespace Tuuto.Common
             set => SetSetting(nameof(IsDarkTheme), value);
         }
 
+        public static DateTime LastNotify
+        {
+            get => DateTime.Parse(GetSetting(nameof(LastNotify), DateTime.UtcNow.ToString()));
+            set => SetSetting(nameof(LastNotify), value.ToString());
+        }
+
         public static (string Domain, string AccessToken, int Id)[] Account
         {
             get => GetListSetting<string>(nameof(Account)).Select(item => (item.Split(';')[0], item.Split(';')[1], int.Parse(item.Split(';')[2]))).ToArray();

@@ -11,26 +11,29 @@ namespace Tuuto.Common.Helpers
 {
     internal static class DeviceHelper
     {
-        public static DeviceFormFactorType GetDeviceFormFactorType()
+        public static DeviceFormFactorType DeviceFormFactorType
         {
-            switch (AnalyticsInfo.VersionInfo.DeviceFamily)
+            get
             {
-                case "Windows.Mobile":
-                    return DeviceFormFactorType.Phone;
-                case "Windows.Desktop":
-                    return UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse
-                        ? DeviceFormFactorType.Desktop
-                        : DeviceFormFactorType.Tablet;
-                case "Windows.Universal":
-                    return DeviceFormFactorType.IoT;
-                case "Windows.Team":
-                    return DeviceFormFactorType.SurfaceHub;
-                default:
-                    return DeviceFormFactorType.Other;
+                switch (AnalyticsInfo.VersionInfo.DeviceFamily)
+                {
+                    case "Windows.Mobile":
+                        return DeviceFormFactorType.Phone;
+                    case "Windows.Desktop":
+                        return UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse
+                            ? DeviceFormFactorType.Desktop
+                            : DeviceFormFactorType.Tablet;
+                    case "Windows.Universal":
+                        return DeviceFormFactorType.IoT;
+                    case "Windows.Team":
+                        return DeviceFormFactorType.SurfaceHub;
+                    default:
+                        return DeviceFormFactorType.Other;
+                }
             }
         }
-        public static WindowsVersions GetCurrentVersion() 
-            => (WindowsVersions)SystemInformation.OperatingSystemVersion.Build;
+
+        public static WindowsVersions CurrentVersion => (WindowsVersions)SystemInformation.OperatingSystemVersion.Build;
 
     }
     public enum WindowsVersions

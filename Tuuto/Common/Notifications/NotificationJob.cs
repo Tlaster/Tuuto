@@ -5,8 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mastodon.Api;
+using Microsoft.Toolkit.Uwp.Notifications;
+using Mastodon.Model;
+using Tuuto.Common.Helpers;
+using Windows.UI.Notifications;
 
-namespace Tuuto.Common
+namespace Tuuto.Common.Notifications
 {
     class NotificationJob : IJob
     {
@@ -16,8 +20,9 @@ namespace Tuuto.Common
         }
         async Task ExecuteAsync()
         {
-            var notification = await Notifications.GetSingle(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Settings.CurrentAccount.Id);
-
+            await NotificationHelper.CheckForNotification();
         }
+
+
     }
 }

@@ -223,7 +223,7 @@
     <value>注销当前用户</value>
   </data>
   <data name="StatusAction_favourite" xml:space="preserve">
-    <value>喜欢了您的嘟</value>
+    <value>喜欢了您的嘟文</value>
   </data>
   <data name="StatusAction_follow" xml:space="preserve">
     <value>关注了您</value>

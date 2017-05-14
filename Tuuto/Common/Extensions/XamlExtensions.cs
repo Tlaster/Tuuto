@@ -29,7 +29,7 @@ namespace Tuuto.Common.Extensions
         {
             if (d is UIElement)
             {
-                (d as UIElement).Visibility = (WindowsVersions)e.NewValue > DeviceHelper.GetCurrentVersion() ? Visibility.Collapsed : Visibility.Visible;
+                (d as UIElement).Visibility = (WindowsVersions)e.NewValue > DeviceHelper.CurrentVersion ? Visibility.Collapsed : Visibility.Visible;
             }
         }
         
@@ -51,7 +51,7 @@ namespace Tuuto.Common.Extensions
         {
             if (d is UIElement)
             {
-                (d as UIElement).Visibility = (WindowsVersions)e.NewValue <= DeviceHelper.GetCurrentVersion() ? Visibility.Collapsed : Visibility.Visible;
+                (d as UIElement).Visibility = (WindowsVersions)e.NewValue <= DeviceHelper.CurrentVersion ? Visibility.Collapsed : Visibility.Visible;
             }
         }
     }
