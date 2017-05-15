@@ -99,21 +99,16 @@ namespace Tuuto.Pages
 
             if (await CheckForLogin())
             {
-                App.StatusAcionHandler = new StatusActionHandler(_rootFrame);
                 JobManager.Initialize(new NotificationRegistry());
-
-                _rootFrame.Navigate(typeof(MainPage));
-
-                //TODO: Currently BladeView does not perform well, do not trying to use it
-                //if (Settings.EnableBladeView)
-                //{
-                //    _rootFrame.Navigate(typeof(BladePage));
-                //}
-                //else
-                //{
-                //    App.StatusAcionHandler = new StatusActionHandler(_rootFrame);
-                //    _rootFrame.Navigate(typeof(MainPage));
-                //}
+                if (Settings.EnableBladeView)
+                {
+                    _rootFrame.Navigate(typeof(BladePage));
+                }
+                else
+                {
+                    App.StatusAcionHandler = new StatusActionHandler(_rootFrame);
+                    _rootFrame.Navigate(typeof(MainPage));
+                }
             }
             else
             {

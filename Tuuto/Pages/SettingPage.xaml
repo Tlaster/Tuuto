@@ -35,7 +35,7 @@
             <controls:FixedPivotItem HeaderIcon="Wrench" HeaderText="{CustomResource Customize}">
                 <StackPanel>
                     <ToggleSwitch Header="{CustomResource IsDarkTheme}" IsOn="{Binding Source={StaticResource Settings},Path=IsDarkTheme,Mode=TwoWay}" Style="{StaticResource SingleLineToggleSwitch}"/>
-                    <ToggleSwitch Visibility="Collapsed" x:Name="EnableBladeViewSwitch" IsOn="{Binding Source={StaticResource Settings},Path=EnableBladeView,Mode=TwoWay}" Header="{CustomResource EnableBladeView}" Style="{StaticResource SingleLineToggleSwitch}"  />
+                    <ToggleSwitch x:Name="EnableBladeViewSwitch" IsOn="{Binding Source={StaticResource Settings},Path=EnableBladeView,Mode=TwoWay}" Header="{CustomResource EnableBladeView}" Style="{StaticResource SingleLineToggleSwitch}"  />
                     <StackPanel Visibility="{Binding ElementName=EnableBladeViewSwitch,Path=IsOn,Converter={StaticResource BoolToVisibilityConverter}}">
                         
                     </StackPanel>

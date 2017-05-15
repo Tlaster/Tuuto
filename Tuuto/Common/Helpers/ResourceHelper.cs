@@ -11,7 +11,7 @@ namespace Tuuto.Common.Helpers
     {
         public static string GetString(string resource)
         {
-            return ResourceLoader.GetForCurrentView().GetString(resource);
+            return ResourceLoader.GetForViewIndependentUse().GetString(resource);
         }
     }
 }

@@ -8,21 +8,24 @@
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:fa="using:FontAwesome.UWP"
     xmlns:controls="using:Tuuto.Common.Controls"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:model="using:Mastodon.Model"
     mc:Ignorable="d">
     <Page.Resources>
-        <Style TargetType="toolkit:BladeItem">
+        <Style TargetType="toolkit:BladeItem" x:Key="BaseBladeStyle">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="IsOpen" Value="True"/>
             <Setter Property="Width" Value="400"/>
             <Setter Property="TitleBarVisibility" Value="Collapsed"/>
+            <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
         </Style>
     </Page.Resources>
     <Grid>
-        <toolkit:BladeView BladeMode="Normal">
-            <toolkit:BladeItem>
-                <StackPanel Padding="8">
-                    <Grid Margin="8">
+        <toolkit:BladeView Background="#19000000" BladeMode="Normal">
+            <toolkit:BladeItem Style="{StaticResource BaseBladeStyle}">
+                <StackPanel>
+                    <Grid Padding="10" Background="{StaticResource SystemControlHighlightChromeHighBrush}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -34,8 +37,13 @@
                         <Button HorizontalAlignment="Stretch" Grid.Column="1" Style="{StaticResource CommonButtonStyle}">
                             <fa:FontAwesome Icon="Globe"/>
                         </Button>
-                        <Button HorizontalAlignment="Stretch" Grid.Column="2" Style="{StaticResource CommonButtonStyle}">
+                        <Button HorizontalAlignment="Stretch" x:Name="SettingButton" Grid.Column="2" Style="{StaticResource CommonButtonStyle}">
                             <fa:FontAwesome Icon="Cog"/>
+                            <Interactivity:Interaction.Behaviors>
+                                <Interactions:EventTriggerBehavior EventName="Click" SourceObject="{Binding ElementName=SettingButton}">
+                                    <Interactions:NavigateToPageAction TargetPage="Tuuto.Pages.SettingPage"/>
+                                </Interactions:EventTriggerBehavior>
+                            </Interactivity:Interaction.Behaviors>
                         </Button>
                     </Grid>
                     <AutoSuggestBox Margin="4">
@@ -43,44 +51,68 @@
                             <fa:FontAwesome Icon="Search"/>
                         </AutoSuggestBox.QueryIcon>
                     </AutoSuggestBox>
-                    <local:PostingTootView CanClose="False" Margin="4"/>
+                    <local:PostingTootView x:Name="postingTootView" CanClose="False" Margin="4"/>
                 </StackPanel>
             </toolkit:BladeItem>
-            <toolkit:BladeItem>
-                <StackPanel>
-                    <controls:ExListView IsError="{x:Bind ViewModel.TimelineHome.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.TimelineHome.Refresh}" ItemsSource="{x:Bind ViewModel.TimelineHome}" IsLoading="{x:Bind ViewModel.TimelineHome.IsLoading,Mode=OneWay}">
-                        <controls:ExListView.ItemTemplate>
-                            <DataTemplate x:DataType="model:StatusModel">
-                                <local:StatusView ViewModel="{x:Bind}"/>
-                            </DataTemplate>
-                        </controls:ExListView.ItemTemplate>
-                        <controls:ExListView.Header>
+            <toolkit:BladeItem Style="{StaticResource BaseBladeStyle}">
+                <controls:ExListView x:Name="TimelineHomeListView" IsError="{x:Bind ViewModel.TimelineHome.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.TimelineHome.Refresh}" ItemsSource="{x:Bind ViewModel.TimelineHome}" IsLoading="{x:Bind ViewModel.TimelineHome.IsLoading,Mode=OneWay}">
+                    <controls:ExListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:StatusModel">
+                            <local:StatusView ViewModel="{x:Bind}"/>
+                        </DataTemplate>
+                    </controls:ExListView.ItemTemplate>
+                    <controls:ExListView.Header>
+                        <toolkit:ScrollHeader TargetListViewBase="{x:Bind TimelineHomeListView}" Mode="Sticky" DoubleTapped="{x:Bind ViewModel.TimelineHome.Refresh}">
                             <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
                                 <controls:SplitViewButton Label="{CustomResource Home}" Style="{StaticResource CommonButtonStyle}" Icon="Home"/>
                             </Grid>
-                        </controls:ExListView.Header>
-                    </controls:ExListView>
-                </StackPanel>
+                        </toolkit:ScrollHeader>
+                    </controls:ExListView.Header>
+                </controls:ExListView>
+            </toolkit:BladeItem>
+            <toolkit:BladeItem Style="{StaticResource BaseBladeStyle}">
+                <controls:ExListView x:Name="NotificationListView" IsError="{x:Bind ViewModel.Notification.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.Notification.Refresh}" ItemsSource="{x:Bind ViewModel.Notification}" IsLoading="{x:Bind ViewModel.Notification.IsLoading,Mode=OneWay}">
+                    <controls:ExListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:NotificationModel">
+                            <local:NotificationView ViewModel="{x:Bind}"/>
+                        </DataTemplate>
+                    </controls:ExListView.ItemTemplate>
+                    <controls:ExListView.Header>
+                        <toolkit:ScrollHeader TargetListViewBase="{x:Bind NotificationListView}" Mode="Sticky" DoubleTapped="{x:Bind ViewModel.Notification.Refresh}">
+                            <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
+                                <controls:SplitViewButton Label="{CustomResource Notification}" Style="{StaticResource CommonButtonStyle}" Icon="Bell"/>
+                            </Grid>
+                        </toolkit:ScrollHeader>
+                    </controls:ExListView.Header>
+                </controls:ExListView>
             </toolkit:BladeItem>
             <toolkit:BladeItem>
-                <StackPanel>
-                    <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
-                        <controls:SplitViewButton Label="{CustomResource Notification}" Style="{StaticResource CommonButtonStyle}" Icon="Bell"/>
-                    </Grid>
-                    <controls:ExListView IsError="{x:Bind ViewModel.Notification.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.Notification.Refresh}" ItemsSource="{x:Bind ViewModel.Notification}" IsLoading="{x:Bind ViewModel.Notification.IsLoading,Mode=OneWay}">
-                        <controls:ExListView.ItemTemplate>
-                            <DataTemplate x:DataType="model:NotificationModel">
-                                <local:NotificationView ViewModel="{x:Bind}"/>
-                            </DataTemplate>
-                        </controls:ExListView.ItemTemplate>
-                    </controls:ExListView>
-                </StackPanel>
+                <toolkit:BladeItem.Style>
+                    <Style TargetType="toolkit:BladeItem" BasedOn="{StaticResource BaseBladeStyle}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="toolkit:BladeItem">
+                                    <Grid BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
+                                            <controls:SplitViewButton Style="{StaticResource CommonButtonStyle}" Icon="ArrowLeft" Label="{CustomResource GoBack}" Visibility="{Binding ElementName=frame,Path=CanGoBack}" Click="SplitViewButton_Click"/>
+                                        </Grid>
+                                        <ContentPresenter Grid.Row="1"
+                                          VerticalAlignment="Stretch"
+                                          Background="{TemplateBinding Background}"
+                                          Visibility="{TemplateBinding IsOpen}" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </toolkit:BladeItem.Style>
+                <Frame x:Name="frame"/>
             </toolkit:BladeItem>
-            <!--<toolkit:BladeItem>
-                <StackPanel>
-                    
-                </StackPanel>
-            </toolkit:BladeItem>-->
         </toolkit:BladeView>
     </Grid>
 </Page>

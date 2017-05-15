@@ -29,6 +29,8 @@ namespace Tuuto.Pages
         public BladePage()
         {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
+            frame.Navigate(typeof(BladeFrameMainPage));
             App.StatusAcionHandler = this;
         }
 
@@ -45,7 +47,8 @@ namespace Tuuto.Pages
 
         public void Reply(StatusModel model)
         {
-
+            postingTootView.Clean();
+            postingTootView.ReplyStatus = model;
         }
 
         public void Expand(StatusModel model)
@@ -55,17 +58,23 @@ namespace Tuuto.Pages
 
         public void Mention(AccountModel model)
         {
-
+            postingTootView.Clean();
+            postingTootView.Text = $"@{model.Acct} ";
         }
 
         public void AccountDetail(int id)
         {
-
+            frame.Navigate(typeof(AccountPage), new AccountViewModel(id));
         }
 
         public void HashTag(string tag)
         {
 
+        }
+
+        private void SplitViewButton_Click(object sender, RoutedEventArgs e)
+        {
+            frame.GoBack();
         }
     }
 }

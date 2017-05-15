@@ -107,8 +107,8 @@
                     <Button Style="{StaticResource CommonButtonStyle}">
                         <fa:FontAwesome Icon="FileTextOutline"/>
                         <Button.Flyout>
-                            <Flyout Placement="Bottom" x:Name="DraftFlyout">
-                                <ListView ItemsSource="{x:Bind DraftList.Value,Mode=OneWay}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
+                            <Flyout Opening="DraftFlyout_Opening" Placement="Bottom" x:Name="DraftFlyout">
+                                <ListView ItemsSource="{x:Bind DraftList,Mode=OneWay}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
                                     <ListView.ItemTemplate>
                                         <DataTemplate x:DataType="model:DraftModel">
                                             <Grid>

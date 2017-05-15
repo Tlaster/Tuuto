@@ -315,4 +315,10 @@
   <data name="TootVisibility_Unlisted_Title" xml:space="preserve">
     <value>Unlisted</value>
   </data>
+  <data name="GoBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>More</value>
+  </data>
 </root>

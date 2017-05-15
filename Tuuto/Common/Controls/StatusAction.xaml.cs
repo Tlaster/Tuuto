@@ -58,21 +58,24 @@ namespace Tuuto.Common.Controls
             {
                 case NotificationModel.NOTIFICATIONTYPE_FAVOURITE:
                     Icon = FontAwesomeIcon.Star;
+                    ActionText = ResourceHelper.GetString("FavouritedBy");
                     break;
                 case NotificationModel.NOTIFICATIONTYPE_FOLLOW:
                     Icon = FontAwesomeIcon.UserPlus;
+                    ActionText = ResourceHelper.GetString("FollowedBy");
                     break;
                 case NotificationModel.NOTIFICATIONTYPE_MENTION:
                     Icon = FontAwesomeIcon.At;
+                    ActionText = ResourceHelper.GetString("MentionedBy");
                     break;
                 case NotificationModel.NOTIFICATIONTYPE_REBLOG:
                     Icon = FontAwesomeIcon.Retweet;
+                    ActionText = ResourceHelper.GetString("RebloggedBy");
                     break;
                 default:
                     break;
             }
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Icon)));
-            ActionText = ResourceHelper.GetString($"StatusAction_{v}");
         }
 
 

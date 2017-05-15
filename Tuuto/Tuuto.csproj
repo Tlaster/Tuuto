@@ -160,6 +160,9 @@
     <Compile Include="Model\MediaData.cs" />
     <Compile Include="Model\PivotHeaderModel.cs" />
     <Compile Include="Model\TootVisibilityModel.cs" />
+    <Compile Include="Pages\BladeFrameMainPage.xaml.cs">
+      <DependentUpon>BladeFrameMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="View\AccountLiteView.xaml.cs">
       <DependentUpon>AccountLiteView.xaml</DependentUpon>
@@ -372,6 +375,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Common\Controls\VersionSplitter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BladeFrameMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

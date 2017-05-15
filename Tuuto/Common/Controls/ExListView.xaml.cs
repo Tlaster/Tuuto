@@ -26,7 +26,6 @@ namespace Tuuto.Common.Controls
     [TemplatePart(Name = "RefreshView", Type = typeof(Border))]
     public partial class ExListView : PullToRefreshListView
     {
-        //TODO: Show progressbar
         public bool IsLoading
         {
             get { return (bool)GetValue(IsLoadingProperty); }
@@ -97,8 +96,6 @@ namespace Tuuto.Common.Controls
 
         private void CheckForEmptyView()
         {
-            var a = Items.Any() && !IsError;
-            var v = !IsLoading;
             if (_emptyView != null)
             {
                 _emptyView.Visibility = Items.Any() && !IsError || IsLoading ? Visibility.Collapsed : Visibility.Visible;

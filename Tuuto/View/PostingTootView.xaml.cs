@@ -236,7 +236,7 @@ namespace Tuuto.View
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            DraftList.Value.Remove((sender as FrameworkElement).DataContext as DraftModel);
+            DraftList.Remove((sender as FrameworkElement).DataContext as DraftModel);
             await DraftManager.DeleteDraft((sender as FrameworkElement).DataContext as DraftModel);
         }
         void FromDraft(DraftModel model)
@@ -255,8 +255,8 @@ namespace Tuuto.View
             _draftId = model.Id;
         }
 
-        
-        Lazy<ObservableCollection<DraftModel>> DraftList { get; } = new Lazy<ObservableCollection<DraftModel>>(() => new ObservableCollection<DraftModel>(DraftManager.GetCurrent()));
+
+        ObservableCollection<DraftModel> DraftList { get; } = new ObservableCollection<DraftModel>();
 
         public void Toot()
         {
@@ -282,7 +282,7 @@ namespace Tuuto.View
             ReplyStatus = null;
         }
 
-        private void Clean()
+        internal void Clean()
         {
             ReplyStatus = null;
             Text = "";
@@ -299,5 +299,12 @@ namespace Tuuto.View
             CloseRequested?.Invoke(this, null);
         }
 
+        private void DraftFlyout_Opening(object sender, object e)
+        {
+            DraftList.Clear();
+            var drafts = DraftManager.GetCurrent();
+            foreach (var item in drafts)
+                DraftList.Add(item);
+        }
     }
 }
