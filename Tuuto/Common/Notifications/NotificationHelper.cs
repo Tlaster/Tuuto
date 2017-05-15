@@ -39,19 +39,19 @@ namespace Tuuto.Common.Notifications
             switch (model.Type)
             {
                 case NotificationModel.NOTIFICATIONTYPE_FAVOURITE:
-                    text = $"{text}{ResourceHelper.GetString("StatusAction_favourite")}";
+                    text = $"{text}{ResourceHelper.GetString("FavouritedBy")}";
                     sub = model.Status.Content;
                     break;
                 case NotificationModel.NOTIFICATIONTYPE_FOLLOW:
-                    text = $"{text}{ResourceHelper.GetString("StatusAction_follow")}";
+                    text = $"{text}{ResourceHelper.GetString("FollowedBy")}";
                     sub = model.Account.Note;
                     break;
                 case NotificationModel.NOTIFICATIONTYPE_MENTION:
-                    text = $"{text}{ResourceHelper.GetString("StatusAction_mention")}";
+                    text = $"{text}{ResourceHelper.GetString("MentionedBy")}";
                     sub = model.Status.Content;
                     break;
                 case NotificationModel.NOTIFICATIONTYPE_REBLOG:
-                    text = $"{text}{ResourceHelper.GetString("StatusAction_reblog")}";
+                    text = $"{text}{ResourceHelper.GetString("RebloggedBy")}";
                     sub = model.Status.Content;
                     break;
                 default:

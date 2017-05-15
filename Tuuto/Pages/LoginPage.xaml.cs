@@ -74,11 +74,11 @@ namespace Tuuto.Pages
                 }
                 catch (UriFormatException)
                 {
-                    Notification.Show(ResourceHelper.GetString("LoginPage_DomainError"));
+                    Notification.Show(ResourceHelper.GetString("DomainError"));
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    Notification.Show(ResourceHelper.GetString("LoginPage_LoginFailed"));
+                    Notification.Show(ResourceHelper.GetString("LoginFailed"));
                 }
                 catch (Exception e) when(e is FileNotFoundException /*user can not connect to the auth page and close the auth dialog*/ || e is HttpRequestException || e is WebException)
                 {

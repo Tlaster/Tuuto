@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Reflection;
+using Tuuto.Common.Helpers;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -84,6 +85,8 @@ namespace Tuuto.Common.Controls
         public ExListView()
         {
             this.InitializeComponent();
+            PullToRefreshLabel = ResourceHelper.GetString("PullToRefresh");
+            ReleaseToRefreshLabel = ResourceHelper.GetString("ReleaseToRefresh");
             Items.VectorChanged += Items_VectorChanged;
         }
 

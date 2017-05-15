@@ -19,18 +19,18 @@
         <!--<selectors:DataTemplateByVersionSelector x:Key="DataTemplateByVersionSelector" Version="AnniversaryUpdate" Before="{StaticResource SensitiveBlockerBackgroundBlackTemplate}" After="{StaticResource SensitiveBlockerBackgroundWithBlurTemplate}"/>-->
         <local:StatusReblogConverter x:Key="StatusReblogConverter"/>
         <MenuFlyout x:Key="MenuOthers" Placement="Bottom">
-            <MenuFlyoutItem Click="{x:Bind Expand}" x:Uid="StatusViewMenu_Expand" Visibility="{x:Bind MenuExpandVisibility}"/>
+            <MenuFlyoutItem Click="{x:Bind Expand}" Text="{CustomResource ExpandStatus}" Visibility="{x:Bind MenuExpandVisibility}"/>
             <MenuFlyoutSeparator Visibility="{x:Bind MenuExpandVisibility}"/>
-            <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mention}"/>
+            <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=MentionUser}"/>
             <MenuFlyoutSeparator/>
-            <MenuFlyoutItem Click="{x:Bind Mute}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mute}" Visibility="{x:Bind MenuExpandVisibility}"/>
-            <MenuFlyoutItem Click="{x:Bind Block}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Block}" Visibility="{x:Bind MenuExpandVisibility}"/>
-            <MenuFlyoutItem Click="{x:Bind Report}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Report}"/>
+            <MenuFlyoutItem Click="{x:Bind Mute}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=MuteUser}" Visibility="{x:Bind MenuExpandVisibility}"/>
+            <MenuFlyoutItem Click="{x:Bind Block}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=BlockUser}" Visibility="{x:Bind MenuExpandVisibility}"/>
+            <MenuFlyoutItem Click="{x:Bind Report}" Text="{x:Bind ViewModel.Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=ReportUser}"/>
         </MenuFlyout>
         <MenuFlyout x:Key="MenuMe" Placement="Bottom">
-            <MenuFlyoutItem Click="{x:Bind Expand}" x:Uid="StatusViewMenu_Expand" Visibility="{x:Bind MenuExpandVisibility}"/>
+            <MenuFlyoutItem Click="{x:Bind Expand}" Text="{CustomResource ExpandStatus}" Visibility="{x:Bind MenuExpandVisibility}"/>
             <MenuFlyoutSeparator Visibility="{x:Bind MenuExpandVisibility}"/>
-            <MenuFlyoutItem Click="{x:Bind Delete}" x:Uid="StatusViewMenu_Delete"/>
+            <MenuFlyoutItem Click="{x:Bind Delete}" Text="{CustomResource Delete}"/>
         </MenuFlyout>
         <DataTemplate x:Key="SensitiveBlockerBackgroundWithBlurTemplate">
             <Border Background="#7F000000">
@@ -59,7 +59,7 @@
                         <TextBlock  Style="{ThemeResource BodyTextBlockStyle}" HorizontalAlignment="Right" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{x:Bind CreatedAt,Converter={StaticResource DateTimeDiffForHumansConverter}}"/>
                     </Grid>
                     <TextBlock IsTextSelectionEnabled="True" Visibility="{x:Bind SpoilerText,Converter={StaticResource NullOrEmptyToVisibilityConverter}}" Text="{x:Bind SpoilerText}"/>
-                    <toolkit:Expander Style="{StaticResource TextExpanderStyle}" x:Uid="StatusView_Expander" Visibility="{x:Bind SpoilerText,Converter={StaticResource NullOrEmptyToVisibilityConverter}}">
+                    <toolkit:Expander Style="{StaticResource TextExpanderStyle}" Header="{CustomResource ShowMore}" Visibility="{x:Bind SpoilerText,Converter={StaticResource NullOrEmptyToVisibilityConverter}}">
                         <toolkit:MarkdownTextBlock HorizontalAlignment="Left" LinkClicked="LinkClicked" Text="{x:Bind Content, Converter={StaticResource HtmlToMarkdownConvert}}"/>
                     </toolkit:Expander>
                     <toolkit:MarkdownTextBlock Visibility="{x:Bind SpoilerText,Converter={StaticResource NullOrEmptyToVisibilityConverter},ConverterParameter=true}" LinkClicked="LinkClicked" Text="{x:Bind Content, Converter={StaticResource HtmlToMarkdownConvert}}"/>
@@ -99,8 +99,8 @@
                             </Interactivity:Interaction.Behaviors>
                             <controls:VersionSplitter Version="AnniversaryUpdate" BeforeTemplate="{StaticResource SensitiveBlockerBackgroundBlackTemplate}" AfterTemplate="{StaticResource SensitiveBlockerBackgroundWithBlurTemplate}"/>
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" RequestedTheme="Dark" Orientation="Vertical">
-                                <TextBlock HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" x:Uid="StatusView_Sensitive"/>
-                                <TextBlock HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" x:Uid="StatusView_ClickToView"/>
+                                <TextBlock HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="{CustomResource Sensitive}"/>
+                                <TextBlock HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Foreground="{ThemeResource TextControlForegroundDisabled}" Text="{CustomResource ClickToView}"/>
                             </StackPanel>
                         </Grid>
                     </Grid>

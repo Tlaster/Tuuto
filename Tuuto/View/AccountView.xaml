@@ -77,15 +77,15 @@
                         <fa:FontAwesome Icon="Bars"/>
                         <Button.Flyout>
                             <MenuFlyout Placement="Bottom">
-                                <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mention}"/>
+                                <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=MentionUser}"/>
                                 <MenuFlyoutSeparator/>
-                                <MenuFlyoutItem Click="{x:Bind OpenInBrowser}" x:Uid="AccountView_OpenInBrowser"/>
+                                <MenuFlyoutItem Click="{x:Bind OpenInBrowser}" Text="{CustomResource OpenInBrowser}"/>
                                 <MenuFlyoutSeparator/>
-                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Muting,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Click="{x:Bind Mute}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mute}" />
-                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Muting,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind UnMute}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_UnMute}" />
-                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Blocking,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Click="{x:Bind Block}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Block}" />
-                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Blocking,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind UnBlock}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_UnBlock}" />
-                                <MenuFlyoutItem Click="{x:Bind Report}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Report}"/>
+                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Muting,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Click="{x:Bind Mute}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=MuteUser}" />
+                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Muting,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind UnMute}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=UnMuteUser}" />
+                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Blocking,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}" Click="{x:Bind Block}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=BlockUser}" />
+                                <MenuFlyoutItem Visibility="{x:Bind Relationship.Blocking,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind UnBlock}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=UnBlockUser}" />
+                                <MenuFlyoutItem Click="{x:Bind Report}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=ReportUser}"/>
                             </MenuFlyout>
                         </Button.Flyout>
                     </Button>
@@ -93,22 +93,22 @@
                         <fa:FontAwesome Icon="Bars"/>
                         <Button.Flyout>
                             <MenuFlyout Placement="Bottom">
-                                <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=StatusViewMenu_Mention}"/>
+                                <MenuFlyoutItem Click="{x:Bind Mention}" Text="{x:Bind Account.UserName,Mode=OneWay,Converter={StaticResource StringFormatFromResourceConverter},ConverterParameter=MentionUser}"/>
                                 <MenuFlyoutSeparator/>
-                                <MenuFlyoutItem Click="{x:Bind OpenInBrowser}" x:Uid="AccountView_OpenInBrowser"/>
+                                <MenuFlyoutItem Click="{x:Bind OpenInBrowser}" Text="{CustomResource OpenInBrowser}"/>
                             </MenuFlyout>
                         </Button.Flyout>
                     </Button>
                     <StackPanel Grid.Column="1">
-                        <TextBlock x:Uid="AccountView_StatusesCount" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
+                        <TextBlock Text="{CustomResource Statuses}" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
                         <TextBlock Text="{x:Bind Account.StatusesCount,Mode=OneWay}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2">
-                        <TextBlock x:Uid="AccountView_FollowingCount" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
+                        <TextBlock Text="{CustomResource Following}" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
                         <TextBlock Text="{x:Bind Account.FollowingCount,Mode=OneWay}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="3">
-                        <TextBlock x:Uid="AccountView_FollowersCount" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
+                        <TextBlock Text="{CustomResource Followers}" Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}"/>
                         <TextBlock Text="{x:Bind Account.FollowersCount,Mode=OneWay}"/>
                     </StackPanel>
                 </Grid>

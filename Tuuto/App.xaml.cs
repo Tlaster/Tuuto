@@ -22,6 +22,7 @@ using Tuuto.Pages;
 using Tuuto.Common.Notifications;
 using Windows.ApplicationModel.Background;
 using Microsoft.Toolkit.Uwp;
+using Windows.UI.Xaml.Resources;
 
 namespace Tuuto
 {
@@ -37,8 +38,11 @@ namespace Tuuto
         {
             InitializeComponent();
             Suspending += OnSuspending;
-            EnteredBackground += App_EnteredBackground;
-            LeavingBackground += App_LeavingBackground;
+            if (DeviceHelper.CurrentVersion >= WindowsVersions.AnniversaryUpdate)
+            {
+                EnteredBackground += App_EnteredBackground;
+                LeavingBackground += App_LeavingBackground;
+            }
             RequestedTheme = Settings.IsDarkTheme ? ApplicationTheme.Dark : ApplicationTheme.Light;
         }
 
@@ -71,6 +75,7 @@ namespace Tuuto
                     ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(350, 200));
                 }
                 Window.Current.Content = new ExtendedSplash(e.SplashScreen);
+                CustomXamlResourceLoader.Current = new LocalizationResource();
             }
             Window.Current.Activate();
         }

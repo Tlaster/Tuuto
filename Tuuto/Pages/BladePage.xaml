@@ -56,7 +56,7 @@
                         </controls:ExListView.ItemTemplate>
                         <controls:ExListView.Header>
                             <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
-                                <controls:SplitViewButton x:Uid="BladePage_Home" Style="{StaticResource CommonButtonStyle}" Icon="Home"/>
+                                <controls:SplitViewButton Label="{CustomResource Home}" Style="{StaticResource CommonButtonStyle}" Icon="Home"/>
                             </Grid>
                         </controls:ExListView.Header>
                     </controls:ExListView>
@@ -65,7 +65,7 @@
             <toolkit:BladeItem>
                 <StackPanel>
                     <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
-                        <controls:SplitViewButton x:Uid="BladePage_Notification" Style="{StaticResource CommonButtonStyle}" Icon="Bell"/>
+                        <controls:SplitViewButton Label="{CustomResource Notification}" Style="{StaticResource CommonButtonStyle}" Icon="Bell"/>
                     </Grid>
                     <controls:ExListView IsError="{x:Bind ViewModel.Notification.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.Notification.Refresh}" ItemsSource="{x:Bind ViewModel.Notification}" IsLoading="{x:Bind ViewModel.Notification.IsLoading,Mode=OneWay}">
                         <controls:ExListView.ItemTemplate>

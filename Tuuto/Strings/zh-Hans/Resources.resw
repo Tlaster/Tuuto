@@ -117,79 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountView_FollowersCount.Text" xml:space="preserve">
+  <data name="Followers" xml:space="preserve">
     <value>关注者</value>
   </data>
-  <data name="AccountView_FollowingCount.Text" xml:space="preserve">
+  <data name="Following" xml:space="preserve">
     <value>正关注</value>
   </data>
-  <data name="AccountView_OpenInBrowser.Text" xml:space="preserve">
+  <data name="OpenInBrowser" xml:space="preserve">
     <value>在浏览器中打开</value>
   </data>
-  <data name="AccountView_StatusesCount.Text" xml:space="preserve">
+  <data name="Statuses" xml:space="preserve">
     <value>嘟文</value>
   </data>
-  <data name="BladePage_Home.Label" xml:space="preserve">
-    <value>主页</value>
-  </data>
-  <data name="ExListView_Empty.Text" xml:space="preserve">
+  <data name="Empty" xml:space="preserve">
     <value>这里空空如也</value>
   </data>
-  <data name="ExListView_Failed.Text" xml:space="preserve">
+  <data name="LoadingFailed" xml:space="preserve">
     <value>载入失败</value>
   </data>
-  <data name="ImageMenu_Save.Text" xml:space="preserve">
+  <data name="Save" xml:space="preserve">
     <value>保存</value>
   </data>
-  <data name="LoginPage_DomainError" xml:space="preserve">
+  <data name="DomainError" xml:space="preserve">
     <value>输入的实例地址有误</value>
   </data>
-  <data name="LoginPage_LoginButton.Content" xml:space="preserve">
+  <data name="Login" xml:space="preserve">
     <value>登录</value>
   </data>
-  <data name="LoginPage_LoginDesc.Text" xml:space="preserve">
+  <data name="LoginDesc" xml:space="preserve">
     <value>您想登录到哪一个Mastodon实例上？</value>
   </data>
-  <data name="LoginPage_LoginFailed" xml:space="preserve">
+  <data name="LoginFailed" xml:space="preserve">
     <value>登陆失败</value>
   </data>
-  <data name="MainPage_Account.HeaderText" xml:space="preserve">
+  <data name="Me" xml:space="preserve">
     <value>我</value>
   </data>
-  <data name="MainPage_Federated.HeaderText" xml:space="preserve">
+  <data name="TimelineFederated" xml:space="preserve">
     <value>跨站公共</value>
   </data>
-  <data name="MainPage_FixedPivot.SplitViewPaneLength" xml:space="preserve">
+  <data name="SplitViewPaneLength" xml:space="preserve">
     <value>150</value>
   </data>
-  <data name="MainPage_Home.HeaderText" xml:space="preserve">
+  <data name="Home" xml:space="preserve">
     <value>主页</value>
   </data>
-  <data name="MainPage_Local.HeaderText" xml:space="preserve">
+  <data name="TimelineLocal" xml:space="preserve">
     <value>本站</value>
   </data>
-  <data name="MainPage_Notifications.HeaderText" xml:space="preserve">
+  <data name="Notification" xml:space="preserve">
     <value>消息提醒</value>
   </data>
-  <data name="MainPage_Refresh.Label" xml:space="preserve">
+  <data name="Refresh" xml:space="preserve">
     <value>刷新</value>
   </data>
-  <data name="MainPage_Search.Label" xml:space="preserve">
+  <data name="Search" xml:space="preserve">
     <value>搜索</value>
   </data>
-  <data name="MainPage_Setting.Label" xml:space="preserve">
+  <data name="Settings" xml:space="preserve">
     <value>设置</value>
   </data>
-  <data name="MainPage_Toot.Label" xml:space="preserve">
+  <data name="Toot" xml:space="preserve">
     <value>发嘟嘟</value>
   </data>
   <data name="ProgressDialogText" xml:space="preserve">
     <value>坐和放宽，这不需要太久</value>
   </data>
-  <data name="RefreshListView.PullToRefreshLabel" xml:space="preserve">
+  <data name="PullToRefresh" xml:space="preserve">
     <value>下拉刷新</value>
   </data>
-  <data name="RefreshListView.ReleaseToRefreshLabel" xml:space="preserve">
+  <data name="ReleaseToRefresh" xml:space="preserve">
     <value>释放刷新</value>
   </data>
   <data name="SendDraft_Error" xml:space="preserve">
@@ -198,100 +195,100 @@
   <data name="SendDraft_OK" xml:space="preserve">
     <value>发布成功</value>
   </data>
-  <data name="SettingPage_Accounts.HeaderText" xml:space="preserve">
+  <data name="AccountManagement" xml:space="preserve">
     <value>用户管理</value>
   </data>
-  <data name="SettingPage_AddUser.Content" xml:space="preserve">
+  <data name="AddAccount" xml:space="preserve">
     <value>添加用户</value>
   </data>
-  <data name="SettingPage_Customize.HeaderText" xml:space="preserve">
+  <data name="Customize" xml:space="preserve">
     <value>个性化</value>
   </data>
-  <data name="SettingPage_Customize_EnableBladeView.Header" xml:space="preserve">
+  <data name="EnableBladeView" xml:space="preserve">
     <value>启用blade视图（需要重启APP）</value>
   </data>
-  <data name="SettingPage_Customize_EnableFederatedTimeline.Header" xml:space="preserve">
+  <data name="EnableFederatedTimeline" xml:space="preserve">
     <value>开启跨站公共时间轴</value>
   </data>
-  <data name="SettingPage_Customize_EnableLocalTimeline.Header" xml:space="preserve">
+  <data name="EnableLocalTimeline" xml:space="preserve">
     <value>开启本站时间轴</value>
   </data>
-  <data name="SettingPage_Customize_IsDarkTheme.Header" xml:space="preserve">
+  <data name="IsDarkTheme" xml:space="preserve">
     <value>使用黑色主题</value>
   </data>
-  <data name="SettingPage_Logout.Content" xml:space="preserve">
+  <data name="Logout" xml:space="preserve">
     <value>注销当前用户</value>
   </data>
-  <data name="StatusAction_favourite" xml:space="preserve">
+  <data name="FavouritedBy" xml:space="preserve">
     <value>喜欢了您的嘟文</value>
   </data>
-  <data name="StatusAction_follow" xml:space="preserve">
+  <data name="FollowedBy" xml:space="preserve">
     <value>关注了您</value>
   </data>
-  <data name="StatusAction_mention" xml:space="preserve">
+  <data name="MentionedBy" xml:space="preserve">
     <value>提及了您</value>
   </data>
-  <data name="StatusAction_reblog" xml:space="preserve">
+  <data name="RebloggedBy" xml:space="preserve">
     <value>转发了</value>
   </data>
-  <data name="StatusViewMenu_Block" xml:space="preserve">
+  <data name="BlockUser" xml:space="preserve">
     <value>屏蔽 @{0}</value>
   </data>
-  <data name="StatusViewMenu_Delete.Text" xml:space="preserve">
+  <data name="Delete" xml:space="preserve">
     <value>删除</value>
   </data>
-  <data name="StatusViewMenu_Expand.Text" xml:space="preserve">
+  <data name="ExpandStatus" xml:space="preserve">
     <value>展开嘟文</value>
   </data>
-  <data name="StatusViewMenu_Mention" xml:space="preserve">
+  <data name="MentionUser" xml:space="preserve">
     <value>提及 @{0}</value>
   </data>
-  <data name="StatusViewMenu_Mute" xml:space="preserve">
+  <data name="MuteUser" xml:space="preserve">
     <value>将 @{0} 静音</value>
   </data>
-  <data name="StatusViewMenu_Report" xml:space="preserve">
+  <data name="ReportUser" xml:space="preserve">
     <value>举报 @{0}</value>
   </data>
-  <data name="StatusViewMenu_UnBlock" xml:space="preserve">
+  <data name="UnBlockUser" xml:space="preserve">
     <value>取消 @{0} 屏蔽</value>
   </data>
-  <data name="StatusViewMenu_UnMute" xml:space="preserve">
+  <data name="UnMuteUser" xml:space="preserve">
     <value>取消 @{0} 静音</value>
   </data>
-  <data name="StatusView_ClickToView.Text" xml:space="preserve">
+  <data name="ClickToView" xml:space="preserve">
     <value>点击查看</value>
   </data>
-  <data name="StatusView_Expander.Header" xml:space="preserve">
+  <data name="ShowMore" xml:space="preserve">
     <value>显示更多</value>
   </data>
-  <data name="StatusView_Sensitive.Text" xml:space="preserve">
+  <data name="Sensitive" xml:space="preserve">
     <value>和谐内容</value>
   </data>
-  <data name="TootDialogCW_PlaceholderText.PlaceholderText" xml:space="preserve">
+  <data name="ContentWarning" xml:space="preserve">
     <value>和谐内容警告</value>
   </data>
-  <data name="TootDialog_AddMultipleImage.Text" xml:space="preserve">
+  <data name="AddMultipleImage" xml:space="preserve">
     <value>添加多图</value>
   </data>
-  <data name="TootDialog_AddSingleImage.Text" xml:space="preserve">
+  <data name="AddSingleImage" xml:space="preserve">
     <value>添加图片</value>
   </data>
-  <data name="TootDialog_ContentWarningShort.Content" xml:space="preserve">
+  <data name="ContentWarningShort" xml:space="preserve">
     <value>和谐</value>
   </data>
-  <data name="TootDialog_Menu_DeleteMedia.Text" xml:space="preserve">
+  <data name="Remove" xml:space="preserve">
     <value>删除</value>
   </data>
-  <data name="TootDialog_NSFW.Content" xml:space="preserve">
+  <data name="NSFW" xml:space="preserve">
     <value>和谐图片</value>
   </data>
-  <data name="TootDialog_PlaceholderText.PlaceholderText" xml:space="preserve">
+  <data name="TootPlaceholder" xml:space="preserve">
     <value>分享您钢鞭的故事</value>
   </data>
-  <data name="TootDialog_TakePhoto.Text" xml:space="preserve">
+  <data name="TakePhoto" xml:space="preserve">
     <value>拍照</value>
   </data>
-  <data name="TootDialog_Toot.Content" xml:space="preserve">
+  <data name="SendToot" xml:space="preserve">
     <value>嘟嘟！</value>
   </data>
   <data name="TootVisibility_Direct_Description" xml:space="preserve">

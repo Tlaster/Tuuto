@@ -11,8 +11,8 @@
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Padding="16">
         <Image Margin="4" Source="ms-appx:///Assets/SplashScreen.png"/>
-        <TextBlock Margin="4" HorizontalAlignment="Center" x:Uid="LoginPage_LoginDesc"/>
+        <TextBlock Margin="4" HorizontalAlignment="Center" Text="{CustomResource LoginDesc}"/>
         <TextBox Margin="4" Text="{x:Bind Domain, Mode=TwoWay}"/>
-        <Button Margin="4" Click="{x:Bind LoginClick}" x:Uid="LoginPage_LoginButton" HorizontalAlignment="Stretch"/>
+        <Button Margin="4" Click="{x:Bind LoginClick}" Content="{CustomResource Login}" HorizontalAlignment="Stretch"/>
     </StackPanel>
 </Page>

@@ -12,7 +12,7 @@
     mc:Ignorable="d">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:FixedPivot>
-            <controls:FixedPivotItem HeaderIcon="User" x:Uid="SettingPage_Accounts">
+            <controls:FixedPivotItem HeaderIcon="User" HeaderText="{CustomResource AccountManagement}">
                 <ListView SelectionMode="Single" SelectedIndex="{x:Bind SelectedUserIndex,Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource Settings},Path=Account}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -21,8 +21,8 @@
                     </ListView.ItemTemplate>
                     <ListView.Footer>
                         <StackPanel>
-                            <Button HorizontalAlignment="Stretch" x:Uid="SettingPage_AddUser" Margin="4" Click="{x:Bind AddUser}"/>
-                            <Button HorizontalAlignment="Stretch" x:Uid="SettingPage_Logout" Margin="4" Click="{x:Bind Logout}"/>
+                            <Button HorizontalAlignment="Stretch" Content="{CustomResource AddAccount}" Margin="4" Click="{x:Bind AddAccount}"/>
+                            <Button HorizontalAlignment="Stretch" Content="{CustomResource Logout}" Margin="4" Click="{x:Bind Logout}"/>
                         </StackPanel>
                     </ListView.Footer>
                     <ListView.ItemContainerStyle>
@@ -32,16 +32,16 @@
                     </ListView.ItemContainerStyle>
                 </ListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem HeaderIcon="Wrench" x:Uid="SettingPage_Customize">
+            <controls:FixedPivotItem HeaderIcon="Wrench" HeaderText="{CustomResource Customize}">
                 <StackPanel>
-                    <ToggleSwitch x:Uid="SettingPage_Customize_IsDarkTheme" IsOn="{Binding Source={StaticResource Settings},Path=IsDarkTheme,Mode=TwoWay}" Style="{StaticResource SingleLineToggleSwitch}"/>
-                    <ToggleSwitch Visibility="Collapsed" x:Name="EnableBladeViewSwitch" IsOn="{Binding Source={StaticResource Settings},Path=EnableBladeView,Mode=TwoWay}" x:Uid="SettingPage_Customize_EnableBladeView" Style="{StaticResource SingleLineToggleSwitch}"  />
+                    <ToggleSwitch Header="{CustomResource IsDarkTheme}" IsOn="{Binding Source={StaticResource Settings},Path=IsDarkTheme,Mode=TwoWay}" Style="{StaticResource SingleLineToggleSwitch}"/>
+                    <ToggleSwitch Visibility="Collapsed" x:Name="EnableBladeViewSwitch" IsOn="{Binding Source={StaticResource Settings},Path=EnableBladeView,Mode=TwoWay}" Header="{CustomResource EnableBladeView}" Style="{StaticResource SingleLineToggleSwitch}"  />
                     <StackPanel Visibility="{Binding ElementName=EnableBladeViewSwitch,Path=IsOn,Converter={StaticResource BoolToVisibilityConverter}}">
                         
                     </StackPanel>
                     <StackPanel Visibility="{Binding ElementName=EnableBladeViewSwitch,Path=IsOn,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=true}">
-                        <ToggleSwitch x:Uid="SettingPage_Customize_EnableLocalTimeline" IsOn="{Binding Source={StaticResource Settings},Path=EnableLocalTimeline,Mode=TwoWay}" Style="{StaticResource SingleLineToggleSwitch}"/>
-                        <ToggleSwitch x:Uid="SettingPage_Customize_EnableFederatedTimeline" IsOn="{Binding Source={StaticResource Settings},Path=EnableFederatedTimeline,Mode=TwoWay}" Style="{StaticResource SingleLineToggleSwitch}"/>
+                        <ToggleSwitch Header="{CustomResource EnableLocalTimeline}" IsOn="{Binding Source={StaticResource Settings},Path=EnableLocalTimeline,Mode=TwoWay}" Style="{StaticResource SingleLineToggleSwitch}"/>
+                        <ToggleSwitch Header="{CustomResource EnableFederatedTimeline}" IsOn="{Binding Source={StaticResource Settings},Path=EnableFederatedTimeline,Mode=TwoWay}" Style="{StaticResource SingleLineToggleSwitch}"/>
                     </StackPanel>
                 </StackPanel>
             </controls:FixedPivotItem>

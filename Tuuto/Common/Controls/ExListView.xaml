@@ -10,7 +10,6 @@
     mc:Ignorable="d"
     SelectionMode="None" 
     IsItemClickEnabled="True"
-    x:Uid="RefreshListView"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <toolkit:PullToRefreshListView.ItemContainerStyle>
@@ -47,7 +46,7 @@
                     <Border x:Name="EmptyView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Vertical">
                             <fa:FontAwesome Foreground="Gray" FontSize="50" Icon="MehOutline"/>
-                            <TextBlock Foreground="Gray" HorizontalAlignment="Center" x:Uid="ExListView_Empty"/>
+                            <TextBlock Foreground="Gray" HorizontalAlignment="Center" Text="{CustomResource Empty}"/>
                         </StackPanel>
                     </Border>
                     <Border x:Name="RefreshView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -56,7 +55,7 @@
                     <Border x:Name="FailedView" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Vertical">
                             <fa:FontAwesome Foreground="Gray" FontSize="50" Icon="FrownOutline"/>
-                            <TextBlock Foreground="Gray" HorizontalAlignment="Center" x:Uid="ExListView_Failed"/>
+                            <TextBlock Foreground="Gray" HorizontalAlignment="Center" Text="{CustomResource LoadingFailed}"/>
                         </StackPanel>
                     </Border>
                     <ScrollViewer x:Name="ScrollViewer"

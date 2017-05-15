@@ -162,7 +162,7 @@
             <Border Background="#7F000000"/>
         </DataTemplate>
         <MenuFlyout x:Name="ImageMenu">
-            <MenuFlyoutItem x:Uid="ImageMenu_Save" Click="ImageMenu_Save_Click"/>
+            <MenuFlyoutItem Text="{CustomResource Save}" Click="ImageMenu_Save_Click"/>
         </MenuFlyout>
     </ContentDialog.Resources>
     <Grid>

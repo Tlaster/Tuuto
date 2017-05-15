@@ -35,12 +35,12 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <controls:FixedPivot x:Name="fixedPivot" x:Uid="MainPage_FixedPivot">
+        <controls:FixedPivot x:Name="fixedPivot" SplitViewPaneLength="{CustomResource SplitViewPaneLength}">
             <controls:FixedPivot.SplitViewPaneButtomContent>
                 <StackPanel Orientation="Vertical">
-                    <controls:SplitViewButton Click="{x:Bind SearchClick}" Icon="Search" x:Uid="MainPage_Search" />
-                    <controls:SplitViewButton Click="{x:Bind RefreshClick}" Icon="Refresh" x:Uid="MainPage_Refresh"/>
-                    <controls:SplitViewButton Click="{x:Bind ShowTootDialog}" Icon="Pencil" x:Uid="MainPage_Toot" x:Name="TootSplitViewButton">
+                    <controls:SplitViewButton Click="{x:Bind SearchClick}" Icon="Search" Label="{CustomResource Search}" />
+                    <controls:SplitViewButton Click="{x:Bind RefreshClick}" Icon="Refresh" Label="{CustomResource Refresh}"/>
+                    <controls:SplitViewButton Click="{x:Bind ShowTootDialog}" Icon="Pencil" Label="{CustomResource Toot}" x:Name="TootSplitViewButton">
                         <!-- TODO: Behaviors doesn't work -->
                         <!--<Interactivity:Interaction.Behaviors>
                             <Interactions:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding ElementName=TootSplitViewButton}">
@@ -48,10 +48,10 @@
                             </Interactions:EventTriggerBehavior>
                         </Interactivity:Interaction.Behaviors>-->
                     </controls:SplitViewButton>
-                    <controls:SplitViewButton Click="{x:Bind SettingClick}" Icon="Cog" x:Uid="MainPage_Setting"/>
+                    <controls:SplitViewButton Click="{x:Bind SettingClick}" Icon="Cog" Label="{CustomResource Settings}"/>
                 </StackPanel>
             </controls:FixedPivot.SplitViewPaneButtomContent>
-            <controls:FixedPivotItem x:Name="pivotitem" RefreshRequested="{x:Bind ViewModel.TimelineHome.Refresh}" HeaderIcon="Home" x:Uid="MainPage_Home">
+            <controls:FixedPivotItem x:Name="pivotitem" RefreshRequested="{x:Bind ViewModel.TimelineHome.Refresh}" HeaderIcon="Home" HeaderText="{CustomResource Home}">
                 <controls:ExListView IsError="{x:Bind ViewModel.TimelineHome.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.TimelineHome.Refresh}" ItemsSource="{x:Bind ViewModel.TimelineHome}" IsLoading="{x:Bind ViewModel.TimelineHome.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:StatusModel">
@@ -60,7 +60,7 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.Notification.Refresh}" HeaderIcon="Bell" x:Uid="MainPage_Notifications">
+            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.Notification.Refresh}" HeaderIcon="Bell" HeaderText="{CustomResource Notification}">
                 <controls:ExListView IsError="{x:Bind ViewModel.Notification.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.Notification.Refresh}" ItemsSource="{x:Bind ViewModel.Notification}" IsLoading="{x:Bind ViewModel.Notification.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:NotificationModel">
@@ -69,7 +69,7 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem Visibility="{Binding Source={StaticResource Settings},Path=EnableLocalTimeline,Converter={StaticResource BoolToVisibilityConverter}}" RefreshRequested="{x:Bind ViewModel.TimelineLocal.Refresh}" HeaderIcon="Users" x:Uid="MainPage_Local">
+            <controls:FixedPivotItem Visibility="{Binding Source={StaticResource Settings},Path=EnableLocalTimeline,Converter={StaticResource BoolToVisibilityConverter}}" RefreshRequested="{x:Bind ViewModel.TimelineLocal.Refresh}" HeaderIcon="Users" HeaderText="{CustomResource TimelineLocal}">
                 <controls:ExListView IsError="{x:Bind ViewModel.TimelineLocal.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.TimelineLocal.Refresh}" ItemsSource="{x:Bind ViewModel.TimelineLocal}" IsLoading="{x:Bind ViewModel.TimelineLocal.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:StatusModel">
@@ -78,7 +78,7 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem Visibility="{Binding Source={StaticResource Settings},Path=EnableFederatedTimeline,Converter={StaticResource BoolToVisibilityConverter}}" RefreshRequested="{x:Bind ViewModel.TimelineFederated.Refresh}" HeaderIcon="Globe" x:Uid="MainPage_Federated">
+            <controls:FixedPivotItem Visibility="{Binding Source={StaticResource Settings},Path=EnableFederatedTimeline,Converter={StaticResource BoolToVisibilityConverter}}" RefreshRequested="{x:Bind ViewModel.TimelineFederated.Refresh}" HeaderIcon="Globe" HeaderText="{CustomResource TimelineFederated}">
                 <controls:ExListView IsError="{x:Bind ViewModel.TimelineFederated.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.TimelineFederated.Refresh}" ItemsSource="{x:Bind ViewModel.TimelineFederated}" IsLoading="{x:Bind ViewModel.TimelineFederated.IsLoading,Mode=OneWay}">
                     <controls:ExListView.ItemTemplate>
                         <DataTemplate x:DataType="model:StatusModel">
@@ -87,24 +87,24 @@
                     </controls:ExListView.ItemTemplate>
                 </controls:ExListView>
             </controls:FixedPivotItem>
-            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.Account.Refresh}" HeaderIcon="User" x:Uid="MainPage_Account">
+            <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.Account.Refresh}" HeaderIcon="User" HeaderText="{CustomResource Me}">
                 <local:AccountView IsError="{x:Bind ViewModel.Account.AccountTimeline.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.Account.Refresh}" IsLoading="{x:Bind ViewModel.Account.AccountTimeline.IsLoading,Mode=OneWay}" ItemsSource="{x:Bind ViewModel.Account.AccountTimeline}" Account="{x:Bind ViewModel.Account.Account.Result,Mode=OneWay}"/>
             </controls:FixedPivotItem>
         </controls:FixedPivot>
     </Grid>
     <Page.BottomAppBar>
         <CommandBar  x:Name="BottomCommandBar">
-            <AppBarButton x:Uid="MainPage_Search">
+            <AppBarButton Label="{CustomResource Search}">
                 <AppBarButton.Icon>
                     <fa:FontAwesome Icon="Search"/>
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton Click="{x:Bind RefreshClick}" x:Uid="MainPage_Refresh">
+            <AppBarButton Click="{x:Bind RefreshClick}" Label="{CustomResource Refresh}">
                 <AppBarButton.Icon>
                     <fa:FontAwesome Icon="Refresh"/>
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton x:Uid="MainPage_Toot" x:Name="TootAppBarButton">
+            <AppBarButton Label="{CustomResource Toot}" x:Name="TootAppBarButton">
                 <Interactivity:Interaction.Behaviors>
                     <Interactions:EventTriggerBehavior EventName="Click" SourceObject="{Binding ElementName=TootAppBarButton}">
                         <behaviors:ShowTootDialog/>
@@ -115,7 +115,7 @@
                 </AppBarButton.Icon>
             </AppBarButton>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Click="{x:Bind SettingClick}" Icon="Setting" x:Uid="MainPage_Setting"/>
+                <AppBarButton Click="{x:Bind SettingClick}" Icon="Setting" Label="{CustomResource Settings}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

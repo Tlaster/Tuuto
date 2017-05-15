@@ -39,7 +39,7 @@ namespace Tuuto.Pages
             App.ReStart();
         }
 
-        void AddUser()
+        void AddAccount()
         {
             Frame.Navigate(typeof(LoginPage));
         }

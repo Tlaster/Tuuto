@@ -117,76 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountView_FollowersCount.Text" xml:space="preserve">
+  <data name="Followers" xml:space="preserve">
     <value>フォロワー</value>
   </data>
-  <data name="AccountView_FollowingCount.Text" xml:space="preserve">
+  <data name="Following" xml:space="preserve">
     <value>フォロー中</value>
   </data>
-  <data name="AccountView_StatusesCount.Text" xml:space="preserve">
+  <data name="Statuses" xml:space="preserve">
     <value>投稿</value>
   </data>
-  <data name="BladePage_Home.Label" xml:space="preserve">
-    <value>ホーム</value>
-  </data>
-  <data name="ExListView_Empty.Text" xml:space="preserve">
+  <data name="Empty" xml:space="preserve">
     <value>何もありません</value>
   </data>
-  <data name="ExListView_Failed.Text" xml:space="preserve">
+  <data name="LoadingFailed" xml:space="preserve">
     <value>エラーが発生しました。</value>
   </data>
-  <data name="ImageMenu_Save.Text" xml:space="preserve">
+  <data name="Save" xml:space="preserve">
     <value>保存</value>
   </data>
-  <data name="LoginPage_DomainError" xml:space="preserve">
+  <data name="DomainError" xml:space="preserve">
     <value>Please check the domain again</value>
   </data>
-  <data name="LoginPage_LoginButton.Content" xml:space="preserve">
+  <data name="Login" xml:space="preserve">
     <value>LOG IN</value>
   </data>
-  <data name="LoginPage_LoginDesc.Text" xml:space="preserve">
+  <data name="LoginDesc" xml:space="preserve">
     <value>どのインスタンス？</value>
   </data>
-  <data name="LoginPage_LoginFailed" xml:space="preserve">
+  <data name="LoginFailed" xml:space="preserve">
     <value>Login failed</value>
   </data>
-  <data name="MainPage_Account.HeaderText" xml:space="preserve">
+  <data name="Me" xml:space="preserve">
     <value>Account</value>
   </data>
-  <data name="MainPage_Federated.HeaderText" xml:space="preserve">
+  <data name="TimelineFederated" xml:space="preserve">
     <value>連合タイムライン</value>
   </data>
-  <data name="MainPage_FixedPivot.SplitViewPaneLength" xml:space="preserve">
+  <data name="SplitViewPaneLength" xml:space="preserve">
     <value>250</value>
   </data>
-  <data name="MainPage_Home.HeaderText" xml:space="preserve">
+  <data name="Home" xml:space="preserve">
     <value>ホーム</value>
   </data>
-  <data name="MainPage_Local.HeaderText" xml:space="preserve">
+  <data name="TimelineLocal" xml:space="preserve">
     <value>ローカルタイムライン</value>
   </data>
-  <data name="MainPage_Notifications.HeaderText" xml:space="preserve">
+  <data name="Notification" xml:space="preserve">
     <value>通知</value>
   </data>
-  <data name="MainPage_Refresh.Label" xml:space="preserve">
+  <data name="Refresh" xml:space="preserve">
     <value>更新</value>
   </data>
-  <data name="MainPage_Search.Label" xml:space="preserve">
+  <data name="Search" xml:space="preserve">
     <value>ユーザーを検索…</value>
   </data>
-  <data name="MainPage_Setting.Label" xml:space="preserve">
+  <data name="Settings" xml:space="preserve">
     <value>設定</value>
   </data>
-  <data name="MainPage_Toot.Label" xml:space="preserve">
+  <data name="Toot" xml:space="preserve">
     <value>投稿</value>
   </data>
   <data name="ProgressDialogText" xml:space="preserve">
     <value>ロード中</value>
   </data>
-  <data name="RefreshListView.PullToRefreshLabel" xml:space="preserve">
+  <data name="PullToRefresh" xml:space="preserve">
     <value>下へスライドして更新...</value>
   </data>
-  <data name="RefreshListView.ReleaseToRefreshLabel" xml:space="preserve">
+  <data name="ReleaseToRefresh" xml:space="preserve">
     <value>Release to refresh</value>
   </data>
   <data name="SendDraft_Error" xml:space="preserve">
@@ -195,91 +192,91 @@
   <data name="SendDraft_OK" xml:space="preserve">
     <value>送信しました！</value>
   </data>
-  <data name="SettingPage_Customize.HeaderText" xml:space="preserve">
+  <data name="Customize" xml:space="preserve">
     <value>Customize</value>
   </data>
-  <data name="SettingPage_Customize_EnableBladeView.Header" xml:space="preserve">
+  <data name="EnableBladeView" xml:space="preserve">
     <value>Enable blade view (Restart required)</value>
   </data>
-  <data name="SettingPage_Customize_EnableFederatedTimeline.Header" xml:space="preserve">
+  <data name="EnableFederatedTimeline" xml:space="preserve">
     <value>Enable federated timeline</value>
   </data>
-  <data name="SettingPage_Customize_EnableLocalTimeline.Header" xml:space="preserve">
+  <data name="EnableLocalTimeline" xml:space="preserve">
     <value>Enable local timeline</value>
   </data>
-  <data name="SettingPage_Customize_IsDarkTheme.Header" xml:space="preserve">
+  <data name="IsDarkTheme" xml:space="preserve">
     <value>Enable Dark Theme</value>
   </data>
-  <data name="StatusAction_favourite" xml:space="preserve">
+  <data name="FavouritedBy" xml:space="preserve">
     <value>さんがあなたのトゥートをお気に入りに登録しました</value>
   </data>
-  <data name="StatusAction_follow" xml:space="preserve">
+  <data name="FollowedBy" xml:space="preserve">
     <value>さんにフォローされています</value>
   </data>
-  <data name="StatusAction_mention" xml:space="preserve">
+  <data name="MentionedBy" xml:space="preserve">
     <value>さんから返信がありました</value>
   </data>
-  <data name="StatusAction_reblog" xml:space="preserve">
+  <data name="RebloggedBy" xml:space="preserve">
     <value>さんにブーストされました</value>
   </data>
-  <data name="StatusViewMenu_Block" xml:space="preserve">
+  <data name="BlockUser" xml:space="preserve">
     <value>ブロック @{0}</value>
   </data>
-  <data name="StatusViewMenu_Delete.Text" xml:space="preserve">
+  <data name="Delete" xml:space="preserve">
     <value>削除</value>
   </data>
-  <data name="StatusViewMenu_Expand.Text" xml:space="preserve">
+  <data name="ExpandStatus" xml:space="preserve">
     <value>詳細を表示</value>
   </data>
-  <data name="StatusViewMenu_Mention" xml:space="preserve">
+  <data name="MentionUser" xml:space="preserve">
     <value>返信 @{0}</value>
   </data>
-  <data name="StatusViewMenu_Mute" xml:space="preserve">
+  <data name="MuteUser" xml:space="preserve">
     <value>ミュート @{0}</value>
   </data>
-  <data name="StatusViewMenu_Report" xml:space="preserve">
+  <data name="ReportUser" xml:space="preserve">
     <value>通報 @{0}</value>
   </data>
-  <data name="StatusViewMenu_UnBlock" xml:space="preserve">
+  <data name="UnBlockUser" xml:space="preserve">
     <value>ブロック解除 @{0}</value>
   </data>
-  <data name="StatusViewMenu_UnMute" xml:space="preserve">
+  <data name="UnMuteUser" xml:space="preserve">
     <value>ミュート解除 @{0}</value>
   </data>
-  <data name="StatusView_ClickToView.Text" xml:space="preserve">
+  <data name="ClickToView" xml:space="preserve">
     <value>クリックして表示</value>
   </data>
-  <data name="StatusView_Expander.Header" xml:space="preserve">
+  <data name="ShowMore" xml:space="preserve">
     <value>もっと見る</value>
   </data>
-  <data name="StatusView_Sensitive.Text" xml:space="preserve">
+  <data name="Sensitive" xml:space="preserve">
     <value>閲覧注意</value>
   </data>
-  <data name="TootDialogCW_PlaceholderText.PlaceholderText" xml:space="preserve">
+  <data name="ContentWarning" xml:space="preserve">
     <value>警告</value>
   </data>
-  <data name="TootDialog_AddMultipleImage.Text" xml:space="preserve">
+  <data name="AddMultipleImage" xml:space="preserve">
     <value>add multiple image</value>
   </data>
-  <data name="TootDialog_AddSingleImage.Text" xml:space="preserve">
+  <data name="AddSingleImage" xml:space="preserve">
     <value>メディアを追加</value>
   </data>
-  <data name="TootDialog_ContentWarningShort.Content" xml:space="preserve">
+  <data name="ContentWarningShort" xml:space="preserve">
     <value>CW</value>
   </data>
-  <data name="TootDialog_Menu_DeleteMedia.Text" xml:space="preserve">
+  <data name="Remove" xml:space="preserve">
     <value>消去</value>
   </data>
-  <data name="TootDialog_NSFW.Content" xml:space="preserve">
+  <data name="NSFW" xml:space="preserve">
     <value>NSFW</value>
   </data>
-  <data name="TootDialog_PlaceholderText.PlaceholderText" xml:space="preserve">
+  <data name="TootPlaceholder" xml:space="preserve">
     <value>今なにしてる？</value>
   </data>
-  <data name="TootDialog_TakePhoto.Text" xml:space="preserve">
+  <data name="TakePhoto" xml:space="preserve">
     <value>写真を撮る</value>
   </data>
-  <data name="TootDialog_Toot.Content" xml:space="preserve">
+  <data name="SendToot" xml:space="preserve">
     <value>トゥート！</value>
   </data>
   <data name="TootVisibility_Direct_Description" xml:space="preserve">
