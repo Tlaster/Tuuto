@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -123,6 +123,9 @@
   <data name="Following" xml:space="preserve">
     <value>フォロー中</value>
   </data>
+  <data name="OpenInBrowser" xml:space="preserve">
+	<value>ブラウザーで開く</value>
+  </data>
   <data name="Statuses" xml:space="preserve">
     <value>投稿</value>
   </data>
@@ -130,25 +133,25 @@
     <value>何もありません</value>
   </data>
   <data name="LoadingFailed" xml:space="preserve">
-    <value>エラーが発生しました。</value>
+    <value>エラーが発生しました</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>保存</value>
   </data>
   <data name="DomainError" xml:space="preserve">
-    <value>Please check the domain again</value>
+    <value>ドメインが正しいか確認してください</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>LOG IN</value>
+    <value>ログイン</value>
   </data>
   <data name="LoginDesc" xml:space="preserve">
     <value>どのインスタンス？</value>
   </data>
   <data name="LoginFailed" xml:space="preserve">
-    <value>Login failed</value>
+    <value>ログインに失敗しました/value>
   </data>
   <data name="Me" xml:space="preserve">
-    <value>Account</value>
+    <value>アカウント</value>
   </data>
   <data name="TimelineFederated" xml:space="preserve">
     <value>連合タイムライン</value>
@@ -169,7 +172,7 @@
     <value>更新</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>ユーザーを検索…</value>
+    <value>ユーザーを検索</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>設定</value>
@@ -178,13 +181,13 @@
     <value>投稿</value>
   </data>
   <data name="ProgressDialogText" xml:space="preserve">
-    <value>ロード中</value>
+    <value>読み込み中…</value>
   </data>
   <data name="PullToRefresh" xml:space="preserve">
-    <value>下へスライドして更新...</value>
+    <value>下へスライドして更新</value>
   </data>
   <data name="ReleaseToRefresh" xml:space="preserve">
-    <value>Release to refresh</value>
+    <value>離して更新</value>
   </data>
   <data name="SendDraft_Error" xml:space="preserve">
     <value>送信失敗</value>
@@ -192,20 +195,29 @@
   <data name="SendDraft_OK" xml:space="preserve">
     <value>送信しました！</value>
   </data>
+  <data name="AccountManagement" xml:space="preserve">
+	<value>アカウント</value>
+  </data>
+  <data name="AddAccount" xml:space="preserve">
+	<value>アカウントを追加</value>
+  </data>
   <data name="Customize" xml:space="preserve">
-    <value>Customize</value>
+    <value>設定</value>
   </data>
   <data name="EnableBladeView" xml:space="preserve">
     <value>Enable blade view (Restart required)</value>
   </data>
   <data name="EnableFederatedTimeline" xml:space="preserve">
-    <value>Enable federated timeline</value>
+    <value>連合タイムラインを有効にする</value>
   </data>
   <data name="EnableLocalTimeline" xml:space="preserve">
-    <value>Enable local timeline</value>
+    <value>ローカルタイムラインを有効にする</value>
   </data>
   <data name="IsDarkTheme" xml:space="preserve">
-    <value>Enable Dark Theme</value>
+    <value>ダークテーマを有効にする</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+	<value>ログアウト</value>
   </data>
   <data name="FavouritedBy" xml:space="preserve">
     <value>さんがあなたのトゥートをお気に入りに登録しました</value>
@@ -256,10 +268,10 @@
     <value>警告</value>
   </data>
   <data name="AddMultipleImage" xml:space="preserve">
-    <value>add multiple image</value>
+    <value>複数の画像/動画を追加</value>
   </data>
   <data name="AddSingleImage" xml:space="preserve">
-    <value>メディアを追加</value>
+    <value>画像/動画を追加</value>
   </data>
   <data name="ContentWarningShort" xml:space="preserve">
     <value>CW</value>
@@ -305,5 +317,8 @@
   </data>
   <data name="GoBack" xml:space="preserve">
     <value>戻る</value>
+  </data>
+  <data name="More" xml:space="preserve">
+	<value>More</value>
   </data>
 </root>
