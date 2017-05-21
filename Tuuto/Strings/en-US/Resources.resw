@@ -321,4 +321,10 @@
   <data name="More" xml:space="preserve">
     <value>More</value>
   </data>
+  <data name="OnlyMedia" xml:space="preserve">
+    <value>Only media</value>
+  </data>
+  <data name="ExcludeReplies" xml:space="preserve">
+    <value>Exclude replies</value>
+  </data>
 </root>

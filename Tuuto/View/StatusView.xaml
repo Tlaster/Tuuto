@@ -76,7 +76,7 @@
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="GridViewItem">
-                                                <GridViewItemPresenter SelectedForeground="{StaticResource AppTheme}" Foreground="{StaticResource PivotHeaderForegroundUnselectedBrush}" />
+                                                <GridViewItemPresenter SelectedForeground="{ThemeResource AppTheme}" Foreground="{StaticResource PivotHeaderForegroundUnselectedBrush}" />
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>

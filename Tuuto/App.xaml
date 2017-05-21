@@ -14,6 +14,7 @@
                 <ResourceDictionary x:Key="Dark">
                     <SolidColorBrush x:Key="AppTheme" Color="#FFC282FF" />
                     <SolidColorBrush x:Key="ActionButtonForeground" Color="LightGray"/>
+                    <SolidColorBrush x:Key="ActionbarBackground" Color="#FF171717"/>
                     <!--<Style TargetType="SplitView">
                         <Setter Property="PaneBackground" Value="#7F171717"/>
                     </Style>
@@ -25,10 +26,14 @@
                     </Style>
                     <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#7FFFFFFF"/>-->
                     <SolidColorBrush x:Key="AppTheme" Color="#FF4D1780" />
-                    <SolidColorBrush x:Key="ActionButtonForeground" Color="{StaticResource SystemChromeBlackMediumLowColor}"/>
+                    <SolidColorBrush x:Key="ActionbarBackground" Color="#FFF2F2F2"/>
+                    <SolidColorBrush x:Key="ActionButtonForeground" Color="{ThemeResource SystemChromeBlackMediumLowColor}"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
             <common:Settings x:Key="Settings"/>
+            <Style TargetType="SplitView">
+                <Setter Property="PaneBackground" Value="{ThemeResource ActionbarBackground}"/>
+            </Style>
             <converters:DateTimeDiffForHumansConverter x:Key="DateTimeDiffForHumansConverter"/>
             <converters:NullOrEmptyToVisibilityConverter x:Key="NullOrEmptyToVisibilityConverter"/>
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -168,7 +173,7 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
                                                                        Storyboard.TargetName="ContentPresenter">
                                                     <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{StaticResource ActionButtonForeground}" />
+                                                                    Value="{ThemeResource ActionButtonForeground}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                             </Storyboard>

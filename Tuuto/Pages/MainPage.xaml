@@ -88,7 +88,7 @@
                 </controls:ExListView>
             </controls:FixedPivotItem>
             <controls:FixedPivotItem RefreshRequested="{x:Bind ViewModel.Account.Refresh}" HeaderIcon="User" HeaderText="{CustomResource Me}">
-                <local:AccountView IsError="{x:Bind ViewModel.Account.AccountTimeline.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.Account.Refresh}" IsLoading="{x:Bind ViewModel.Account.AccountTimeline.IsLoading,Mode=OneWay}" ItemsSource="{x:Bind ViewModel.Account.AccountTimeline}" Account="{x:Bind ViewModel.Account.Account.Result,Mode=OneWay}"/>
+                <local:AccountView ViewModel="{x:Bind ViewModel.Account}"/>
             </controls:FixedPivotItem>
         </controls:FixedPivot>
     </Grid>

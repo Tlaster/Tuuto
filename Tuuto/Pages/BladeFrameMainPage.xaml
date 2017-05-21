@@ -9,10 +9,10 @@
     mc:Ignorable="d">
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
+        <Grid Background="{ThemeResource ActionbarBackground}">
             <controls:SplitViewButton Style="{StaticResource CommonButtonStyle}" Icon="Asterisk" Label="{CustomResource More}"/>
         </Grid>
-        <controls:SplitViewButton Icon="Users" Label="{CustomResource TimelineLocal}" HorizontalAlignment="Stretch"/>
-        <controls:SplitViewButton Icon="Globe" Label="{CustomResource TimelineFederated}" HorizontalAlignment="Stretch"/>
+        <controls:SplitViewButton Click="{x:Bind GoTimelineLocal}" Icon="Users" Label="{CustomResource TimelineLocal}" HorizontalAlignment="Stretch"/>
+        <controls:SplitViewButton Click="{x:Bind GoTimelineFederated}" Icon="Globe" Label="{CustomResource TimelineFederated}" HorizontalAlignment="Stretch"/>
     </StackPanel>
 </Page>

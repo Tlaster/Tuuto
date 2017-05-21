@@ -25,7 +25,7 @@
         <toolkit:BladeView Background="#19000000" BladeMode="Normal">
             <toolkit:BladeItem Style="{StaticResource BaseBladeStyle}">
                 <StackPanel>
-                    <Grid Padding="10" Background="{StaticResource SystemControlHighlightChromeHighBrush}">
+                    <Grid Padding="10" Background="{ThemeResource ActionbarBackground}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -63,7 +63,7 @@
                     </controls:ExListView.ItemTemplate>
                     <controls:ExListView.Header>
                         <toolkit:ScrollHeader TargetListViewBase="{x:Bind TimelineHomeListView}" Mode="Sticky" DoubleTapped="{x:Bind ViewModel.TimelineHome.Refresh}">
-                            <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
+                            <Grid Background="{ThemeResource ActionbarBackground}">
                                 <controls:SplitViewButton Label="{CustomResource Home}" Style="{StaticResource CommonButtonStyle}" Icon="Home"/>
                             </Grid>
                         </toolkit:ScrollHeader>
@@ -79,7 +79,7 @@
                     </controls:ExListView.ItemTemplate>
                     <controls:ExListView.Header>
                         <toolkit:ScrollHeader TargetListViewBase="{x:Bind NotificationListView}" Mode="Sticky" DoubleTapped="{x:Bind ViewModel.Notification.Refresh}">
-                            <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
+                            <Grid Background="{ThemeResource ActionbarBackground}">
                                 <controls:SplitViewButton Label="{CustomResource Notification}" Style="{StaticResource CommonButtonStyle}" Icon="Bell"/>
                             </Grid>
                         </toolkit:ScrollHeader>
@@ -98,7 +98,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
-                                        <Grid Background="{StaticResource SystemControlHighlightChromeHighBrush}">
+                                        <Grid Background="{ThemeResource ActionbarBackground}">
                                             <controls:SplitViewButton Style="{StaticResource CommonButtonStyle}" Icon="ArrowLeft" Label="{CustomResource GoBack}" Visibility="{Binding ElementName=frame,Path=CanGoBack}" Click="SplitViewButton_Click"/>
                                         </Grid>
                                         <ContentPresenter Grid.Row="1"

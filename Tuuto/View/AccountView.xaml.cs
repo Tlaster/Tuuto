@@ -26,94 +26,96 @@ namespace Tuuto.View
 {
     public sealed partial class AccountView : ExListView
     {
-        public event EventHandler RefreshRelationshipRequested;
+        //public event EventHandler RefreshRelationshipRequested;
 
-        //public AccountViewModel ViewModel
+        public AccountViewModel ViewModel
+        {
+            get { return (AccountViewModel)GetValue(ViewModelProperty); }
+            set { SetValue(ViewModelProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ViewModel.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ViewModelProperty =
+            DependencyProperty.Register(nameof(ViewModel), typeof(AccountViewModel), typeof(AccountView), new PropertyMetadata(null));
+
+
+
+        //public AccountModel Account
         //{
-        //    get { return (AccountViewModel)GetValue(ViewModelProperty); }
-        //    set { SetValue(ViewModelProperty, value); }
+        //    get { return (AccountModel)GetValue(AccountProperty); }
+        //    set { SetValue(AccountProperty, value); }
         //}
 
-        //// Using a DependencyProperty as the backing store for ViewModel.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty ViewModelProperty =
-        //    DependencyProperty.Register(nameof(ViewModel), typeof(AccountViewModel), typeof(AccountView), new PropertyMetadata(null));
+        //// Using a DependencyProperty as the backing store for Account.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty AccountProperty =
+        //    DependencyProperty.Register(nameof(Account), typeof(AccountModel), typeof(AccountView), new PropertyMetadata(null));
 
 
 
-        public AccountModel Account
-        {
-            get { return (AccountModel)GetValue(AccountProperty); }
-            set { SetValue(AccountProperty, value); }
-        }
+        //public RelationshipModel Relationship
+        //{
+        //    get { return (RelationshipModel)GetValue(RelationshipProperty); }
+        //    set { SetValue(RelationshipProperty, value); }
+        //}
 
-        // Using a DependencyProperty as the backing store for Account.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AccountProperty =
-            DependencyProperty.Register(nameof(Account), typeof(AccountModel), typeof(AccountView), new PropertyMetadata(null));
-
-
-
-        public RelationshipModel Relationship
-        {
-            get { return (RelationshipModel)GetValue(RelationshipProperty); }
-            set { SetValue(RelationshipProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Relationship.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty RelationshipProperty =
-            DependencyProperty.Register(nameof(Relationship), typeof(RelationshipModel), typeof(AccountView), new PropertyMetadata(null));
+        //// Using a DependencyProperty as the backing store for Relationship.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty RelationshipProperty =
+        //    DependencyProperty.Register(nameof(Relationship), typeof(RelationshipModel), typeof(AccountView), new PropertyMetadata(null));
 
 
 
         public AccountView()
         {
             this.InitializeComponent();
+            //x:Bind does not work for ViewModel.Relationship
+            DataContext = this;
         }
 
 
         void Mention()
         {
-            App.StatusAcionHandler.Mention(Account);
+            App.StatusAcionHandler.Mention(ViewModel.Account.Result);
         }
 
         void Report()
         {
-            App.StatusAcionHandler.Report(Account);
+            App.StatusAcionHandler.Report(ViewModel.Account.Result);
         }
 
         async void Block()
         {
-            await Accounts.Block(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
-            RefreshRelationshipRequested?.Invoke(this, null);
+            ViewModel.Relationship = await Accounts.Block(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, ViewModel.Account.Result.Id);
+            //ViewModel.RefreshRelationship();
         }
         async void UnBlock()
         {
-            await Accounts.UnBlock(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
-            RefreshRelationshipRequested?.Invoke(this, null);
+            ViewModel.Relationship = await Accounts.UnBlock(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, ViewModel.Account.Result.Id);
+            //ViewModel.RefreshRelationship();
         }
 
         async void Mute()
         {
-            await Accounts.Mute(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
-            RefreshRelationshipRequested?.Invoke(this, null);
+            ViewModel.Relationship = await Accounts.Mute(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, ViewModel.Account.Result.Id);
+            //ViewModel.RefreshRelationship();
         }
         async void UnMute()
         {
-            await Accounts.UnMute(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
-            RefreshRelationshipRequested?.Invoke(this, null);
+            ViewModel.Relationship = await Accounts.UnMute(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, ViewModel.Account.Result.Id);
+            //ViewModel.RefreshRelationship();
         }
         async void Follow()
         {
-            await Accounts.Follow(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
-            RefreshRelationshipRequested?.Invoke(this, null);
+            ViewModel.Relationship = await Accounts.Follow(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, ViewModel.Account.Result.Id);
+            //ViewModel.RefreshRelationship();
         }
         async void UnFollow()
         {
-            await Accounts.UnFollow(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Account.Id);
-            RefreshRelationshipRequested?.Invoke(this, null);
+            ViewModel.Relationship = await Accounts.UnFollow(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, ViewModel.Account.Result.Id);
+            //ViewModel.RefreshRelationship();
         }
         async void OpenInBrowser()
         {
-            await Launcher.LaunchUriAsync(new Uri(Account.Url));
+            await Launcher.LaunchUriAsync(new Uri(ViewModel.Account.Result.Url));
         }
 
         private async void MarkdownTextBlock_LinkClicked(object sender, Microsoft.Toolkit.Uwp.UI.Controls.LinkClickedEventArgs e)
@@ -122,7 +124,7 @@ namespace Tuuto.View
             Notification.Show(e.Link);
 #endif
             var url = new Uri(e.Link);
-            if (url.Host == new Uri(Account.Url).Host || url.Host == new Uri(Settings.CurrentAccountModel.Url).Host)
+            if (url.Host == new Uri(ViewModel.Account.Result.Url).Host || url.Host == new Uri(Settings.CurrentAccountModel.Url).Host)
             {
                 var groups = Regex.Match(e.Link, "(http|https)://([^/]*)/([^/]*)/([^/]*)").Groups;
                 if (!groups[3].Success && groups[4].Success) await Launcher.LaunchUriAsync(url);
@@ -141,6 +143,12 @@ namespace Tuuto.View
             {
                 await Launcher.LaunchUriAsync(url);
             }
+        }
+
+        private void listView_RefreshRequested(object sender, EventArgs e)
+        {
+            //RefreshRequested="{x:Bind ViewModel.Refresh}" will cause "Xaml Internal Error error WMC9999"
+            ViewModel.Refresh();
         }
     }
 }

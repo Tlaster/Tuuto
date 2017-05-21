@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     RequestedTheme="Dark"
-    Background="{StaticResource AppTheme}">
+    Background="{ThemeResource AppTheme}">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Padding="16">
         <Image Margin="4" Source="ms-appx:///Assets/SplashScreen.png"/>

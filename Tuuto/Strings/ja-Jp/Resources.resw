@@ -148,7 +148,7 @@
     <value>どのインスタンス？</value>
   </data>
   <data name="LoginFailed" xml:space="preserve">
-    <value>ログインに失敗しました/value>
+    <value>ログインに失敗しました</value>
   </data>
   <data name="Me" xml:space="preserve">
     <value>アカウント</value>

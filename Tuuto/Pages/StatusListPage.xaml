@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="Tuuto.Pages.StatusListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Tuuto.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Tuuto.Common.Controls"
+    xmlns:model="using:Mastodon.Model"
+    xmlns:view="using:Tuuto.View"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:ExListView IsError="{x:Bind ViewModel.List.IsError,Mode=OneWay}" RefreshRequested="{x:Bind ViewModel.List.Refresh}" ItemsSource="{x:Bind ViewModel.List}" IsLoading="{x:Bind ViewModel.List.IsLoading,Mode=OneWay}">
+            <controls:ExListView.ItemTemplate>
+                <DataTemplate x:DataType="model:StatusModel">
+                    <view:StatusView ViewModel="{x:Bind}"/>
+                </DataTemplate>
+            </controls:ExListView.ItemTemplate>
+        </controls:ExListView>
+    </Grid>
+</Page>

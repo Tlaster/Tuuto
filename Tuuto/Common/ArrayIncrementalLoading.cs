@@ -11,6 +11,8 @@ using Windows.UI.Xaml.Data;
 using PropertyChanged;
 using Windows.Foundation;
 using Tuuto.Common.Extensions;
+using Tuuto.Common.Controls;
+using Mastodon.Common;
 
 namespace Tuuto.Common
 {
@@ -51,6 +53,7 @@ namespace Tuuto.Common
         {
             Source = source;
         }
+        
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count) => LoadMoreTask(count).AsAsyncOperation();
 
         private async Task<LoadMoreItemsResult> LoadMoreTask(uint count)
@@ -64,8 +67,16 @@ namespace Tuuto.Common
                     IsLoading = true;
                     data = await Source(_maxid);
                 }
-                catch
+                catch (MastodonException e)
                 {
+                    Notification.Show(e.Message);
+                    IsError = true;
+                }
+                catch (Exception e)
+                {
+#if DEBUG
+                    Notification.Show(e.Message);
+#endif
                     IsError = true;
                 }
 

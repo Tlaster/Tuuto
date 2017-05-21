@@ -8,27 +8,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tuuto.Common;
+using PropertyChanged;
 
 namespace Tuuto.ViewModel
 {
-    public class AccountViewModel : INotifyPropertyChanged
+    [ImplementPropertyChanged]
+    public class AccountViewModel
     {
         public ArrayIncrementalLoading<StatusModel> AccountTimeline { get; } 
         public NotifyTask<AccountModel> Account { get; private set; }
-        public NotifyTask<RelationshipModel> Relationship { get; private set; }
+        public RelationshipModel Relationship { get; internal set; }
+
         public int Id { get; }
         public bool OnlyMedia { get; set; } = false;
         public bool ExcludeReplies { get; set; } = false;
 
+        public void OnOnlyMediaChanged()
+        {
+            AccountTimeline.Refresh();
+        }
+
+        public void OnExcludeRepliesChanged()
+        {
+            AccountTimeline.Refresh();
+        }
+
         public AccountViewModel(int id)
         {
             Id = id;
-            AccountTimeline = new ArrayIncrementalLoading<StatusModel>((max_id) => Accounts.Statuses(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, id, max_id: max_id, only_media: OnlyMedia, exclude_replies: ExcludeReplies));
+            AccountTimeline = new ArrayIncrementalLoading<StatusModel>((max_id) => Accounts.Statuses(Settings.CurrentAccount.Domain, Settings.CurrentAccount.AccessToken, Id, max_id: max_id, only_media: OnlyMedia, exclude_replies: ExcludeReplies));
             RefreshAccount();
             RefreshRelationship();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void Refresh()
         {
@@ -36,10 +47,11 @@ namespace Tuuto.ViewModel
             RefreshAccount();
             RefreshRelationship();
         }
-        public void RefreshRelationship()
+
+        public async void RefreshRelationship()
         {
-            Relationship = NotifyTask.Create(GetRelationshipTask);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Relationship)));
+            Relationship = await GetRelationshipTask();
+            //Relationship = NotifyTask.Create(GetRelationshipTask);
         }
 
         private async Task<RelationshipModel> GetRelationshipTask()

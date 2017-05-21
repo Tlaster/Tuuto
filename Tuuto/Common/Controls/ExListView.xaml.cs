@@ -98,7 +98,7 @@ namespace Tuuto.Common.Controls
         {
             if (_emptyView != null)
             {
-                _emptyView.Visibility = Items.Any() && !IsError || IsLoading ? Visibility.Collapsed : Visibility.Visible;
+                _emptyView.Visibility = Items.Any() || IsError || IsLoading ? Visibility.Collapsed : Visibility.Visible;
             }
         }
     }

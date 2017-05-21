@@ -321,4 +321,10 @@
   <data name="More" xml:space="preserve">
     <value>更多</value>
   </data>
+  <data name="OnlyMedia" xml:space="preserve">
+    <value>仅带图片</value>
+  </data>
+  <data name="ExcludeReplies" xml:space="preserve">
+    <value>去除转发</value>
+  </data>
 </root>
